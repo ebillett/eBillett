@@ -26,6 +26,14 @@ exports.load = function() {
 	tabgroup.addTab(tabs.profile);
 
 	tabgroup.open();
+
+	
+	app.checkLoggedIn(function(loggedIn) {
+		if(!loggedIn) {
+			//app.loginWin.open({modal: true});
+			app.loginDialog();
+		}
+	});
 };
 
 exports.set = function(a) {
