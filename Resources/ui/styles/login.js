@@ -145,9 +145,9 @@ exports = {
 		shadowOffset: {x: 0, y:1}
 	},
 	noLoginAlert: {
-		title: 'Fortsett uten innlogging',
-		message: 'Du kan ikke kjøpe billetter hvis du ikke logger inn.',
-		buttonNames: ['OK', 'Avbryt']
+		title: 'Du kan ikke kjøpe billetter hvis du fortsetter uten å logge inn.',
+		options: ['OK', 'Avbryt'],
+		cancel: 1
 	},
 	registerWrapper: {
 		layout: 'vertical',

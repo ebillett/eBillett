@@ -1,10 +1,11 @@
 var general = require('ui/styles/general'),
+	styles = require('ui/styles/tabgroup'),
 	windows = {
 		buy: require('ui/buy/start'),
 		tickets: Titanium.UI.createWindow({title: 'tickets'}),
 		profile: Titanium.UI.createWindow({title: 'profile'})
 	},
-	tabgroup = Titanium.UI.createTabGroup(general.tabgroup);
+	tabgroup = Titanium.UI.createTabGroup(general.tabgroup),
 	tabs = {
 		buy: Titanium.UI.createTab({
 			title: 'Kjøp billetter',
@@ -18,7 +19,9 @@ var general = require('ui/styles/general'),
 			title: 'Min profil',
 			window: windows.profile.open()
 		})
-	};
+	},
+	disable = Titanium.UI.createView(styles.disable),
+	loginAlert = Titanium.UI.createAlertDialog(styles.loginAlert);
 
 exports.load = function() {
 	tabgroup.addTab(tabs.buy);

@@ -16,7 +16,7 @@ var general = require('ui/styles/general'),
 	nrLink = Titanium.UI.createLabel(styles.nrLink),
 	continueWrapper = Titanium.UI.createView(styles.continueWrapper),
 	continueLabel = Titanium.UI.createLabel(styles.continueLabel),
-	noLoginAlert = Titanium.UI.createAlertDialog(styles.noLoginAlert),
+	noLoginAlert = Titanium.UI.createOptionDialog(styles.noLoginAlert),
 	registerWrapper = Titanium.UI.createView(styles.registerWrapper),
 	r_nameField = Titanium.UI.createTextField(styles.r_nameField),
 	r_telField = Titanium.UI.createTextField(styles.r_telField),
@@ -121,6 +121,46 @@ noLoginAlert.addEventListener('click', function(e) {
 	}
 });
 
+self.addEventListener('close', function() {
+	// Setup login form
+	loginWrapper.remove(usernameField);
+	loginWrapper.remove(passwordField);
+	loginBtn.remove(loginBtnLabel);
+	loginWrapper.remove(loginBtn);
+
+	// -- Setup not registered message
+	notRegisteredWrapper.remove(seperator);
+	notRegisteredWrapper.remove(nrTitle);
+	notRegisteredWrapper.remove(nrInfo);
+	notRegisteredWrapper.remove(nrLink);
+	loginWrapper.remove(notRegisteredWrapper);
+
+	//wrapper.remove(loginWrapper);
+
+	// Setup register form
+	registerWrapper.remove(r_nameField);
+	registerWrapper.remove(r_telField);
+	registerWrapper.remove(r_emailField);
+	registerWrapper.remove(r_passwordField);
+	registerWrapper.remove(r_password2Field);
+	registerBtn.remove(registerBtnLabel);
+	registerWrapper.remove(registerBtn);
+
+	// Move register form out of view
+	//wrapper.remove(registerWrapper);
+
+	contentWrapper.remove(loginWrapper);
+	contentWrapper.remove(registerWrapper);
+	wrapper.remove(contentWrapper);
+
+
+	// Setup continue without login
+	continueWrapper.remove(continueLabel);
+	self.remove(continueWrapper);
+	
+
+	self.add(wrapper);
+});
 
 
 // Animations
