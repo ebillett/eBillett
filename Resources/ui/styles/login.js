@@ -1,3 +1,5 @@
+var general = require('ui/styles/general');
+
 exports = {
 	loginWin: {
 		backgroundImage: 'images/login/bg.png',
@@ -9,10 +11,17 @@ exports = {
 		top: 40,
 		backgroundImage: 'images/common/logo.png'
 	},
+	contentWrapper: {
+		top: 95,
+		width: general.dWidth*2,
+		left: 0,
+		layout: 'horizontal'
+	},
 	loginWrapper: {
 		layout: 'vertical',
-		top: 25,
-		height: 150
+		top: 0,
+		width: general.dWidth,
+		height: 300
 	},
 	usernameField: {
 		hintText: 'Epostadresse',
@@ -67,7 +76,9 @@ exports = {
 	notRegisteredWrapper: {
 		layout: 'vertical',
 		height: 130,
-		top: 20
+		top: 20,
+		zIndex: 500,
+		touchEnabled: true
 	},
 	nrTitle: {
 		height: 'auto',
@@ -140,15 +151,17 @@ exports = {
 	},
 	registerWrapper: {
 		layout: 'vertical',
-		height: 90,
-		opacity: 0,
-		top: 92
+		top: 0,
+		height: 300,
+		width: general.dWidth,
+		right: -general.dWidth
 	},
-	nameField: {
-		hintText: 'Ditt navn',
+	r_nameField: {
+		hintText: 'Navn',
 		color: '#000',
 		height:40,
 		width: 245,
+		//top: 6,
 		backgroundColor: '#fff',
 		borderRadius: 4,
 		borderColor: '#bbb',
@@ -159,8 +172,40 @@ exports = {
 		autocorrect: false,
 		paddingLeft: 8
 	},
-	telField: {
+	r_telField: {
 		hintText: 'Mobilnummer',
+		color: '#000',
+		height:40,
+		width: 245,
+		top: 6,
+		backgroundColor: '#fff',
+		borderRadius: 4,
+		borderColor: '#bbb',
+		clearButtonMode: Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
+		autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+		left:4,
+		right: 4,
+		autocorrect: false,
+		paddingLeft: 8
+	},
+	r_emailField: {
+		hintText: 'Epostadresse',
+		color: '#000',
+		height:40,
+		width: 245,
+		top: 12,
+		backgroundColor: '#fff',
+		borderRadius: 4,
+		borderColor: '#bbb',
+		clearButtonMode: Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
+		autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+		left:4,
+		right: 4,
+		autocorrect: false,
+		paddingLeft: 8
+	},
+	r_passwordField: {
+		hintText: 'Passord',
 		color: '#ccc',
 		height:40,
 		width: 245,
@@ -170,17 +215,16 @@ exports = {
 		borderColor: '#bbb',
 		clearButtonMode: Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
 		autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
-		passwordMask: false,
+		passwordMask: true,
 		autocorrect: false,
 		paddingLeft: 8
 	},
-	repeatPwField: {
+	r_password2Field: {
 		hintText: 'Gjenta passord',
 		color: '#ccc',
 		height:40,
 		width: 245,
-		top: 276,
-		opacity: 0,
+		top: 6,
 		backgroundColor: '#fff',
 		borderRadius: 4,
 		borderColor: '#bbb',
@@ -189,6 +233,25 @@ exports = {
 		passwordMask: true,
 		autocorrect: false,
 		paddingLeft: 8
+	},
+	registerBtn: {
+		width: 245,
+		height: 50,
+		top: 10,
+		backgroundImage: 'images/common/greenbtn.png'
+	},
+	registerBtnLabel: {
+		height: 'auto',
+		width: 'auto',
+		text: 'REGISTRER',
+		color: '#eee',
+		touchEnabled: false,
+		font: {
+			fontWeight: 'bold',
+			fontSize: 16
+		},
+		shadowColor: '#516a12',
+		shadowOffset: {x: 0, y:-1}
 	},
 	backBtn: {
 		width: 24,

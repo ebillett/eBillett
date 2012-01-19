@@ -1,8 +1,9 @@
 var general = require('ui/styles/general'),
 	styles = require('ui/styles/login'),
 	self = Titanium.UI.createWindow(styles.loginWin),
-	wrapper = Titanium.UI.createView(general.wrapper),
+	wrapper = Titanium.UI.createView(),
 	logo = Titanium.UI.createView(styles.logo),
+	contentWrapper = Titanium.UI.createView(styles.contentWrapper),
 	loginWrapper = Titanium.UI.createView(styles.loginWrapper),
 	usernameField = Titanium.UI.createTextField(styles.usernameField),
 	passwordField = Titanium.UI.createTextField(styles.passwordField),
@@ -17,9 +18,13 @@ var general = require('ui/styles/general'),
 	continueLabel = Titanium.UI.createLabel(styles.continueLabel),
 	noLoginAlert = Titanium.UI.createAlertDialog(styles.noLoginAlert),
 	registerWrapper = Titanium.UI.createView(styles.registerWrapper),
-	nameField = Titanium.UI.createTextField(styles.nameField),
-	telField = Titanium.UI.createTextField(styles.telField),
-	repeatPwField = Titanium.UI.createTextField(styles.repeatPwField),
+	r_nameField = Titanium.UI.createTextField(styles.r_nameField),
+	r_telField = Titanium.UI.createTextField(styles.r_telField),
+	r_emailField = Titanium.UI.createTextField(styles.r_emailField),
+	r_passwordField = Titanium.UI.createTextField(styles.r_passwordField),
+	r_password2Field = Titanium.UI.createTextField(styles.r_password2Field),
+	registerBtn = Titanium.UI.createButton(styles.registerBtn),
+	registerBtnLabel = Titanium.UI.createLabel(styles.registerBtnLabel),
 	backBtn = Titanium.UI.createButton(styles.backBtn);
 	
 	
@@ -32,22 +37,36 @@ var layout = function() {
 	loginWrapper.add(passwordField);
 	loginBtn.add(loginBtnLabel);
 	loginWrapper.add(loginBtn);
-	wrapper.add(loginWrapper);
 
-	// Setup not registered message
+	// -- Setup not registered message
 	notRegisteredWrapper.add(seperator);
 	notRegisteredWrapper.add(nrTitle);
 	notRegisteredWrapper.add(nrInfo);
 	notRegisteredWrapper.add(nrLink);
-	wrapper.add(notRegisteredWrapper);
+	loginWrapper.add(notRegisteredWrapper);
+
+	//wrapper.add(loginWrapper);
+
+	// Setup register form
+	registerWrapper.add(r_nameField);
+	registerWrapper.add(r_telField);
+	registerWrapper.add(r_emailField);
+	registerWrapper.add(r_passwordField);
+	registerWrapper.add(r_password2Field);
+	registerBtn.add(registerBtnLabel);
+	registerWrapper.add(registerBtn);
+
+	// Move register form out of view
+	//wrapper.add(registerWrapper);
+
+	contentWrapper.add(loginWrapper);
+	contentWrapper.add(registerWrapper);
+	wrapper.add(contentWrapper);
+
 
 	// Setup continue without login
 	continueWrapper.add(continueLabel);
 	self.add(continueWrapper);
-
-	// Setup register form
-	registerWrapper.add(nameField);
-	registerWrapper.add(telField);
 	
 
 	self.add(wrapper);
@@ -60,104 +79,55 @@ exports.load = function() {
 };
 
 
-// Toggle login or register state for button
-var toggleLoginBtn = function(a) {
-	if(a === 1) {
-		debug('Login button is now for registration');
-
-		loginBtnLabel.text = 'REGISTRER';
-		loginBtn.type = 'register';
-	} else {
-		debug('Login button is now for logging in');
-
-		loginBtnLabel.text = 'LOGG INN';
-		loginBtn.type = 'login';
-	}
-};
-
-loginBtn.addEventListener('click', function() {
-	alert('hei');
-});
-
-// Throw warning about no purchase-mode
-continueWrapper.addEventListener('click', function() {
-	noLoginAlert.show();
-});
-
-noLoginAlert.addEventListener('click', function(e) {
-	if(e.index === 0) {
-		self.close(); // Close login win and go into no-buy mode
-
-		debug('App is in no buy-mode');
-	} else {
-		noLoginAlert.hide();
-	}
-});
-
+// Events
 notRegisteredWrapper.addEventListener('click', function() {
-	debug('Start registration');
+	debug('Switch to register form');
+
 	animateToRegister();
 });
 
-//
+backBtn.addEventListener('click', function() {
+	debug('Switch to login form');
+
+	animateToLogin();
+});
+
+
+loginBtn.addEventListener('click', function() {
+	alert('login btn clicked');
+});
+
+
+
 // Animations
-//
-
 var animateToRegister = function() {
-	// Fade out not registered-text
-	notRegisteredWrapper.animate({
-		top: 262,
-		opacity: 0,
-		duration: 500
-	});
-
-	// Move loginwrapper down
-	loginWrapper.animate({
-		top: 185,
+	contentWrapper.animate({
+		left: -general.dWidth,
 		duration: 500,
 		delay: 200
 	});
 
-	// Move button further down to make place for verify pw field
-	loginBtn.animate({
-		top: 145,
-		duration: 500,
-		delay: 200
-	});
-
-	// Add extra fields
-	self.add(registerWrapper);
-	registerWrapper.animate({
-		opacity: 100,
-		duration: 500,
-		delay: 500
-	});
-
-	// Add verify pw field
-	self.add(repeatPwField);
-	repeatPwField.animate({
-		opacity: 100,
-		duration: 500,
-		delay: 500
-	});
-
-	// Add back button
 	self.add(backBtn);
 	backBtn.animate({
 		opacity: 100,
-		duration: 500,
-		delay: 700
+		duration: 300,
+		delay: 800
 	});
-
-	backBtn.addEventListener('click', function() {
-		animateToLogin();
-	});
-
-	// Change to register mode
-	//setTimeout(toggleLoginBtn(1), 2000);
-	toggleLoginBtn(1);
 };
 
 var animateToLogin = function() {
-	
+	contentWrapper.animate({
+		left: 0,
+		duration: 500,
+		delay: 300
+	});
+
+	backBtn.animate({
+		opacity: 0,
+		duration: 300
+	}, function() {
+		setTimeout(function() {
+			self.remove(backBtn);
+			}, 500);
+	});
 };
