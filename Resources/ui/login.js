@@ -95,7 +95,7 @@ noLoginAlert.addEventListener('click', function(e) {
 });
 
 notRegisteredWrapper.addEventListener('click', function() {
-	debug('Start registration');
+	debug('Change to registration form');
 	animateToRegister();
 });
 
@@ -150,6 +150,7 @@ var animateToRegister = function() {
 	});
 
 	backBtn.addEventListener('click', function() {
+		debug('Change to login form');
 		animateToLogin();
 	});
 
@@ -159,5 +160,11 @@ var animateToRegister = function() {
 };
 
 var animateToLogin = function() {
-	
+	// Remove back button
+	//self.remove(backBtn);
+
+	repeatPwField.animate({
+		opacity: 0,
+		duration: 500
+	});
 };
