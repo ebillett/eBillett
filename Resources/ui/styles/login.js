@@ -155,6 +155,8 @@ exports = {
 		color: '#000',
 		height:40,
 		width: 245,
+		top: 0,
+		opacity: 0,
 		backgroundColor: '#fff',
 		borderRadius: 4,
 		borderColor: '#bbb',
@@ -170,7 +172,8 @@ exports = {
 		color: '#ccc',
 		height:40,
 		width: 245,
-		top: 6,
+		top: 46,
+		opacity: 0,
 		backgroundColor: '#fff',
 		borderRadius: 4,
 		borderColor: '#bbb',
@@ -185,7 +188,7 @@ exports = {
 		color: '#ccc',
 		height:40,
 		width: 245,
-		top: 276,
+		top: 190,
 		opacity: 0,
 		backgroundColor: '#fff',
 		borderRadius: 4,
@@ -202,6 +205,7 @@ exports = {
 		backgroundImage: 'images/login/back.png',
 		top: 60,
 		left: 40,
-		opacity: 0
+		//opacity: 0
+		opacity: 100
 	}
 };

@@ -3,6 +3,7 @@ var general = require('ui/styles/general'),
 	self = Titanium.UI.createWindow(styles.loginWin),
 	wrapper = Titanium.UI.createView(general.wrapper),
 	logo = Titanium.UI.createView(styles.logo),
+	mode = 'login',
 	loginWrapper = Titanium.UI.createScrollView(styles.loginWrapper),
 	usernameField = Titanium.UI.createTextField(styles.usernameField),
 	passwordField = Titanium.UI.createTextField(styles.passwordField),
@@ -64,12 +65,14 @@ var toggleLoginBtn = function(a) {
 		debug('Login button is now for registration');
 
 		loginBtnLabel.text = 'REGISTRER';
-		loginBtn.type = 'register';
+		//loginBtn.type = 'register';
+		mode = 'register';
 	} else {
 		debug('Login button is now for logging in');
 
 		loginBtnLabel.text = 'LOGG INN';
-		loginBtn.type = 'login';
+		//loginBtn.type = 'login';
+		mode = 'login';
 	}
 };
 
@@ -94,11 +97,19 @@ noLoginAlert.addEventListener('click', function(e) {
 
 notRegisteredWrapper.addEventListener('click', function() {
 	debug('Change to registration form');
+	mode = 'register';
 	animateToRegister();
 });
 
 
+backBtn.addEventListener('click', function() {
+	debug('Change to login form');
+	mode = 'login';
+	animateToLogin();
+});
+
 var animateToRegister = function() {
+	// Hide register text
 	notRegisteredWrapper.animate({
 		opacity: 0,
 		top: 262,
@@ -107,17 +118,96 @@ var animateToRegister = function() {
 		wrapper.remove(notRegisteredWrapper);
 	});
 
+	// Expand wrapper to hold extra fields
 	loginWrapper.animate({
-		height: 270,
+		height: 300,
 		top: 95,
 		duration: 500,
 		delay: 350
 	});
 	
+	// Move down to make room
 	loginBtn.animate({
-		top: 210,
+		top: 240,
+		duration: 500,
+		delay: 400
+	});
+
+	usernameField.animate({
+		top: usernameField.top + 100,
 		duration: 500,
 		delay: 450
 	});
-}
+
+	passwordField.animate({
+		top: passwordField.top + 100,
+		duration: 500,
+		delay: 350
+	});
+
+	loginWrapper.add(nameField);
+	nameField.animate({
+		opacity: 100,
+		duration: 500,
+		delay: 650
+	});
+
+	loginWrapper.add(telField);
+	telField.animate({
+		opacity: 100,
+		duration: 500,
+		delay: 650
+	});
+
+	loginWrapper.add(repeatPwField);
+	repeatPwField.animate({
+		opacity: 100,
+		duration: 500,
+		delay: 650
+	}, function() {
+		loginBtnLabel.text = 'REGISTRER';
+	});
+
+	//loginWrapper.add(repeatPwField);
+
+	self.add(backBtn);
+};
+
+var animateToLogin = function() {
+	repeatPwField.animate({
+		opacity: 0,
+		duration: 500
+	}, function() {
+		loginWrapper.remove(repeatPwField);
+	});
+
+	telField.animate({
+		opacity: 0,
+		duration: 500
+	}, function() {
+		loginWrapper.remove(telField);
+	});
+
+	nameField.animate({
+		opacity: 0,
+		duration: 500
+	}, function() {
+		loginWrapper.remove(nameField);
+	});
+
+	passwordField.animate({
+		top: 46,
+		duration: 500,
+		delay: 650
+	});
+
+	usernameField.animate({
+		top: 0,
+		duration: 500,
+		delay: 650
+	});
+
+	
+
+};
 
