@@ -94,7 +94,29 @@ backBtn.addEventListener('click', function() {
 
 
 loginBtn.addEventListener('click', function() {
-	alert('login btn clicked');
+	debug('Should validate login credentials');
+
+	app.state = 'loggedin';
+	self.close();
+});
+
+registerBtn.addEventListener('click', function() {
+	debug('Should validate registration');
+});
+
+// Throw warning about no purchase-mode
+continueWrapper.addEventListener('click', function() {
+	noLoginAlert.show();
+});
+
+noLoginAlert.addEventListener('click', function(e) {
+	if(e.index === 0) {
+		debug('App is in limited state');
+		
+		Ti.App.fireEvent('loginwin.close');
+		self.close(); // Close login win and go into no-buy mode
+		app.state = 'limited';
+	}
 });
 
 
