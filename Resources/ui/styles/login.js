@@ -10,15 +10,21 @@ exports = {
 		backgroundImage: 'images/common/logo.png'
 	},
 	loginWrapper: {
-		layout: 'vertical',
+		//layout: 'vertical',
 		top: 25,
-		height: 150
+		height: 150,
+		//backgroundColor: '#ff0000',
+		contentWidth:'auto',
+		contentHeight:'auto',
+		showVerticalScrollIndicator:false,
+		showHorizontalScrollIndicator:false
 	},
 	usernameField: {
 		hintText: 'Epostadresse',
 		color: '#000',
 		height:40,
 		width: 245,
+		top: 0,
 		backgroundColor: '#fff',
 		borderRadius: 4,
 		borderColor: '#bbb',
@@ -34,7 +40,7 @@ exports = {
 		color: '#ccc',
 		height:40,
 		width: 245,
-		top: 6,
+		top: 46,
 		backgroundColor: '#fff',
 		borderRadius: 4,
 		borderColor: '#bbb',
@@ -47,7 +53,7 @@ exports = {
 	loginBtn: {
 		width: 245,
 		height: 50,
-		top: 10,
+		top: 100,
 		backgroundImage: 'images/common/greenbtn.png',
 		type: 'login' // Changes to 'register' when user registers profile
 	},

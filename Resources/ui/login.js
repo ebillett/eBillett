@@ -3,7 +3,7 @@ var general = require('ui/styles/general'),
 	self = Titanium.UI.createWindow(styles.loginWin),
 	wrapper = Titanium.UI.createView(general.wrapper),
 	logo = Titanium.UI.createView(styles.logo),
-	loginWrapper = Titanium.UI.createView(styles.loginWrapper),
+	loginWrapper = Titanium.UI.createScrollView(styles.loginWrapper),
 	usernameField = Titanium.UI.createTextField(styles.usernameField),
 	passwordField = Titanium.UI.createTextField(styles.passwordField),
 	loginBtn = Titanium.UI.createButton(styles.loginBtn),
@@ -45,9 +45,7 @@ var layout = function() {
 	continueWrapper.add(continueLabel);
 	self.add(continueWrapper);
 
-	// Setup register form
-	registerWrapper.add(nameField);
-	registerWrapper.add(telField);
+	
 	
 
 	self.add(wrapper);
@@ -99,4 +97,27 @@ notRegisteredWrapper.addEventListener('click', function() {
 	animateToRegister();
 });
 
+
+var animateToRegister = function() {
+	notRegisteredWrapper.animate({
+		opacity: 0,
+		top: 262,
+		duration: 500
+	}, function() {
+		wrapper.remove(notRegisteredWrapper);
+	});
+
+	loginWrapper.animate({
+		height: 270,
+		top: 95,
+		duration: 500,
+		delay: 350
+	});
+	
+	loginBtn.animate({
+		top: 210,
+		duration: 500,
+		delay: 450
+	});
+}
 
