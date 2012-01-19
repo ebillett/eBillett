@@ -39,3 +39,22 @@ exports.load = function() {
 exports.set = function(a) {
 	tabgroup.setActiveTab(a);
 };
+
+Ti.App.addEventListener('loginwin.close', function() {
+	if(app.state == 'limited') {
+		tabgroup.add(disable); // Lock down profile stuff
+	} else if(app.state == 'normal') {
+		tabgroup.remove(disable); // Open profile stuff
+	}
+});
+
+disable.addEventListener('click', function() {
+	loginAlert.show();
+});
+
+loginAlert.addEventListener('click', function(e) {
+	if(e.index === 0) {
+		// Open login win
+		app.loginDialog();
+	}
+});

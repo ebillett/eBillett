@@ -95,8 +95,10 @@ backBtn.addEventListener('click', function() {
 
 loginBtn.addEventListener('click', function() {
 	debug('Should validate login credentials');
+	debug('App is in normal state');
 
-	app.state = 'loggedin';
+	Ti.App.fireEvent('loginwin.close');
+	app.state = 'normal';
 	self.close();
 });
 
@@ -114,8 +116,8 @@ noLoginAlert.addEventListener('click', function(e) {
 		debug('App is in limited state');
 		
 		Ti.App.fireEvent('loginwin.close');
+		app.state = 'limited'; // Set app state
 		self.close(); // Close login win and go into no-buy mode
-		app.state = 'limited';
 	}
 });
 
