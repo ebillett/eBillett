@@ -24,14 +24,15 @@ exports.getString = function(name) {
 // Check if we are logged in
 exports.checkLoggedIn = function(callback) {
 	debug('Checking if user is logged in.');
+	
 	var loggedIn = exports.getString('user:loggedin');
-
-	if(!loggedIn || loggedIn === false) {
+	
+	if(!loggedIn || loggedIn == 'false') {
 		debug('Is not logged in.');
 		callback(false);
 		return false;
 	} else {
-		debug('Is logged in');
+		debug('Is logged in.');
 		exports.user.getInfo();
 		callback(true); // is logged in
 		return true;
@@ -46,20 +47,29 @@ exports.user = {
 	info: {},
 	login:  function(user) {
 		debug('Persisting login credentials for ' + user.name + ' with id: ' + user.id);
-		exports.setString('user:loggedin', true);
+		exports.setString('user:loggedin', 'true');
 		exports.setString('user:info', JSON.stringify(user));
 	},
 	logout: function() {
+		debug('Logging out user');
+		
 		var user = JSON.parse(exports.getString('user:info'));
-		debug(user);
+		
+		debug('Logging out user: ' + user.name + ' with id: ' + user.id);
 
-		exports.setString('user:loggedin', false);
-		exports.setString('user:info', '');
+		exports.setString('user:loggedin', 'false');
+		exports.setString('user:info', '-');
+
+		// Open login dialog
+		exports.loginDialog();
+
+		// Set tab to Buy
+		require('ui/tabgroup').set(0);
 	},
 	getInfo: function() {
 		var user = JSON.parse(exports.getString('user:info'));
 		exports.user.info = user;
 
-		debug('User is logged in as ' + user.name + ' with id: ' + user.id);
+		debug('Stored credentials for logged in user is ' + user.name + ' with id: ' + user.id);
 	}
 };

@@ -3,7 +3,7 @@ var general = require('ui/styles/general'),
 	windows = {
 		buy: require('ui/buy/start'),
 		tickets: Titanium.UI.createWindow({title: 'tickets'}),
-		profile: Titanium.UI.createWindow({title: 'profile'})
+		profile: require('ui/profile/profile')
 	},
 	tabgroup = Titanium.UI.createTabGroup(general.tabgroup),
 	tabs = {
@@ -17,7 +17,7 @@ var general = require('ui/styles/general'),
 		}),
 		profile: Titanium.UI.createTab({
 			title: 'Min profil',
-			window: windows.profile.open()
+			window: windows.profile.load()
 		})
 	},
 	disable = Titanium.UI.createView(styles.disable),
