@@ -5,7 +5,7 @@ exports = {
 	disable: {
 		backgroundColor: '#000',
 		opacity: 0.3,
-		height:50,
+		height:48,
 		width:200,
 		bottom:0,
 		right: 0

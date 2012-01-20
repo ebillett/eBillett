@@ -13,4 +13,6 @@ Ti.include('plugins/debug.js');
 // Global app namespace
 var app = require('ui/core');
 
+app.db.bootstrap();
+
 app.launch();

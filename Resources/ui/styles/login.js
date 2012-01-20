@@ -57,8 +57,7 @@ exports = {
 		width: 245,
 		height: 50,
 		top: 10,
-		backgroundImage: 'images/common/greenbtn.png',
-		type: 'login' // Changes to 'register' when user registers profile
+		backgroundImage: 'images/common/greenbtn.png'
 	},
 	loginBtnLabel: {
 		height: 'auto',

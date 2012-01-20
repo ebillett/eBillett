@@ -2,10 +2,11 @@
 // Private objects
 var whatever;
 
-//exports.db = require('services/db/general');
-//exports.net = require('services/net/general');
-//exports.utils = require('plugins/utils');
+exports.db = require('services/db');
+//exports.net = require('services/net');
+//exports.u = require('plugins/utils');
 
+exports.prop = {};
 
 exports.launch = function() {
 	
@@ -21,6 +22,10 @@ exports.getString = function(name) {
 	return Ti.App.Properties.getString(name);
 };
 
+
+// User stuff
+
+
 // Check if we are logged in
 exports.checkLoggedIn = function(callback) {
 	debug('Checking if user is logged in.');
@@ -34,6 +39,7 @@ exports.checkLoggedIn = function(callback) {
 	} else {
 		debug('Is logged in.');
 		exports.user.getInfo();
+		app.state = 'normal';
 		callback(true); // is logged in
 		return true;
 	}
