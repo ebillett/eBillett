@@ -97,13 +97,26 @@ loginBtn.addEventListener('click', function() {
 	debug('Should validate login credentials');
 	debug('App is in normal state');
 
-	Ti.App.fireEvent('loginwin.close');
-	app.state = 'normal';
-	self.close();
+	if(1+1==2) { // if user credentials validates
+		// fake user object
+		var user = {
+			id: '1',
+			name: 'Martin Berg',
+			email: 'martin@dx.no',
+			tel: '',
+			password: 'martin'
+		};
+
+		Ti.App.fireEvent('loginwin.close');
+		app.state = 'normal';
+		app.user.login(user);
+		self.close();
+	}
 });
 
 registerBtn.addEventListener('click', function() {
 	debug('Should validate registration');
+	app.user.logout(); // move to profile asap
 });
 
 // Throw warning about no purchase-mode

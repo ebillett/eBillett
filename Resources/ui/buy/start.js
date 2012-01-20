@@ -15,3 +15,9 @@ exports.load = function() {
 
 	return self;
 };
+
+self.addEventListener('focus', function() {
+	if(app.state) {
+		debug('buy window has focus');
+	}
+});
