@@ -110,6 +110,7 @@ var closeAddDialog = function() {
 // Events
 // ------------------------------------
 addPlaceBtn.addEventListener('click', function() {
+	Ti.App.fireEvent('addPlaces.open');
 	openAddDialog();
 });
 

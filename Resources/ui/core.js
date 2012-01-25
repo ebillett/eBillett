@@ -3,7 +3,7 @@
 var whatever;
 
 exports.db = require('services/db');
-//exports.net = require('services/net');
+exports.net = require('services/network');
 //exports.u = require('plugins/utils');
 
 exports.prop = {};
