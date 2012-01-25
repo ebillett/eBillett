@@ -1,7 +1,8 @@
 var general = require('ui/styles/general'),
 	styles = require('ui/styles/buy/addplaces'),
+	Place = require('models/Place'),
 	view = Titanium.UI.createView(styles.view),
-	table = Titanium.UI.createTableView();
+	table = Titanium.UI.createTableView(styles.table);
 	closeBtn = Titanium.UI.createButton(styles.closeBtn);
 
 
@@ -18,10 +19,26 @@ exports.load = function() {
 
 
 function getPlaces() {
-	app.net.places.get(function(places) {
-		_.each(place, function() {
-			debug(place.name);
-		});
+	table.setData([]);
+
+	var tableData = [];
+
+	app.net.places.get(function(resultData) {
+		debug('inside getPlaces callback');
+		if(resultData) {
+			var places = resultData.result.places;
+
+			_.each(places, function(a) {
+				// fix så Place-modell tar et objekt
+				var obj = new Place(null, a.place.name, a.place.pid, a.place.type, a.place.hasmobile);
+				var row = Titanium.UI.createTableViewRow({title: obj.name});
+				tableData.push(row);
+			});
+
+		}
+
+		table.setData(tableData);
+		
 	});
 }
 

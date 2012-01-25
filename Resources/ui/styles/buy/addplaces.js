@@ -12,5 +12,8 @@ exports = {
 		width: general.dWidth- 60,
 		height: 50,
 		bottom: 70
+	},
+	table: {
+		bottom: 80
 	}
 };
