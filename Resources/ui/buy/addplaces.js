@@ -31,7 +31,7 @@ function getPlaces() {
 			_.each(places, function(a) {
 				// fix så Place-modell tar et objekt
 				var obj = new Place(null, a.place.name, a.place.pid, a.place.type, a.place.hasmobile);
-				var row = Titanium.UI.createTableViewRow({title: obj.name});
+				var row = Titanium.UI.createTableViewRow({title: obj.name, hascheck: obj.hasmobile? true : false});
 				tableData.push(row);
 			});
 
