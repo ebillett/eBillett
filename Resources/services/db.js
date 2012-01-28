@@ -57,3 +57,11 @@ exports.savePlace = function(place, callback) {
 
 	callback(1);
 };
+
+exports.deletePlace = function(place) {
+	debug('deleting: ' + place.name);
+
+	var db = Ti.Database.open('eBillett');
+	db.execute('DELETE FROM places WHERE pid = ?', place.pid);
+	db.close();
+};

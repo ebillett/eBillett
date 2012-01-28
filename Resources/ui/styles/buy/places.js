@@ -1,7 +1,8 @@
 
 exports = {
 	table: {
-		height: 300
+		height: 300,
+		editable: true
 	},
 	row: {
 	},
@@ -11,6 +12,6 @@ exports = {
 	addPlaceHint: {
 		title: 'Ingen steder lagret. Klikk her for å legge til',
 		//width: 'auto',
-		height: 50	
+		height: 50
 	}
 };

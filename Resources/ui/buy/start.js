@@ -72,6 +72,7 @@ var loadSavedPlaces = function() {
 
 var createRow = function(o) {
 	var instance = Titanium.UI.createTableViewRow(styles.row);
+	instance.obj = o;
 	instance.title = o.name;
 
 	if(o.hasmobile) {
@@ -121,6 +122,10 @@ Ti.App.addEventListener('addPlaces.close', function() {
 Ti.App.addEventListener('addPlaces.new', function() {
 	// Update list
 	loadSavedPlaces();
+});
+
+table.addEventListener('delete', function(e) {
+	app.db.deletePlace(e.rowData.obj);
 });
 
 
