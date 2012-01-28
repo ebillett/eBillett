@@ -14,6 +14,8 @@ var general = require('ui/styles/general'),
 
 var layout = function() {
 	self.setLeftNavButton(addPlaceBtn);
+	
+	wrapper.add(table);
 
 	self.add(wrapper);
 };
@@ -62,8 +64,6 @@ var loadSavedPlaces = function() {
 				}
 
 				table.setData(tableData);
-				wrapper.add(table);
-
 			}
 		});
 
@@ -116,6 +116,11 @@ addPlaceBtn.addEventListener('click', function() {
 
 Ti.App.addEventListener('addPlaces.close', function() {
 	closeAddDialog();
+});
+
+Ti.App.addEventListener('addPlaces.new', function() {
+	// Update list
+	loadSavedPlaces();
 });
 
 

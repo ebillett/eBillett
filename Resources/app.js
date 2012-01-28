@@ -3,8 +3,6 @@
 // Bootstrapper
 //
 
-// Hei fra stormacen
-
 // Patch commonJS module
 require('plugins/require_patch').monkeypatch(this);
 

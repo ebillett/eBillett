@@ -28,10 +28,34 @@ function getPlaces() {
 		if(resultData) {
 			var places = resultData.result.places;
 
+			// Load previously saved places
+			var savedPlaces;
+			app.db.getPlaces(function(resultData) {
+				savedPlaces = resultData;
+			});
+
+			
 			_.each(places, function(a) {
+				var isSaved = false;
+
+				// Check if place is stored locally
+				_.each(savedPlaces, function(savedPlace) {
+					if(savedPlace.name == a.place.name) {
+						debug(a.place.name + ' is already saved. Deactivating it');
+						isSaved = true;
+					}
+				});
+
 				// fix så Place-modell tar et objekt
 				var obj = new Place(null, a.place.name, a.place.pid, a.place.type, a.place.hasmobile);
-				var row = Titanium.UI.createTableViewRow({title: obj.name, hascheck: obj.hasmobile? true : false});
+				var row = Titanium.UI.createTableViewRow({
+					title: obj.name,
+					backgroundColor: isSaved? '#ddd' : '#fff',
+					hascheck: obj.hasmobile? true : false,
+					obj: obj,
+					isSaved: isSaved,
+					touchEnabled: false
+				});
 				tableData.push(row);
 			});
 
@@ -54,4 +78,22 @@ closeBtn.addEventListener('click', function() {
 
 Ti.App.addEventListener('addPlaces.open', function() {
 	getPlaces();
+});
+
+table.addEventListener('click', function(e) {
+	if(!e.rowData.isSaved) {
+		app.db.savePlace(e.rowData.obj, function(success) {
+			if(success) {
+				// Fire event to update local list
+				Ti.App.fireEvent('addPlaces.new');
+
+				e.row.backgroundColor = '#ddd';
+				e.rowData.isSaved = true;
+
+				debug('Saved success');
+			} else {
+				debug('Save failed... :-(');
+			}
+		});
+	}
 });

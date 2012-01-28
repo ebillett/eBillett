@@ -37,9 +37,23 @@ exports.getPlaces = function(callback) {
 	result.close();
 	db.close();
 
-	//callback(data);
+	if(callback) {
+		callback(data);
+	}
+
+	return data;
 
 	// Dev
-	var empty;
-	callback(empty);
+	//var empty;
+	//callback(empty);
+};
+
+exports.savePlace = function(place, callback) {
+	debug('saving: ' + place.name);
+
+	var db = Ti.Database.open('eBillett');
+    db.execute('INSERT INTO places (name, pid, type, hasmobile) VALUES (?,?,?,?)', place.name, place.pid, place.type, place.hasmobile);
+	db.close();
+
+	callback(1);
 };
