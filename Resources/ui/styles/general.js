@@ -27,4 +27,17 @@ exports = {
 		left: 0,
 		layout: 'vertical'
 	},
+	shadowTop: function(top) {
+		var instance = Titanium.UI.createView({
+			width: 320,
+			height: 5,
+			top: top,
+			backgroundColor: 'transparent',
+			backgroundImage: 'images/common/shadow.png',
+			touchEnabled: false,
+			zIndex: 1001
+		});
+
+		return instance;
+	}
 };

@@ -14,6 +14,7 @@ exports.get = function(callback) {
 
 		xhr.onload = function()
 			{
+				debug('onLoad from network/place');
 				if(this.status === 200) {
 					
 					var returnData = JSON.parse(this.responseText);

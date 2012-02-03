@@ -86,6 +86,7 @@ var createRow = function(o) {
 		instance.add(mobile);
 	}
 
+
 	return instance;
 };
 
@@ -126,15 +127,6 @@ Ti.App.addEventListener('addPlaces.close', function() {
 	closeAddDialog();
 });
 
-Ti.App.addEventListener('addPlaces.new', function() {
-	// Update list
-	loadSavedPlaces();
-});
-
-table.addEventListener('delete', function(e) {
-	app.db.deletePlace(e.rowData.obj);
-});
-
 editBtn.addEventListener('click', function() {
 	if(!editing) {
 		// Not already in edit mode
@@ -147,6 +139,22 @@ editBtn.addEventListener('click', function() {
 		editBtn.title = 'Rediger';
 		editing = false;
 	}
+});
+
+Ti.App.addEventListener('addPlaces.new', function() {
+	// Update list
+	loadSavedPlaces();
+});
+
+table.addEventListener('delete', function(e) {
+	app.db.deletePlace(e.rowData.obj);
+});
+
+table.addEventListener('click', function(e) {
+	debug('Clicked on: ' + e.rowData.obj.name);
+
+	var next = require('ui/buy/show_cinema').load(e.rowData.obj);
+	require('ui/tabgroup').tabs.buy.open(next);
 });
 
 

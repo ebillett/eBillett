@@ -43,6 +43,8 @@ exports.set = function(a) {
 	tabgroup.setActiveTab(a);
 };
 
+exports.tabs = tabs;
+
 Ti.App.addEventListener('loginwin.close', function() {
 	if(app.state == 'limited') {
 		tabgroup.add(disable); // Lock down profile stuff
