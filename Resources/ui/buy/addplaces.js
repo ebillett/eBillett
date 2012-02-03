@@ -37,7 +37,7 @@ function getPlaces() {
 				savedPlaces = resultData;
 			});
 
-			
+
 			_.each(places, function(a) {
 				var isSaved = false;
 
@@ -55,9 +55,9 @@ function getPlaces() {
 					title: obj.name,
 					backgroundColor: isSaved? '#ddd' : '#fff',
 					hascheck: obj.hasmobile? true : false,
+					opacity: obj.hasmobile? 0.5 : 100,
 					obj: obj,
-					isSaved: isSaved,
-					touchEnabled: false
+					isSaved: isSaved
 				});
 				tableData.push(row);
 			});

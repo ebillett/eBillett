@@ -26,6 +26,9 @@ var layout = function() {
 exports.load = function() {
 	layout();
 
+	// Reset booleans for program loading
+	resetProgramLoad();
+
 	return self;
 };
 
@@ -114,6 +117,13 @@ var closeAddDialog = function() {
 		self.remove(instance);
 	});
 };
+
+function resetProgramLoad() {
+	// Reset app.prop.cinemaLoaded
+	app.prop.cinemaLoaded.current = false;
+	app.prop.cinemaLoaded.program = false;
+	app.prop.cinemaLoaded.coming = false;
+}
 
 // ------------------------------------
 // Events

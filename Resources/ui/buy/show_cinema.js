@@ -1,8 +1,11 @@
 var general = require('ui/styles/general'),
 	styles = require('ui/styles/buy/show_cinema'),
 	self = Titanium.UI.createWindow(general.defaultWindow),
-	tabbar = require('ui/buy/components/tabbar');
-	currentView = require('ui/buy/components/cinema_current');
+	tabbar = require('ui/buy/components/tabbar'),
+	currentView = require('ui/buy/components/cinema_current'),
+	loadedCurrent = false,
+	loadedProgram = false,
+	loadedComing = false;
 
 
 
@@ -19,6 +22,9 @@ function layout(obj) {
 }
 
 exports.load = function(obj) {
+	// Set place object to properties
+	app.prop.place = obj;
+
 	layout(obj);
 
 	return self;
@@ -27,7 +33,11 @@ exports.load = function(obj) {
 
 function setView(id) {
 	if(id === 0) {
-		currentView = currentView.load();
-		self.add(currentView);
+		self.add(currentView.load());
 	}
 }
+
+
+self.addEventListener('close', function() {
+	// set loaded to
+});

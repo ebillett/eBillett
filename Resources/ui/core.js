@@ -6,7 +6,13 @@ exports.db = require('services/db');
 exports.net = require('services/network');
 //exports.u = require('plugins/utils');
 
-exports.prop = {};
+exports.prop = {
+	cinemaLoaded: {
+		current: false,
+		program: false,
+		coming: false
+	}
+};
 
 exports.launch = function() {
 	
