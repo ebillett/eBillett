@@ -1,19 +1,22 @@
 var general = require('ui/styles/general'),
 	styles = require('ui/styles/buy/places'),
 	self = Titanium.UI.createWindow(general.defaultWindow),
+	editing = false,
 	wrapper = Titanium.UI.createView(general.wrapper),
 	addPlaceBtn = Titanium.UI.createButton(addPlaceBtn),
 	addPlaceHint = Titanium.UI.createButton(addPlaceHint),
 	addDialog = require('ui/buy/addplaces').load(),
+	editBtn = Titanium.UI.createButton({title: 'Rediger'}),
 	table = Titanium.UI.createTableView(styles.table);
 	//row = Titanium.UI.createTableViewRow(styles.row);
 
 
-	self.titleControl = general.defaultTitle('Hei idiot');
+	self.titleControl = general.defaultTitle('Mine steder');
 
 
 var layout = function() {
 	self.setLeftNavButton(addPlaceBtn);
+	self.setRightNavButton(editBtn);
 	
 	wrapper.add(table);
 
@@ -71,12 +74,16 @@ var loadSavedPlaces = function() {
 };
 
 var createRow = function(o) {
-	var instance = Titanium.UI.createTableViewRow(styles.row);
+	var instance = Titanium.UI.createTableViewRow(styles.row),
+		title = Titanium.UI.createLabel(styles.rowTitle);
 	instance.obj = o;
-	instance.title = o.name;
+	title.text =  o.name;
+
+	instance.add(title);
 
 	if(o.hasmobile) {
-		instance.hasCheck = true;
+		var mobile = Titanium.UI.createView(styles.rowMobile);
+		instance.add(mobile);
 	}
 
 	return instance;
@@ -126,6 +133,20 @@ Ti.App.addEventListener('addPlaces.new', function() {
 
 table.addEventListener('delete', function(e) {
 	app.db.deletePlace(e.rowData.obj);
+});
+
+editBtn.addEventListener('click', function() {
+	if(!editing) {
+		// Not already in edit mode
+		table.editing = true;
+		editBtn.title = 'Ferdig';
+		editing = true;
+	} else {
+		// In edit mode
+		table.editing = false;
+		editBtn.title = 'Rediger';
+		editing = false;
+	}
 });
 
 

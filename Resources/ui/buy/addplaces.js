@@ -2,11 +2,14 @@ var general = require('ui/styles/general'),
 	styles = require('ui/styles/buy/addplaces'),
 	Place = require('models/Place'),
 	view = Titanium.UI.createView(styles.view),
-	table = Titanium.UI.createTableView(styles.table);
-	closeBtn = Titanium.UI.createButton(styles.closeBtn);
+	table = Titanium.UI.createTableView(styles.table),
+	closeBtn = Titanium.UI.createButton(styles.closeBtn),
+	closeTitle = Titanium.UI.createLabel(styles.closeTitle);
 
 
 function layout() {
+	closeBtn.add(closeTitle);
+
 	view.add(closeBtn);
 	view.add(table);
 }
