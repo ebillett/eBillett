@@ -42,14 +42,14 @@ function Tab(item) {
 
 	// Events
 	instance.addEventListener('click', function() {
-		Ti.App.fireEvent('cinematab_click', item.id);
+		Ti.App.fireEvent('cinematab_change', {id: item.id});
 		debug(item.title);
 		activeTab = item.id;
 
 		instance.backgroundImage = instance.selectedBg;
 	});
 
-	Ti.App.addEventListener('cinematab_click', function() {
+	Ti.App.addEventListener('cinematab_change', function() {
 		reset();
 	});
 

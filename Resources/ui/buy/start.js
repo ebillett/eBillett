@@ -161,10 +161,22 @@ table.addEventListener('delete', function(e) {
 });
 
 table.addEventListener('click', function(e) {
-	debug('Clicked on: ' + e.rowData.obj.name);
+	debug('Clicked on: ' + e.rowData.obj.name + 'which has type: ' + e.rowData.obj.type);
 
-	var next = require('ui/buy/show_cinema').load(e.rowData.obj);
-	require('ui/tabgroup').tabs.buy.open(next);
+	var type = e.rowData.obj.type;
+
+	switch (type) {
+		case 'Kino':
+			var next = require('ui/buy/show_cinema').load(e.rowData.obj);
+			require('ui/tabgroup').tabs.buy.open(next);
+		break;
+
+		case 'Begge':
+			var next2 = require('ui/buy/show_dual').load(e.rowData.obj);
+			require('ui/tabgroup').tabs.buy.open(next2);
+		break;
+	}
+	
 });
 
 

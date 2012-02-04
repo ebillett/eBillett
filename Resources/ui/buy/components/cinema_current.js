@@ -9,7 +9,7 @@ var general = require('ui/styles/general'),
 function layout() {
 	self.backgroundColor = '#eee';
 	
-	//table.setData();
+	self.setData();
 
 	//self.add(table);
 }
@@ -21,7 +21,6 @@ exports.load = function() {
 
 	return self;
 
-	//return table;
 };
 
 
