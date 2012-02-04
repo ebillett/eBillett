@@ -1,16 +1,17 @@
 var general = require('ui/styles/general'),
 	styles = require('ui/styles/buy/show_cinema'),
 	Movie = require('models/Movie'),
-	self = Titanium.UI.createView(),
-	table = Titanium.UI.createTableView({backgroundColor: '#eee', height: 323, top: 43, data: []});
+	//self = Titanium.UI.createView(),
+	//table = Titanium.UI.createTableView({backgroundColor: '#eee', height: 323, top: 43, data: []});
+	self = Titanium.UI.createTableView({backgroundColor: '#eee', height: 323, top: 43, data: []});
 
 
 function layout() {
-	self.backgroundColor = '#ff00ff';
+	self.backgroundColor = '#eee';
 	
-	table.setData();
+	//table.setData();
 
-	self.add(table);
+	//self.add(table);
 }
 
 exports.load = function() {
@@ -19,6 +20,8 @@ exports.load = function() {
 	getMovies();
 
 	return self;
+
+	//return table;
 };
 
 
@@ -40,7 +43,7 @@ function getMovies() {
 						var obj = new Movie(movie);
 
 						var testRow = Titanium.UI.createTableViewRow({title: obj.title});
-						table.appendRow(testRow);
+						self.appendRow(testRow);
 					}
 				});
 
