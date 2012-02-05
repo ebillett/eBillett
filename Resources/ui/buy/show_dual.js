@@ -31,31 +31,25 @@ toggleMode.addEventListener('click', function() {
 	debug('toggleMode clicked');
 
 	if(toggleValue == 'cinema') {
-		cultureView = require('ui/buy/show_culture').loadComponent(app.prop.place);
-		self.add(cultureView);
+		debug('Switching to culture');
+
+		//cultureView = require('ui/buy/show_culture').loadComponent(app.prop.place);
+		//self.add(cultureView);
 
 		cinemaView.animate({
 			top: 480,
 			duration: 500,
 			delay: 50
 		});
-		cultureView.animate({
-			top: 0,
-			duration: 500,
-			delay: 200
-		});
 
 		toggleValue = 'culture';
 
 	} else if(toggleValue == 'culture') {
-		cultureView.animate({
-			top: -480,
-			duration: 500,
-			delay: 50
-		});
+		debug('Switching to cinema');
+
 
 		cinemaView.animate({
-			top: -200,
+			top: 0,
 			duration: 500,
 			delay: 200
 		});
