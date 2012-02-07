@@ -40,7 +40,10 @@ toggleMode.addEventListener('click', function() {
 			top: 480,
 			duration: 500,
 			delay: 50
-		});
+		},
+			function() {
+				cinemaView.top = 480;
+			});
 
 		toggleValue = 'culture';
 
