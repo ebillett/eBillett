@@ -54,14 +54,44 @@ function getPlaces() {
 
 				// fix så Place-modell tar et objekt
 				var obj = new Place(null, a.place.name, a.place.pid, a.place.type, a.place.hasmobile);
-				var row = Titanium.UI.createTableViewRow({
-					title: obj.name,
-					backgroundColor: isSaved? '#ddd' : '#fff',
-					hascheck: obj.hasmobile? true : false,
-					opacity: obj.hasmobile? 0.5 : 100,
-					obj: obj,
-					isSaved: isSaved
+
+				var row = Titanium.UI.createTableViewRow(styles.row);
+				row.obj = obj;
+				row.isSaved = isSaved;
+				row.hasmobile = obj.hasmobile;
+
+				var title = Titanium.UI.createLabel(styles.rowTitle);
+				title.text = obj.name;
+				row.add(title);
+
+				if(!obj.hasmobile) {
+					var noMobile = Titanium.UI.createLabel(styles.rowNoMobile);
+					row.add(noMobile);
+					row.enabled = false;
+					title.opacity = 0.5;
+				}
+
+				// Add checkbox
+				var checkbox = Titanium.UI.createView(styles.rowCheck);
+
+				if(obj.hasmobile && !isSaved) {
+					debug('adding checkbox for: ' + obj.name);
+
+					row.add(checkbox);
+
+				} else if (obj.hasmobile && isSaved) {
+					debug('adding checkbox active for: ' + obj.name);
+
+					checkbox.backgroundImage = checkbox.activeImage;
+					row.add(checkbox);
+				}
+
+				Ti.App.addEventListener('addCheckboxActive', function(e) {
+					if(e.name == obj.name) {
+						checkbox.backgroundImage = checkbox.activeImage;
+					}
 				});
+
 				tableData.push(row);
 			});
 
@@ -88,18 +118,24 @@ Ti.App.addEventListener('addPlaces.open', function() {
 
 table.addEventListener('click', function(e) {
 	if(!e.rowData.isSaved) {
-		app.db.savePlace(e.rowData.obj, function(success) {
-			if(success) {
-				// Fire event to update local list
-				Ti.App.fireEvent('addPlaces.new');
+		if(e.rowData.hasmobile) {
+			app.db.savePlace(e.rowData.obj, function(success) {
+				if(success) {
+					// Fire event to update local list
+					Ti.App.fireEvent('addPlaces.new');
 
-				e.row.backgroundColor = '#ddd';
-				e.rowData.isSaved = true;
+					e.row.backgroundColor = '#ddd';
+					e.rowData.isSaved = true;
 
-				debug('Saved success');
-			} else {
-				debug('Save failed... :-(');
-			}
-		});
+					Ti.App.fireEvent('addCheckboxActive', {name: e.rowData.obj.name});
+
+					debug('Saved success');
+				} else {
+					debug('Save failed... :-(');
+				}
+			});
+		} else {
+			alert('Beklager. Dette stedet støtter ikke mobilbillett, og kan derfor ikke legges til');
+		}
 	}
 });

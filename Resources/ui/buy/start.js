@@ -85,17 +85,15 @@ var createRow = function(o) {
 
 	instance.add(title);
 
-	if(o.hasmobile) {
-		var mobile = Titanium.UI.createView(styles.rowMobile);
-		instance.add(mobile);
-	}
-
 
 	return instance;
 };
 
 var openAddDialog = function() {
 	debug('Opening add dialog');
+
+	// Set new titlebar title
+	self.titleControl = general.defaultTitle('Legg til');
 
 	var instance = addDialog;
 	self.add(instance);
@@ -108,6 +106,9 @@ var openAddDialog = function() {
 
 var closeAddDialog = function() {
 	debug('Closing add dialog');
+
+	// Set new titlebar title
+	self.titleControl = general.defaultTitle('Mine steder');
 
 	var instance = addDialog;
 	instance.animate({
@@ -130,7 +131,7 @@ function resetProgramLoad() {
 // Events
 // ------------------------------------
 addPlaceBtn.addEventListener('click', function() {
-	if(!addDialogActive) {	
+	if(!addDialogActive) {
 		Ti.App.fireEvent('addPlaces.open');
 		openAddDialog();
 

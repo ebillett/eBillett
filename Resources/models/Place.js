@@ -4,7 +4,7 @@ function Place(id, name, pid, type, hasmobile) {
 	this.name = name;
 	this.pid = pid;
 	this.type = type;
-	this.hasmobile = hasmobile;
+	this.hasmobile = hasmobile*1;
 }
 
 module.exports = Place;
