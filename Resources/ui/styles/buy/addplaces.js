@@ -35,7 +35,9 @@ exports = {
 	},
 	row: {
 		backgroundImage: 'images/buy/table_places.png',
-		height: 50
+		height: 50,
+		selectionStyle: 'none',
+		className: 'addplacerow'
 	},
 	rowTitle: {
 		height: 'auto',

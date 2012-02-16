@@ -73,7 +73,9 @@ function getPlaces() {
 
 				// Add checkbox
 				var checkbox = Titanium.UI.createView(styles.rowCheck);
+				debug(obj.name + '  is saved: ' + isSaved);
 
+				
 				if(obj.hasmobile && !isSaved) {
 					debug('adding checkbox for: ' + obj.name);
 
