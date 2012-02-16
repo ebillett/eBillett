@@ -6,6 +6,7 @@ var general = require('ui/styles/general'),
 	addPlaceBtn = Titanium.UI.createButton(addPlaceBtn),
 	addPlaceHint = Titanium.UI.createButton(addPlaceHint),
 	addDialog = require('ui/buy/addplaces').load(),
+	addDialogActive = false,
 	editBtn = Titanium.UI.createButton({title: 'Rediger'}),
 	table = Titanium.UI.createTableView(styles.table);
 	//row = Titanium.UI.createTableViewRow(styles.row);
@@ -129,12 +130,21 @@ function resetProgramLoad() {
 // Events
 // ------------------------------------
 addPlaceBtn.addEventListener('click', function() {
-	Ti.App.fireEvent('addPlaces.open');
-	openAddDialog();
+	if(!addDialogActive) {	
+		Ti.App.fireEvent('addPlaces.open');
+		openAddDialog();
+
+		addDialogActive = true;
+	} else {
+		closeAddDialog();
+		addDialogActive = false;
+	}
 });
 
 Ti.App.addEventListener('addPlaces.close', function() {
 	closeAddDialog();
+
+	addDialogActive = false;
 });
 
 editBtn.addEventListener('click', function() {

@@ -3,6 +3,7 @@ var general = require('ui/styles/general'),
 	Place = require('models/Place'),
 	view = Titanium.UI.createView(styles.view),
 	table = Titanium.UI.createTableView(styles.table),
+	search = Titanium.UI.createSearchBar(styles.search),
 	closeBtn = Titanium.UI.createButton(styles.closeBtn),
 	closeTitle = Titanium.UI.createLabel(styles.closeTitle);
 
@@ -12,6 +13,8 @@ function layout() {
 
 	view.add(closeBtn);
 	view.add(table);
+
+	table.search = search;
 }
 
 exports.load = function() {

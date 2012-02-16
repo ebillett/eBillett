@@ -31,5 +31,8 @@ exports = {
 		top: 20,
 		bottom: 80,
 		width: 270
+	},
+	search: {
+		backgroundColor: '#ccc'
 	}
 };
