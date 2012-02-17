@@ -15,6 +15,7 @@ function layout() {
 	view.add(table);
 
 	table.search = search;
+	table.filterAttribute = 'hiddenFilter';
 }
 
 exports.load = function() {
@@ -64,6 +65,10 @@ function getPlaces() {
 				title.text = obj.name;
 				row.add(title);
 
+
+				// Set filter attribute for search
+				row.hiddenFilter = obj.name;
+
 				if(!obj.hasmobile) {
 					var noMobile = Titanium.UI.createLabel(styles.rowNoMobile);
 					row.add(noMobile);
@@ -75,7 +80,7 @@ function getPlaces() {
 				var checkbox = Titanium.UI.createView(styles.rowCheck);
 				debug(obj.name + '  is saved: ' + isSaved);
 
-				
+
 				if(obj.hasmobile && !isSaved) {
 					debug('adding checkbox for: ' + obj.name);
 
