@@ -1,6 +1,7 @@
 
 // Private objects
-var whatever;
+var whatever,
+	tabgroup = require('ui/tabgroup');
 
 exports.db = require('services/db');
 exports.net = require('services/network');
@@ -15,8 +16,29 @@ exports.prop = {
 };
 
 exports.launch = function() {
-	
-	require('ui/tabgroup').load();
+	//var start = require('ui/pre').load();
+	//start.open();
+	//require('ui/tabgroup').load();
+
+	app.checkLoggedIn(function(loggedIn) {
+		if(!loggedIn) {
+			//app.loginWin.open({modal: true});
+			app.loginDialog();
+		} else {
+			tabgroup.setBuyWin(true);
+			tabgroup.load();
+		}
+	});
+
+	Ti.App.addEventListener('loginwin.close', function() {
+		if(app.state == 'limited') {
+			tabgroup.setBuyWin(false);
+		} else if(app.state == 'normal') {
+			tabgroup.setBuyWin(true);
+		}
+
+		tabgroup.load();
+	});
 
 };
 
@@ -77,7 +99,9 @@ exports.user = {
 		exports.loginDialog();
 
 		// Set tab to Buy
-		require('ui/tabgroup').set(0);
+		var tabgroup = require('ui/tabgroup');
+		tabgroup.set(0);
+		tabgroup.shutdown();
 	},
 	getInfo: function() {
 		var user = JSON.parse(exports.getString('user:info'));

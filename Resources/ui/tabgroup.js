@@ -2,6 +2,7 @@ var general = require('ui/styles/general'),
 	styles = require('ui/styles/tabgroup'),
 	windows = {
 		buy: require('ui/buy/start'),
+		noLogin: require('ui/buy/places_nologin'),
 		tickets: Titanium.UI.createWindow({title: 'tickets'}),
 		profile: require('ui/profile/profile')
 	},
@@ -9,7 +10,9 @@ var general = require('ui/styles/general'),
 	tabs = {
 		buy: Titanium.UI.createTab({
 			title: 'Kjøp billetter',
-			window: windows.buy.load()
+			//window: windows.buy.load()
+			//window: null
+			//window: windows.noLogin.load()
 		}),
 		tickets: Titanium.UI.createTab({
 			title: 'Mine billetter',
@@ -24,32 +27,52 @@ var general = require('ui/styles/general'),
 	loginAlert = Titanium.UI.createAlertDialog(styles.loginAlert);
 
 exports.load = function() {
-	tabgroup.addTab(tabs.buy);
-	tabgroup.addTab(tabs.tickets);
-	tabgroup.addTab(tabs.profile);
+	if(!tabgroup.tabs) {
+		tabgroup.addTab(tabs.buy);
+		tabgroup.addTab(tabs.tickets);
+		tabgroup.addTab(tabs.profile);
+	}
 
 	tabgroup.open();
-
-	
-	app.checkLoggedIn(function(loggedIn) {
-		if(!loggedIn) {
-			//app.loginWin.open({modal: true});
-			app.loginDialog();
-		}
-	});
 };
 
 exports.set = function(a) {
 	tabgroup.setActiveTab(a);
 };
 
+exports.setBadge = function(i) {
+
+	tabs.tickets.setBadge(1);
+	
+};
+
+exports.shutdown = function() {
+	//tabgroup.close();
+};
+
 exports.tabs = tabs;
+
+
+
+// Set start for buy tab depending on logged in state
+exports.setBuyWin = function(loggedin) {
+	tabs.buy.setWindow(loggedin ? windows.buy.load() : windows.noLogin.load());
+	tabs.buy.setTitle(loggedin ? 'Kjøp billetter' : 'Vis program');
+};
+
+
 
 Ti.App.addEventListener('loginwin.close', function() {
 	if(app.state == 'limited') {
 		tabgroup.add(disable); // Lock down profile stuff
+		//tabs.buy.setWindow(windows.noLogin.load());
+		debug('niggaw');
+		//tabgroup.open(windows.noLogin.load());
+
 	} else if(app.state == 'normal') {
 		tabgroup.remove(disable); // Open profile stuff
+		tabs.buy.window = windows.buy.load();
+
 	}
 });
 
