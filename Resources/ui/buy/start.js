@@ -25,7 +25,12 @@ var layout = function() {
 };
 
 exports.load = function() {
-	layout();
+	
+	if(app.state == 'normal') {
+		layout();
+	} else {
+		self.add(Titanium.UI.createView({backgroundColor: '#ff0000'}));
+	}
 
 	// Reset booleans for program loading
 	resetProgramLoad();
@@ -38,7 +43,7 @@ self.addEventListener('focus', function() {
 		debug('Buy window has focus');
 
 		// Initialize window only if it has not already been done
-		app.prop.didLoadPlaces = true;
+		//app.prop.didLoadPlaces = true;
 
 		loadSavedPlaces();
 	}
@@ -49,12 +54,9 @@ var loadSavedPlaces = function() {
 	// Empty in case of previous load
 	table.setData([]);
 
+
 	var tableData = [];
 
-	if(app.state == 'normal') {
-		// Load places from db, but check for updates online
-
-	} else {
 		// Load places from db only
 		app.db.getPlaces(function(places) {
 			if(!places) {
@@ -74,7 +76,6 @@ var loadSavedPlaces = function() {
 			}
 		});
 
-	}
 };
 
 var createRow = function(o) {

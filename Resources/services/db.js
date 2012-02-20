@@ -10,6 +10,8 @@ exports.bootstrap = function() {
 };
 
 exports.getPlaces = function(callback) {
+	debug('get places');
+
 	var db = Ti.Database.open('eBillett');
 	//var result = db.execute('SELECT id,name,pid,type FROM places');
 	var result = db.execute('SELECT * FROM places');
