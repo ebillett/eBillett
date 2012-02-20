@@ -15,6 +15,7 @@ function layout() {
 	view.add(table);
 
 	table.search = search;
+	table.filterAttribute = 'filter';
 }
 
 exports.load = function() {
@@ -59,6 +60,7 @@ function getPlaces() {
 				row.obj = obj;
 				row.isSaved = isSaved;
 				row.hasmobile = obj.hasmobile;
+				row.filter = obj.name;
 
 				var title = Titanium.UI.createLabel(styles.rowTitle);
 				title.text = obj.name;
