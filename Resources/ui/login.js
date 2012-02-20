@@ -72,10 +72,16 @@ var layout = function() {
 	self.add(wrapper);
 };
 
-exports.load = function() {
+exports.load = function(modal) {
 	layout();
 
 	self.open({modal: true});
+	
+	// if(modal) {
+	// 	self.open({modal: true});
+	// } else {
+	// 	self.open();
+	// }
 };
 
 
