@@ -1,6 +1,7 @@
 
 // Private objects
-var whatever;
+var whatever,
+	tabgroup = require('ui/tabgroup');
 
 exports.db = require('services/db');
 exports.net = require('services/network');
@@ -15,8 +16,30 @@ exports.prop = {
 };
 
 exports.launch = function() {
-	
-	require('ui/tabgroup').load();
+	//var start = require('ui/pre').load();
+	//start.open();
+	//require('ui/tabgroup').load();
+	Ti.UI.backgroundImage = 'images/common/cover.png';
+
+	app.checkLoggedIn(function(loggedIn) {
+		if(!loggedIn) {
+			//app.loginWin.open({modal: true});
+			app.loginDialog(false);
+		} else {
+			tabgroup.setBuyWin(true);
+			tabgroup.load();
+		}
+	});
+
+	Ti.App.addEventListener('loginwin.close', function() {
+		if(app.state == 'limited') {
+			tabgroup.setBuyWin(false);
+		} else if(app.state == 'normal') {
+			tabgroup.setBuyWin(true);
+		}
+
+		tabgroup.load();
+	});
 
 };
 
@@ -52,8 +75,8 @@ exports.checkLoggedIn = function(callback) {
 	}
 };
 
-exports.loginDialog = function() {
-	require('ui/login').load();
+exports.loginDialog = function(modal) {
+	require('ui/login').load(modal);
 };
 
 exports.user = {
@@ -74,10 +97,12 @@ exports.user = {
 		exports.setString('user:info', '-');
 
 		// Open login dialog
-		exports.loginDialog();
+		exports.loginDialog(true);
 
 		// Set tab to Buy
-		require('ui/tabgroup').set(0);
+		var tabgroup = require('ui/tabgroup');
+		tabgroup.set(0);
+		tabgroup.shutdown();
 	},
 	getInfo: function() {
 		var user = JSON.parse(exports.getString('user:info'));
