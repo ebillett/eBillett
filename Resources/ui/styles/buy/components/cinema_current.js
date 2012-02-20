@@ -15,8 +15,8 @@ exports = {
 		width: 67,
 		height: 99,
 		top: 12,
-		left: 12
-		//backgroundColor: '#ddd'
+		left: 12,
+		backgroundColor: '#ddd'
 	},
 	title: {
 		color: '#333',

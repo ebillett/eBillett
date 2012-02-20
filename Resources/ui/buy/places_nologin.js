@@ -77,7 +77,7 @@ function getPlaces() {
 				}
 
 				if(id == prev) {
-					row.backgroundImage = row.altImage;
+					//row.backgroundImage = row.altImage;
 					title.color = '#80a221';
 				}
 				id++;
