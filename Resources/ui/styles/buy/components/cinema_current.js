@@ -5,16 +5,18 @@ exports = {
 		backgroundColor: 'transparent'
 	},
 	row: {
-		backgroundImage: 'images/buy/big_item.png',
+		//backgroundImage: 'images/buy/big_item.png',
 		height: 120,
-		width: 210,
+		left: 10,
+		right: 10,
 		className: 'movie'
 	},
 	poster: {
-		width: 134,
-		height: 198,
-		top: 10,
-		left: 10
+		width: 67,
+		height: 99,
+		top: 12,
+		left: 12
+		//backgroundColor: '#ddd'
 	},
 	title: {
 		color: '#333',

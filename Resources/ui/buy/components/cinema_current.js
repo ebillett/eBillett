@@ -42,13 +42,14 @@ function getMovies() {
 						var obj = new Movie(movie);
 
 						var row = Titanium.UI.createTableViewRow(styles.row);
+						row.movie = obj;
 
 						var poster = Titanium.UI.createImageView(styles.poster);
-						poster.url = movie.poster;
+						poster.image = obj.poster;
 						row.add(poster);
 
 						var title = Titanium.UI.createLabel(styles.title);
-						title.text = movie.title;
+						title.text = obj.title;
 						row.add(title);
 
 						self.appendRow(row);
@@ -64,3 +65,16 @@ function getMovies() {
 		});
 	}
 }
+
+
+// ------------------------------------
+// Events
+// ------------------------------------
+
+self.addEventListener('click', function(e) {
+	
+	var win = require('ui/buy/select_show').load(e.rowData.movie);
+	require('ui/tabgroup').tabs.buy.open(win);
+
+});
+
