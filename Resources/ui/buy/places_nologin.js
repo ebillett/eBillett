@@ -16,6 +16,7 @@ function layout() {
 		
 	self.add(infoWrapper);
 	self.add(table);
+	self.add(general.shadowTop(116));
 
 	table.search = search;
 	table.filterAttribute = 'filter';

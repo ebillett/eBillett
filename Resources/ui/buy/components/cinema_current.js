@@ -1,9 +1,9 @@
 var general = require('ui/styles/general'),
-	styles = require('ui/styles/buy/show_cinema'),
+	styles = require('ui/styles/buy/components/cinema_current'),
 	Movie = require('models/Movie'),
 	//self = Titanium.UI.createView(),
 	//table = Titanium.UI.createTableView({backgroundColor: '#eee', height: 323, top: 43, data: []});
-	self = Titanium.UI.createTableView({backgroundColor: '#eee', height: 323, top: 43, data: []});
+	self = Titanium.UI.createTableView(styles.table);
 
 
 function layout() {
@@ -41,8 +41,18 @@ function getMovies() {
 						// Luk ut ghosts
 						var obj = new Movie(movie);
 
-						var testRow = Titanium.UI.createTableViewRow({title: obj.title});
-						self.appendRow(testRow);
+						var row = Titanium.UI.createTableViewRow(styles.row);
+
+						var poster = Titanium.UI.createImageView(styles.poster);
+						poster.url = movie.poster;
+						row.add(poster);
+
+						var title = Titanium.UI.createLabel(styles.title);
+						title.text = movie.title;
+						row.add(title);
+
+						self.appendRow(row);
+						
 					}
 				});
 

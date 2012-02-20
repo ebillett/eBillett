@@ -1,8 +1,11 @@
 exports = {
 	infoWrapper: {
-		backgroundColor: '#f1f1f1',
+		backgroundImage: 'images/common/block_bg.png',
 		height: 116,
 		top: 0
+	},
+	infoTitle: {
+			
 	},
 	table: {
 		backgroundColor: 'transparent',
@@ -14,7 +17,7 @@ exports = {
 		altImage: 'images/buy/table_places_b.png',
 		height: 50,
 		selectionStyle: 'none',
-		className: 'addplacerow'
+		className: 'placerow'
 	},
 	rowTitle: {
 		height: 'auto',

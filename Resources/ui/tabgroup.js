@@ -66,7 +66,6 @@ Ti.App.addEventListener('loginwin.close', function() {
 	if(app.state == 'limited') {
 		tabgroup.add(disable); // Lock down profile stuff
 		//tabs.buy.setWindow(windows.noLogin.load());
-		debug('niggaw');
 		//tabgroup.open(windows.noLogin.load());
 
 	} else if(app.state == 'normal') {
@@ -84,5 +83,6 @@ loginAlert.addEventListener('click', function(e) {
 	if(e.index === 0) {
 		// Open login win
 		app.loginDialog();
+		tabgroup.close();
 	}
 });
