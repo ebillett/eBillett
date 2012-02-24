@@ -97,7 +97,7 @@ exports = {
 		left: 40,
 		top: 6,
 		touchEnabled: false,
-		text: 'Får å kjøpe billetter, og bruke telefonen \nsom billett må du ha en konto',
+		text: 'For å kjøpe billetter og bruke telefonen \nsom billett må du ha en konto',
 		color: '#666',
 		font: {
 			fontSize: 14
@@ -110,7 +110,7 @@ exports = {
 		left: 40,
 		top: 12,
 		touchEnabled: false,
-		text: 'Klikk her får å komme i gang',
+		text: 'Klikk her for å komme i gang',
 		color: '#516a12',
 		font: {
 			fontSize: 14,

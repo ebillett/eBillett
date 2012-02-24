@@ -2,7 +2,6 @@ var general = require('ui/styles/general'),
 	styles = require('ui/styles/tabgroup'),
 	windows = {
 		buy: require('ui/buy/start'),
-		noLogin: require('ui/buy/places_nologin'),
 		tickets: Titanium.UI.createWindow({title: 'tickets'}),
 		profile: require('ui/profile/profile')
 	},
@@ -10,7 +9,7 @@ var general = require('ui/styles/general'),
 	tabs = {
 		buy: Titanium.UI.createTab({
 			title: 'Kjøp billetter',
-			//window: windows.buy.load()
+			window: windows.buy.load()
 			//window: null
 			//window: windows.noLogin.load()
 		}),
@@ -54,14 +53,6 @@ exports.tabs = tabs;
 
 
 
-// Set start for buy tab depending on logged in state
-exports.setBuyWin = function(loggedin) {
-	tabs.buy.setWindow(loggedin ? windows.buy.load() : windows.noLogin.load());
-	tabs.buy.setTitle(loggedin ? 'Kjøp billetter' : 'Vis program');
-};
-
-
-
 Ti.App.addEventListener('loginwin.close', function() {
 	if(app.state == 'limited') {
 		tabgroup.add(disable); // Lock down profile stuff
@@ -70,7 +61,6 @@ Ti.App.addEventListener('loginwin.close', function() {
 
 	} else if(app.state == 'normal') {
 		tabgroup.remove(disable); // Open profile stuff
-		tabs.buy.window = windows.buy.load();
 
 	}
 });
