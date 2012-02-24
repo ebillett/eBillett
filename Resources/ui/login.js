@@ -72,16 +72,31 @@ var layout = function() {
 	self.add(wrapper);
 };
 
-exports.load = function(modal) {
+exports.load = function(modal, fade) {
+
+	alert(app.test);
+
 	layout();
 
-	self.open({modal: true});
-	
-	// if(modal) {
-	// 	self.open({modal: true});
-	// } else {
-	// 	self.open();
-	// }
+	if (modal) {
+
+		self.open({modal: modal});
+
+	} else if (fade) {
+		
+		self.opacity = 0;
+		self.open();
+		self.animate({
+			duration: 800,
+			opacity: 100
+		},
+			function() {
+				self.opacity = 100;
+		});
+
+	} else {
+		self.open();
+	}
 };
 
 

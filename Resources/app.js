@@ -19,3 +19,7 @@ var app = require('ui/core');
 app.db.bootstrap();
 
 app.launch();
+
+
+
+var GLOBAL = 'test';

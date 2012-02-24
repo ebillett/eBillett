@@ -1,11 +1,19 @@
 
+// ------------------------------------
+// Bootstrapper for the app
+// ------------------------------------
+
 // Private objects
 var whatever,
 	tabgroup = require('ui/tabgroup');
 
+
+
 exports.db = require('services/db');
 exports.net = require('services/network');
 //exports.u = require('plugins/utils');
+
+exports.test = 'hallo';
 
 exports.prop = {
 	cinemaLoaded: {
@@ -15,34 +23,44 @@ exports.prop = {
 	}
 };
 
+
 exports.launch = function() {
-	//var start = require('ui/pre').load();
-	//start.open();
-	//require('ui/tabgroup').load();
+
 	Ti.UI.backgroundImage = 'images/common/cover.png';
 
 	app.checkLoggedIn(function(loggedIn) {
+
 		if(!loggedIn) {
-			//app.loginWin.open({modal: true});
-			app.loginDialog(false);
+
+			app.loginDialog(false, true);
+			
 		} else {
-			tabgroup.setBuyWin(true);
+			
 			tabgroup.load();
+		
 		}
 	});
+
 
 	Ti.App.addEventListener('loginwin.close', function() {
-		if(app.state == 'limited') {
-			tabgroup.setBuyWin(false);
-		} else if(app.state == 'normal') {
-			tabgroup.setBuyWin(true);
-		}
 
 		tabgroup.load();
+
 	});
+};
+
+
+// Login window
+exports.loginDialog = function(modal, animate) {
+
+	require('ui/login').load(modal, animate);
 
 };
 
+
+// ------------------------------------
+// Setting and retrieving strings
+// ------------------------------------
 exports.setString = function(name, value) {
 	Ti.App.Properties.setString(name, value);
 };
@@ -53,8 +71,10 @@ exports.getString = function(name) {
 
 
 
-// User stuff
 
+// ------------------------------------
+// User stuff
+// ------------------------------------
 
 // Check if we are logged in
 exports.checkLoggedIn = function(callback) {
@@ -75,10 +95,7 @@ exports.checkLoggedIn = function(callback) {
 	}
 };
 
-exports.loginDialog = function(modal) {
-	require('ui/login').load(modal);
-};
-
+// Set up the user object with helper methods for sign in/out and retrieving info
 exports.user = {
 	info: {},
 	login:  function(user) {
@@ -100,9 +117,8 @@ exports.user = {
 		exports.loginDialog(true);
 
 		// Set tab to Buy
-		var tabgroup = require('ui/tabgroup');
-		tabgroup.set(0);
-		tabgroup.shutdown();
+		// var tabgroup = require('ui/tabgroup');
+		// tabgroup.set(0);
 	},
 	getInfo: function() {
 		var user = JSON.parse(exports.getString('user:info'));

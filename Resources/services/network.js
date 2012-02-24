@@ -5,3 +5,7 @@ var cinema = require('services/network_cinema');
 
 exports.places = places;
 exports.cinema = cinema;
+
+exports.test = function() {
+	alert('reached me');
+};
