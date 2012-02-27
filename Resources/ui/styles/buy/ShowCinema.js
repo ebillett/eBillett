@@ -1,0 +1,5 @@
+exports = {
+	wrapper: {
+		showPagingControl: true
+	}
+};

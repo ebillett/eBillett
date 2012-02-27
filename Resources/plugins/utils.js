@@ -1,3 +1,19 @@
+exports.setString = function(name, value) {
+	Ti.App.Properties.setString(name, value);
+};
+
+exports.getString = function(name) {
+	return Ti.App.Properties.getString(name);
+};
+
+exports.setBool = function(name, value) {
+	Ti.App.Properties.setBool(name, value);
+};
+
+exports.getBool = function(name) {
+	return Ti.App.Properties.getBool(name);
+};
+
 
 
 

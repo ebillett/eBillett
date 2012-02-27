@@ -46,3 +46,10 @@ exports.get = function(callback) {
 		xhr.open('GET',url);
 		xhr.send();
 };
+
+
+exports.test = function() {
+	
+	alert('hei fra network');
+	
+}

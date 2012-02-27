@@ -14,12 +14,8 @@ Ti.include('plugins/debug.js');
 var _ = require('plugins/underscore-min')._;
 
 // Global app namespace
-var app = require('ui/core');
+var app = require('ui/bootstrap');
 
 app.db.bootstrap();
 
 app.launch();
-
-
-
-var GLOBAL = 'test';

@@ -1,5 +1,5 @@
 var general = require('ui/styles/general'),
-	styles = require('ui/styles/login'),
+	styles = require('ui/styles/Login'),
 	self = Titanium.UI.createWindow(styles.loginWin),
 	wrapper = Titanium.UI.createView(),
 	logo = Titanium.UI.createView(styles.logo),
@@ -72,29 +72,16 @@ var layout = function() {
 	self.add(wrapper);
 };
 
-exports.load = function(modal, fade) {
-
+exports.load = function(modal) {
 	layout();
 
-	if (modal) {
-
-		self.open({modal: modal});
-
-	} else if (fade) {
-		
-		self.opacity = 0;
-		self.open();
-		self.animate({
-			duration: 800,
-			opacity: 100
-		},
-			function() {
-				self.opacity = 100;
-		});
-
-	} else {
-		self.open();
-	}
+	self.open({modal: true});
+	
+	// if(modal) {
+	// 	self.open({modal: true});
+	// } else {
+	// 	self.open();
+	// }
 };
 
 
@@ -129,12 +116,13 @@ loginBtn.addEventListener('click', function() {
 		Ti.App.fireEvent('loginwin.close', {loggedIn: true});
 		app.state = 'normal';
 		app.user.login(user);
-		self.close({modal: true});
+		self.close();
 	}
 });
 
 registerBtn.addEventListener('click', function() {
 	debug('Should validate registration');
+	app.user.logout(); // move to profile asap
 });
 
 // Throw warning about no purchase-mode
@@ -148,7 +136,7 @@ noLoginAlert.addEventListener('click', function(e) {
 		
 		Ti.App.fireEvent('loginwin.close', {loggedIn: false});
 		app.state = 'limited'; // Set app state
-		self.close({animate: true}); // Close login win and go into no-buy mode
+		self.close(); // Close login win and go into no-buy mode
 	}
 });
 
@@ -191,8 +179,6 @@ self.addEventListener('close', function() {
 	
 
 	self.add(wrapper);
-
-	self.opacity = 100;
 });
 
 
