@@ -1,6 +1,7 @@
 var general = require('ui/styles/general'),
 	styles = require('ui/styles/buy/start'),
 	self = Titanium.UI.createWindow(general.defaultWindow),
+	app,
 	editBtn = Titanium.UI.createButton({title: 'Rediger'});
 
 
@@ -8,33 +9,35 @@ var general = require('ui/styles/general'),
 
 var layout = function() {
 
-	//alert(app.state);
 
-	// if (app.state == 'limited') {
 
-	// 	debug('limited mode, loading full places list');
-	// 	self.backgroundColor = '#ff0000';
+	if (app.state == 'limited') {
 
-	// } else if (app.state == 'normal') {
+		debug('limited mode, loading full places list');
+		self.titleControl = general.defaultTitle('Velg sted');
 
-	// 	debug('normal mode, loading user based list');
+		var content = require('ui/buy/places_nologin').load();
+		self.add(content);
 
-	// } else {
+	} else if (app.state == 'normal') {
 
-	// 	alert('En feil har oppstått. Vennligst start applikasjonen på nytt. Beklager! :-/');
+		debug('normal mode, loading user based list');
+		self.titleControl = general.defaultTitle('Mine steder');
 
-	// }
+	} else {
+
+		alert('En feil har oppstått. Vennligst start applikasjonen på nytt. Beklager! :-/');
+
+	}
 
 };
 
 
-exports.load = function() {
-
-
+exports.load = function(exports) {
+	app = exports;
 
 	layout();
 
-		//debug(app.test);
 
 	return self;
 

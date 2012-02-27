@@ -74,8 +74,6 @@ var layout = function() {
 
 exports.load = function(modal, fade) {
 
-	alert(app.test);
-
 	layout();
 
 	if (modal) {
@@ -128,16 +126,15 @@ loginBtn.addEventListener('click', function() {
 			password: 'martin'
 		};
 
-		Ti.App.fireEvent('loginwin.close');
+		Ti.App.fireEvent('loginwin.close', {loggedIn: true});
 		app.state = 'normal';
 		app.user.login(user);
-		self.close();
+		self.close({modal: true});
 	}
 });
 
 registerBtn.addEventListener('click', function() {
 	debug('Should validate registration');
-	app.user.logout(); // move to profile asap
 });
 
 // Throw warning about no purchase-mode
@@ -149,9 +146,9 @@ noLoginAlert.addEventListener('click', function(e) {
 	if(e.index === 0) {
 		debug('App is in limited state');
 		
-		Ti.App.fireEvent('loginwin.close');
+		Ti.App.fireEvent('loginwin.close', {loggedIn: false});
 		app.state = 'limited'; // Set app state
-		self.close(); // Close login win and go into no-buy mode
+		self.close({animate: true}); // Close login win and go into no-buy mode
 	}
 });
 
@@ -194,6 +191,8 @@ self.addEventListener('close', function() {
 	
 
 	self.add(wrapper);
+
+	self.opacity = 100;
 });
 
 

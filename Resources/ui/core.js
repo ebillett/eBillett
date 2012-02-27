@@ -13,8 +13,6 @@ exports.db = require('services/db');
 exports.net = require('services/network');
 //exports.u = require('plugins/utils');
 
-exports.test = 'hallo';
-
 exports.prop = {
 	cinemaLoaded: {
 		current: false,
@@ -36,18 +34,18 @@ exports.launch = function() {
 			
 		} else {
 			
-			tabgroup.load();
+			tabgroup.load(exports);
 		
 		}
 	});
 
-
-	Ti.App.addEventListener('loginwin.close', function() {
-
-		tabgroup.load();
-
-	});
 };
+
+Ti.App.addEventListener('loginwin.close', function() {
+
+		tabgroup.load(exports);
+
+});
 
 
 // Login window
@@ -117,8 +115,8 @@ exports.user = {
 		exports.loginDialog(true);
 
 		// Set tab to Buy
-		// var tabgroup = require('ui/tabgroup');
-		// tabgroup.set(0);
+		var tabgroup = require('ui/tabgroup');
+		tabgroup.set(0);
 	},
 	getInfo: function() {
 		var user = JSON.parse(exports.getString('user:info'));
