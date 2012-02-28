@@ -45,6 +45,7 @@ exports.load = function() {
 	
 }
 
+exports.tab = tab;
 
 
 function getPrevious() {

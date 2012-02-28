@@ -33,6 +33,8 @@ function getMovies(place) {
 	var hasLoaded = u.getBool('cinemaCurrentLoaded')
 	
 	debug('cinema loaded current: ' + hasLoaded);
+	
+	self.setData();
 
 	//if(!hasLoaded) {
 	if(1+1==2) {
@@ -66,7 +68,8 @@ function getMovies(place) {
 				});
 
 			} else {
-				// ERROR
+				var row = Titanium.UI.createTableViewRow({title: 'Får ikke kontakt med server. Gå tilbake og prøv igjen. Beklager.'});
+				self.appendRow(row);
 			}
 		});
 	}
@@ -79,8 +82,17 @@ function getMovies(place) {
 
 self.addEventListener('click', function(e) {
 	
-	var win = require('ui/buy/select_show').load(e.rowData.movie);
-	require('ui/tabgroup').tabs.buy.open(win);
+	//var win = require('ui/buy/SelectShow').load(e.rowData.movie);
+	var win = Titanium.UI.createWindow({title: 'test'});
+	
+	debug('clicked on ' + e.rowData.movie.title);
+	debug('in purchase mode? ' + u.getBool('purchaseMode'));
+	
+	//u.getBool('purchaseMode') ? require('ui/buy/Limited').tab.open(win) : require('ui/buy/Limited').tab.open(win);
+	
+	u.getBool('purchaseMode') ? alert('true') : alert('false');
+	
+	
 
 });
 
