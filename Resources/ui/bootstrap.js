@@ -48,6 +48,11 @@ exports.launch = function() {
 	
 }
 
+Ti.App.addEventListener('openLoginDialog', function() {
+	
+	exports.openLoginDialog();
+	
+})
 
 exports.openLoginDialog = function() {
 	

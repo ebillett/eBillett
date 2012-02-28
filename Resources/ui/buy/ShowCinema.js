@@ -6,7 +6,7 @@ var general = require('ui/styles/general'),
 	shadow = general.shadowTop(43),
 	tabbar = require('ui/buy/components/TabBar').init(),
 	wrapper = Ti.UI.createScrollableView(),
-	currentView = require('ui/buy/components/CinemaCurrent').load(),
+	currentView = require('ui/buy/components/CinemaCurrent'),
 	programView = Titanium.UI.createView({backgroundColor: '#26b5c2'}),
 	comingView = Titanium.UI.createView({backgroundColor: '#c29f26'}),
 	loadedCurrent = false,
@@ -24,9 +24,21 @@ function layout(obj) {
 	self.add(shadow);
 	
 	// Setup scrollable view
-	wrapper.setViews([currentView, programView, comingView]);
+	wrapper.setViews([currentView.load(), programView, comingView]);
 	wrapper.setCurrentPage(0);
 	self.add(wrapper);
+	
+	
+	if(!u.getBool('purchaseMode')) {
+		var banner = Titanium.UI.createView({backgroundColor: '#222', height: 50, bottom: 0});
+		self.add(banner);
+		
+		banner.addEventListener('click', function() {
+			Ti.App.fireEvent('openLoginDialog', {from: 'placeLimited'});
+			self.close();
+		});
+	}
+	
 	
 	// Initiate
 	setView(0);

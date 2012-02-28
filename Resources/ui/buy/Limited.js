@@ -64,8 +64,7 @@ function getPlaces() {
 		var tableData = [];
 
 		var id = 0;
-		//prev = getPrevious();
-		debug('hello');
+		prev = getPrevious();
 
 		net.places.get(function(resultData) {
 			debug('inside getPlaces callback');
