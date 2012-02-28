@@ -10,6 +10,7 @@ var general = require('ui/styles/general'),
 		title: 'Velg sted',
 		window: self
 	}),
+	exit = Titanium.UI.createButton({title: 'x'}),
 	infoWrapper = Titanium.UI.createView(styles.infoWrapper),
 	table = Titanium.UI.createTableView(styles.table),
 	search = Titanium.UI.createSearchBar(styles.search);
@@ -18,6 +19,8 @@ var general = require('ui/styles/general'),
 	
 
 var layout = function() {
+	
+	self.setLeftNavButton(exit);
 	
 	self.add(infoWrapper);
 	self.add(table);
@@ -141,5 +144,10 @@ table.addEventListener('click', function(e) {
 
 self.addEventListener('focus', function() {
 	u.resetCinemaLoaded();
+});
+
+exit.addEventListener('click', function() {
+	app.openLoginDialog();
+	self.close();
 });
 

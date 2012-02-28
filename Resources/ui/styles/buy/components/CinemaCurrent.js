@@ -1,12 +1,14 @@
 exports = {
 	table: {
 		height: 323,
+		width: 308,
 		top: 43,
-		backgroundColor: '#eee'
+		backgroundColor: 'transparent'
 	},
 	row: {
-		//backgroundImage: 'images/buy/big_item.png',
-		height: 120,
+		backgroundImage: 'images/buy/table_movie.png',
+		height: 118,
+		width: 308,
 		left: 10,
 		right: 10,
 		className: 'movie'
@@ -14,8 +16,8 @@ exports = {
 	poster: {
 		width: 67,
 		height: 99,
-		top: 12,
-		left: 12,
+		top: 8,
+		left: 4,
 		backgroundColor: '#ddd'
 	},
 	title: {
@@ -24,6 +26,9 @@ exports = {
 			fontSize: 14,
 			fontWeight: 'bold'
 		},
-		width: 'auto'
+		height: 'auto',
+		left: 85,
+		right: 15,
+		top: 20
 	}
 };

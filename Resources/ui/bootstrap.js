@@ -117,7 +117,7 @@ exports.user = {
 		
 		debug('Logging out user');
 		
-		var user = JSON.parse(exports.getString('user:info'));
+		var user = JSON.parse(u.getString('user:info'));
 		
 		debug('Logging out user: ' + user.name + ' with id: ' + user.id);
 
