@@ -103,3 +103,10 @@ self.addEventListener('close', function() {
 Ti.App.addEventListener('cinematab_change', function(e) {
 	wrapper.scrollToView(e.id);
 });
+
+
+Ti.App.addEventListener('goto:SelectShow', function(e) {
+	// var win = Titanium.UI.createWindow({title: 'idiot'});
+	// 
+	// require('ui/buy/Limited').tab.open(win)
+});

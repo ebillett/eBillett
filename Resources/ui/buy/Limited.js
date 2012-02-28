@@ -6,7 +6,10 @@ var general = require('ui/styles/general'),
 	Place = require('models/Place'),
 	prev = false,
 	container,
-	tab,
+	tab = Titanium.UI.createTab({
+		title: 'Velg sted',
+		window: self
+	}),
 	infoWrapper = Titanium.UI.createView(styles.infoWrapper),
 	table = Titanium.UI.createTableView(styles.table),
 	search = Titanium.UI.createSearchBar(styles.search);
@@ -31,11 +34,6 @@ exports.load = function() {
 	
 	// Setup fake tabgroup for navigation control
 	container = Titanium.UI.createTabGroup();
-	
-	tab = Titanium.UI.createTab({
-		title: 'Velg sted',
-		window: self
-	});
 	
 	self.tabBarHidden = true;
 	

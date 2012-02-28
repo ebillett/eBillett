@@ -19,7 +19,7 @@ function layout() {
 
 exports.load = function() {
 	layout();
-	
+
 	place = JSON.parse(u.getString('place'));
 
 	getMovies(place);
@@ -82,17 +82,13 @@ function getMovies(place) {
 
 self.addEventListener('click', function(e) {
 	
-	//var win = require('ui/buy/SelectShow').load(e.rowData.movie);
-	var win = Titanium.UI.createWindow({title: 'test'});
+	var win = require('ui/buy/SelectShow').load(e.rowData.movie);
 	
 	debug('clicked on ' + e.rowData.movie.title);
 	debug('in purchase mode? ' + u.getBool('purchaseMode'));
 	
-	//u.getBool('purchaseMode') ? require('ui/buy/Limited').tab.open(win) : require('ui/buy/Limited').tab.open(win);
+	// Open in correct context based on mode
+	u.getBool('purchaseMode') ? debug('true') : require('ui/buy/Limited').tab.open(win);
 	
-	u.getBool('purchaseMode') ? alert('true') : alert('false');
-	
-	
-
 });
 
