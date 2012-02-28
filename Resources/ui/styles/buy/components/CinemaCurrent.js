@@ -2,7 +2,7 @@ exports = {
 	table: {
 		height: 323,
 		top: 43,
-		backgroundColor: 'transparent'
+		backgroundColor: '#eee'
 	},
 	row: {
 		//backgroundImage: 'images/buy/big_item.png',

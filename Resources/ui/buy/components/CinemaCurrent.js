@@ -4,13 +4,15 @@ var general = require('ui/styles/general'),
 	net = require('services/network'),
 	Movie = require('models/Movie'),
 	place,
+	loader,
 	//self = Titanium.UI.createView(),
 	//table = Titanium.UI.createTableView({backgroundColor: '#eee', height: 323, top: 43, data: []});
 	self = Titanium.UI.createTableView(styles.table);
 
 
 function layout() {
-	self.backgroundColor = '#eee';
+	loader = u.loading();
+	self.add(loader);
 	
 	self.setData();
 
@@ -30,6 +32,7 @@ exports.load = function() {
 
 
 function getMovies(place) {
+
 	var hasLoaded = u.getBool('cinemaCurrentLoaded')
 	
 	debug('cinema loaded current: ' + hasLoaded);
@@ -71,6 +74,11 @@ function getMovies(place) {
 				var row = Titanium.UI.createTableViewRow({title: 'Får ikke kontakt med server. Gå tilbake og prøv igjen. Beklager.'});
 				self.appendRow(row);
 			}
+			
+			u.fadeout(loader, function() {
+				self.remove(loader);
+			});
+			
 		});
 	}
 }
