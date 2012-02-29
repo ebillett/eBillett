@@ -6,7 +6,10 @@ var general = require('ui/styles/general'),
 	movie,
 	place,
 	self = Titanium.UI.createWindow(general.defaultWindow),
-	InfoBlock = require('ui/buy/components/InfoBlock'),
+	// Infoblock
+	infoWrapper = Titanium.UI.createView(styles.infoWrapper),
+	poster = Titanium.UI.createImageView(styles.poster),
+	// ---
 	table = Titanium.UI.createTableView(styles.table),
 	tableHeader = Titanium.UI.createView(styles.tableHeader),
 	tableHeaderTitle = Titanium.UI.createLabel(styles.tableHeaderTitle);
@@ -16,7 +19,12 @@ var general = require('ui/styles/general'),
 	
 function layout() {
 	
-	self.add(InfoBlock.loadMovieInfo(movie));
+	//self.add(InfoBlock.load(movie));
+
+	// Build infoblock
+	poster.image = movie.poster;
+	infoWrapper.add(poster);
+	self.add(infoWrapper);
 
 	tableHeader.add(tableHeaderTitle);
 	self.add(tableHeader);

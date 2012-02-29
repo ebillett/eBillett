@@ -5,7 +5,8 @@ exports = {
 		backgroundImage: 'images/buy/add_bg.png',
 		width: 299,
 		height: 362,
-		bottom: -350
+		bottom: -350,
+		zIndex: 600
 	},
 	closeBtn: {
 		title: '',

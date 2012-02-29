@@ -35,7 +35,7 @@ exports = {
 			backgroundColor: 'transparent',
 			backgroundImage: 'images/common/shadow.png',
 			touchEnabled: false,
-			zIndex: 1001
+			zIndex: 500
 		});
 
 		return instance;
