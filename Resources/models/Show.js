@@ -8,6 +8,24 @@ function Show(obj) {
 
 	this.tickets = obj.tickets;
 
+	this.getDate = function() {
+		var date = Date.parse(this.date);
+
+		date.toString('dddd DD mmmm');
+
+		return date;
+	}
+
+	this.getTime = function() {
+		var time = Date.parse(this.showtime);
+
+		time.toString('h:mm');
+
+		return time;
+	}
+
+
+
 	// debug('Setting up model for show with time: ' + this.showtime);
 
 	// _.each(obj.tickets, function(ticket) {

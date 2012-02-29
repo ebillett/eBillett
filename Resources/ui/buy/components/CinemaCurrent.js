@@ -96,7 +96,17 @@ self.addEventListener('click', function(e) {
 	debug('in purchase mode? ' + u.getBool('purchaseMode'));
 	
 	// Open in correct context based on mode
-	u.getBool('purchaseMode') ? debug('true') : require('ui/buy/Limited').tab.open(win);
+	//u.getBool('purchaseMode') ?  require('ui/Tabgroup').tabs.buy.open(win) : require('ui/buy/Limited').tab.open(win);
+
+	if(u.getBool('purchaseMode')) {
+		
+		require('ui/Tabgroup').tabs.buy.open(win)
+		
+	} else {
+
+		require('ui/buy/Limited').tab.open(win)
+
+	}
 	
 });
 

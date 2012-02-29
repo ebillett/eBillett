@@ -5,6 +5,7 @@
 
 // Patch commonJS module
 require('plugins/require_patch').monkeypatch(this);
+require('plugins/date');
 
 // Setup debugging environment
 var DEBUG = true; // set to false for production

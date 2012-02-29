@@ -28,6 +28,8 @@ var tabs = {
 	
 }
 
+exports.tabs = tabs;
+
 
 exports.load = function() {
 	

@@ -22,7 +22,10 @@ var layout = function() {
 	self.setLeftNavButton(addPlaceBtn);
 	self.setRightNavButton(editBtn);
 
+	self.add(general.shadowTop(150));
+
 	self.add(table);
+
 }
 
 
@@ -168,17 +171,17 @@ table.addEventListener('click', function(e) {
 
 	var type = e.rowData.obj.type;
 
-	// switch (type) {
-	// 	case 'Kino':
-	// 		var next = require('ui/buy/show_cinema').load(e.rowData.obj);
-	// 		require('ui/tabgroup').tabs.buy.open(next);
-	// 	break;
+	switch (type) {
+		case 'Kino':
+			var next = require('ui/buy/ShowCinema').load(e.rowData.obj);
+			require('ui/Tabgroup').tabs.buy.open(next);
+		break;
 
-	// 	case 'Begge':
-	// 		var next2 = require('ui/buy/show_dual').load(e.rowData.obj);
-	// 		require('ui/tabgroup').tabs.buy.open(next2);
-	// 	break;
-	// }
+		case 'Begge':
+			// var next2 = require('ui/buy/show_dual').load(e.rowData.obj);
+			// require('ui/tabgroup').tabs.buy.open(next2);
+		break;
+	}
 
 });
 

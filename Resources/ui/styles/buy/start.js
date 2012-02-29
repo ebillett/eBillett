@@ -9,12 +9,13 @@ exports = {
 	row: {
 		className: 'place',
 		backgroundImage: 'images/buy/table_places.png',
-		hasChild: true
+		hasChild: true,
+		height: 60
 	},
 	rowTitle: {
 		height: 'auto',
 		left: 20,
-		top: 12,
+		//top: 12,
 		touchEnabled: false,
 		color: '#444',
 		font: {
