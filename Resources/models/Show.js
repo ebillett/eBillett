@@ -4,7 +4,7 @@ function Show(obj) {
 	this.datenbr = obj.datenbr;
 	this.showtime = obj.showtime;
 	this.showend = obj.showend;
-	this.showrooom = obj.showroom;
+	this.room = obj.showroom;
 
 	this.tickets = obj.tickets;
 
