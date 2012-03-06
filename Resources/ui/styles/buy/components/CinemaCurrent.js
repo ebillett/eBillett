@@ -16,7 +16,7 @@ exports = {
 	poster: {
 		width: 67,
 		height: 99,
-		top: 8,
+		top: 14,
 		left: 4,
 		backgroundColor: '#ddd'
 	},
@@ -29,6 +29,6 @@ exports = {
 		height: 'auto',
 		left: 85,
 		right: 15,
-		top: 20
+		top: 26
 	}
 };

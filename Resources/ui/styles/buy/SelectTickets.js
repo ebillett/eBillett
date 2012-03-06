@@ -23,7 +23,7 @@ exports = {
 		left: 12
 	},
 	infoWrapper: {
-		backgroundColor: '#eee',
+		backgroundColor: 'transparent',
 		height: 130,
 		top: 0
 	},
@@ -89,6 +89,11 @@ exports = {
 		height: 40,
 		right: 110
 	},
+	bottomWrapper: {
+		height: 60,
+		bottom: 0,
+		backgroundColor: '#eee'
+	},
 	totalLabel: {
 		color: '#222',
 		font: {
@@ -99,8 +104,15 @@ exports = {
 		shadowOffset: {x: 0, y: 1},
 		width: 'auto',
 		height: 'auto',
-		right: 60,
-		bottom: 10
+		left: 60,
+		bottom: 30
+	},
+	continueButton: {
+		title: 'Fortsett',
+		right: 10,
+		bottom: 20,
+		height: 40,
+		width: 60
 	}
 
 

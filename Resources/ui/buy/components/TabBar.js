@@ -1,5 +1,5 @@
 var general = require('ui/styles/general'),
-	styles = require('ui/styles/buy/components/TabBar'),
+	styles = require('ui/styles/buy/components/tabbar'),
 	tabbar = Titanium.UI.createView(styles.tabbar);
 
 
@@ -14,7 +14,7 @@ var width = 106,
 
 exports.init = function() {
 	_.each(items, function(item) {
-		
+
 		tabbar.add(new Tab(item));
 
 	});

@@ -38,5 +38,10 @@ exports = {
 		title: 'Ingen steder lagret. Klikk her for å legge til',
 		//width: 'auto',
 		height: 50
+	},
+	cover: {
+		backgroundColor: '#000',
+		opacity: 0.7,
+		zIndex: 550
 	}
 };

@@ -11,7 +11,8 @@ var general = require('ui/styles/general'),
 	addDialogActive = false,
 	editing = false,
 	table = Titanium.UI.createTableView(styles.table),
-	editBtn = Titanium.UI.createButton({title: 'Rediger'});
+	editBtn = Titanium.UI.createButton({title: 'Rediger'}),
+	cover = Titanium.UI.createView(styles.cover);
 
 
 	self.titleControl = general.defaultTitle('Mine steder');
@@ -30,6 +31,8 @@ var layout = function() {
 
 
 exports.load = function() {
+
+	u.setString('place', null);
 	
 	layout();
 	
@@ -95,6 +98,17 @@ var openAddDialog = function() {
 	// Set new titlebar title
 	self.titleControl = general.defaultTitle('Legg til');
 
+	cover.opacity = 0;
+	self.add(cover);
+	cover.animate({
+		opacity: 0.7,
+		duration: 300,
+		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
+	}, function() {
+		cover.opacity = 0.7
+	});
+
+
 	var instance = addDialog;
 	self.add(instance);
 	instance.animate({
@@ -109,6 +123,15 @@ var closeAddDialog = function() {
 
 	// Set new titlebar title
 	self.titleControl = general.defaultTitle('Mine steder');
+
+	cover.animate({
+		opacity: 0,
+		duration: 300,
+		delay: 350,
+		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
+	}, function() {
+		self.remove(cover);
+	});
 
 	var instance = addDialog;
 	instance.animate({
@@ -171,15 +194,22 @@ table.addEventListener('click', function(e) {
 
 	var type = e.rowData.obj.type;
 
+	u.setString('place', JSON.stringify(e.rowData.obj));
+
 	switch (type) {
 		case 'Kino':
 			var next = require('ui/buy/ShowCinema').load(e.rowData.obj);
 			require('ui/Tabgroup').tabs.buy.open(next);
 		break;
 
+		case 'Kultur':
+			var next2 = require('ui/buy/ShowCulture').load();
+			require('ui/Tabgroup').tabs.buy.open(next2);
+		break;
+
 		case 'Begge':
-			// var next2 = require('ui/buy/show_dual').load(e.rowData.obj);
-			// require('ui/tabgroup').tabs.buy.open(next2);
+			var next3 = require('ui/buy/ShowCombo').load();
+			require('ui/Tabgroup').tabs.buy.open(next3);
 		break;
 	}
 

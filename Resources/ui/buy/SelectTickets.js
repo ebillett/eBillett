@@ -13,8 +13,10 @@ var general = require('ui/styles/general'),
 	table = Titanium.UI.createTableView(styles.table),
 	tableHeader = Titanium.UI.createView(styles.tableHeader),
 	tableHeaderTitle = Titanium.UI.createLabel(styles.tableHeaderTitle),
+	bottomWrapper = Titanium.UI.createView(styles.bottomWrapper),
 	totalAmt = 0;
-	totalLabel = Titanium.UI.createLabel(styles.totalLabel);
+	totalLabel = Titanium.UI.createLabel(styles.totalLabel),
+	continueButton = Titanium.UI.createButton(styles.continueButton);
 
 	self.titleControl = general.defaultTitle('Velg antall');
 	self.tabBarHidden = true;
@@ -35,7 +37,10 @@ function layout() {
 
 	self.add(table);
 
-	self.add(totalLabel);
+	totalLabel.text = null;
+	bottomWrapper.add(totalLabel);
+	bottomWrapper.add(continueButton);
+	self.add(bottomWrapper);
 
 	createTicketRows();
 
@@ -60,11 +65,11 @@ function createTicketRows() {
 
 	var tableData = [];
 
-	alert(_.size(show.tickets));
-
 	_.each(show.tickets, function(ticket) {
 
 		var row = Titanium.UI.createTableViewRow(styles.row);
+
+		var ticketCount = 0;
 		
 		var catTitle = Titanium.UI.createLabel(styles.catTitle);
 		catTitle.text = ticket.name;
@@ -75,9 +80,15 @@ function createTicketRows() {
 		row.add(catPrice);
 
 		var catAmt = Titanium.UI.createLabel(styles.catAmt);
-		catAmt.text = 0;
+		catAmt.text = ticketCount;
 		row.add(catAmt);
 
+		row.i = {
+			name: ticket.name,
+			id: ticket.id,
+			price: ticket.price,
+			count: ticketCount
+		};
 
 		// Buttons
 		var addBtn = Titanium.UI.createButton(styles.addBtn);
@@ -87,11 +98,33 @@ function createTicketRows() {
 		row.add(subBtn);
 
 		addBtn.addEventListener('click', function() {
+			// Update category count label
+			ticketCount++;
+			catAmt.text = ticketCount;
+
+			row.i = {
+				name: ticket.name,
+				id: ticket.id,
+				price: ticket.price,
+				count: ticketCount
+			};
+
 			updateTotal(true, ticket.price);
+
+			debug(ticket.name + ': ' + row.i.count);
 		});
 
 		subBtn.addEventListener('click', function() {
-			updateTotal(false, ticket.price);
+			if(ticketCount != 0) {
+
+				// Update category count label
+				ticketCount--;
+				row.i.count = ticketCount;
+				catAmt.text = ticketCount;
+
+				updateTotal(false, ticket.price);
+				
+			}
 		});
 
 
@@ -110,14 +143,40 @@ function updateTotal(op, price) {
 
 		// Add
 		totalAmt = totalAmt + price*1;
-		totalLabel.text = totalAmt;
+		totalLabel.text = totalAmt + ',-';
 
 	} else {
 
 		// Subtract
 		totalAmt = totalAmt - price*1;
-		totalLabel.text = totalAmt;
+		if(totalAmt === 0) {
+			totalLabel.text = null;
+			return;	
+		}
+
+		totalLabel.text = totalAmt + ',-';
 
 	}
 
 }
+
+
+continueButton.addEventListener('click', function() {
+	var cats = table.data[0].rows,
+		selectedTickets = [];
+
+	_.each(cats, function(cat) {
+
+		var o = cat.i;
+
+		if(o.count !== 0 || !o.count) {
+			selectedTickets.push(o);
+		}
+
+	});
+
+	_.each(selectedTickets, function(a) {
+		debug(a.name + '/' + a.count);
+	})
+
+});

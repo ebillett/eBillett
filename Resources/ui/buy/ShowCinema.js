@@ -4,10 +4,10 @@ var general = require('ui/styles/general'),
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	selfView = Titanium.UI.createView(),
 	shadow = general.shadowTop(43),
-	tabbar = require('ui/buy/components/TabBar').init(),
+	tabbar = require('ui/buy/components/TabBar'),
 	wrapper = Ti.UI.createScrollableView(),
 	currentView = require('ui/buy/components/CinemaCurrent'),
-	programView = Titanium.UI.createView({backgroundColor: '#26b5c2'}),
+	programView = require('ui/buy/components/CinemaProgram'),
 	comingView = Titanium.UI.createView({backgroundColor: '#c29f26'}),
 	loadedCurrent = false,
 	loadedProgram = false,
@@ -20,11 +20,12 @@ function layout(obj) {
 	self.titleControl = general.defaultTitle(obj.name);
 
 	// Setup tabbar
-	self.add(tabbar);
+	self.add(tabbar.init());
 	self.add(shadow);
+
 	
 	// Setup scrollable view
-	wrapper.setViews([currentView.load(), programView, comingView]);
+	wrapper.setViews([currentView.load(), programView.load(), comingView]);
 	wrapper.setCurrentPage(0);
 	self.add(wrapper);
 	
@@ -56,25 +57,33 @@ exports.load = function(obj) {
 // Component builder
 //   when used in dual mode
 // ------------------------------------
-function layoutComponent(obj) {
+function layoutComponent() {
 	// Setup tabbar
-	selfView.add(tabbar);
+	selfView.add(tabbar.init());
 	selfView.add(shadow);
 
 	// Setup scrollable view
-	wrapper.setViews([currentView.load(), programView, comingView]);
+	wrapper.setViews([currentView.load(), programView.load(), comingView]);
 	wrapper.setCurrentPage(0);
 	selfView.add(wrapper);
+
+	if(!u.getBool('purchaseMode')) {
+		var banner = Titanium.UI.createView({backgroundColor: '#222', height: 50, bottom: 0});
+		selfView.add(banner);
+		
+		banner.addEventListener('click', function() {
+			Ti.App.fireEvent('openLoginDialog', {from: 'placeLimited'});
+			//self.close();
+		});
+	}
 	
 	// Initiate
 	setView(0);
 }
 
-exports.loadComponent = function(obj) {
-	// Set place object to properties
-	app.prop.place = obj;
+exports.loadComponent = function() {
 
-	layoutComponent(obj);
+	layoutComponent();
 
 	return selfView;
 };
