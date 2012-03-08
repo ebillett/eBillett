@@ -11,42 +11,53 @@ exports = {
 		top: 40,
 		backgroundImage: 'images/common/logo.png'
 	},
-	contentWrapper: {
-		top: 95,
-		width: general.dWidth*2,
-		left: 0,
-		layout: 'horizontal'
-	},
 	loginWrapper: {
 		layout: 'vertical',
-		top: 0,
-		width: general.dWidth,
+		top: 70,
+		//width: general.dWidth,
+		width: 251,
 		height: 300
+	},
+	modeSelect: {
+		labels:['LOGG INN', 'REGISTRER'],
+    	backgroundColor:'#ddd',
+    	backgroundSelectedColor: '#98c532',
+    	backgroundImage: 'images/common/button-grey.png',
+    	top:30,
+    	style:Titanium.UI.iPhone.SystemButtonStyle.BAR,
+    	height:50,
+    	width:251,
+    	index: 0
+	},
+	modeLogin: {
+		backgroundImage: 'images/commong-selector-l',
+		activeImage: null,
+		height: 50,
+		width: 126
 	},
 	usernameField: {
 		hintText: 'Epostadresse',
-		color: '#000',
-		height:40,
-		width: 245,
+		color: '#333',
+		height:50,
+		width: 251,
 		backgroundColor: '#fff',
-		borderRadius: 4,
-		borderColor: '#bbb',
+		borderRadius: 6,
+		borderColor: '#b5b5b5',
 		clearButtonMode: Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
 		autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
-		left:4,
-		right: 4,
+		top: 15,
 		autocorrect: false,
 		paddingLeft: 8
 	},
 	passwordField: {
 		hintText: 'Passord',
-		color: '#ccc',
-		height:40,
-		width: 245,
-		top: 6,
+		color: '#333',
+		height:50,
+		width: 251,
+		top: 8,
 		backgroundColor: '#fff',
-		borderRadius: 4,
-		borderColor: '#bbb',
+		borderRadius: 6,
+		borderColor: '#b5b5b5',
 		clearButtonMode: Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
 		autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
 		passwordMask: true,
@@ -54,15 +65,16 @@ exports = {
 		paddingLeft: 8
 	},
 	loginBtn: {
-		width: 245,
+		width: 251,
 		height: 50,
 		top: 10,
-		backgroundImage: 'images/common/greenbtn.png'
+		backgroundImage: 'images/common/button-green.png',
+		backgroundSelectedImage: 'images/common/button-green-pressed.png'
 	},
 	loginBtnLabel: {
 		height: 'auto',
 		width: 'auto',
-		text: 'LOGG INN',
+		text: 'FORTSETT',
 		color: '#eee',
 		touchEnabled: false,
 		font: {

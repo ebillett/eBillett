@@ -1,11 +1,9 @@
 
 
-var places = require('services/network_places');
-var cinema = require('services/network_cinema');
+var places = require('services/network_places'),
+	cinema = require('services/network_cinema'),
+	user = require('services/network_user');
 
 exports.places = places;
 exports.cinema = cinema;
-
-exports.test = function() {
-	alert('reached me');
-};
+exports.user = user;
