@@ -198,7 +198,9 @@ table.addEventListener('click', function(e) {
 
 	switch (type) {
 		case 'Kino':
-			var next = require('ui/buy/ShowCinema').load(e.rowData.obj);
+			var next = require('ui/buy/ShowCinema').load();
+			//var next = require('ui/buy/ShowCin').load();
+			//var next = Titanium.UI.createWindow({title: 'hallo'});
 			require('ui/Tabgroup').tabs.buy.open(next);
 		break;
 
@@ -212,6 +214,13 @@ table.addEventListener('click', function(e) {
 			require('ui/Tabgroup').tabs.buy.open(next3);
 		break;
 	}
+
+});
+
+
+self.addEventListener('focus', function() {
+	debug('firing Start:active');
+	Ti.App.fireEvent('Start:active');
 
 });
 

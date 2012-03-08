@@ -1,6 +1,7 @@
 var general = require('ui/styles/general'),
-	styles = require('ui/styles/buy/components/tabbar'),
+	styles = require('ui/styles/buy/components/TabBar'),
 	tabbar = Titanium.UI.createView(styles.tabbar);
+
 
 
 // Settings
@@ -14,7 +15,7 @@ var width = 106,
 
 exports.init = function() {
 	_.each(items, function(item) {
-
+		
 		tabbar.add(new Tab(item));
 
 	});
@@ -35,8 +36,15 @@ function Tab(item) {
 	instance.add(label);
 
 	function reset() {
+		debug('activeTab is: ' + activeTab);
 		if(item.id != activeTab) {
+
 			instance.backgroundImage = null;
+		
+		} else if(item.id != activeTab) {
+
+			instance.backgroundImage = instance.selectedBg;
+
 		}
 	}
 
@@ -50,6 +58,18 @@ function Tab(item) {
 	});
 
 	Ti.App.addEventListener('cinematab_change', function() {
+		reset();
+	});
+
+	Ti.App.addEventListener('Start:active', function() {
+		activeTab = 0;
+		
+		if(item.id === 0) {
+			activeTab = item.id;
+			instance.backgroundImage = instance.selectedBg;
+		}
+
+		debug('caught start active');
 		reset();
 	});
 

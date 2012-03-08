@@ -1,10 +1,11 @@
 var general = require('ui/styles/general'),
 	styles = require('ui/styles/buy/ShowCinema'),
 	u = require('plugins/utils'),
+	place,
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	selfView = Titanium.UI.createView(),
 	shadow = general.shadowTop(43),
-	tabbar = require('ui/buy/components/TabBar'),
+	tabbar = require('ui/buy/components/TabBar').init(),
 	wrapper = Ti.UI.createScrollableView(),
 	currentView = require('ui/buy/components/CinemaCurrent'),
 	programView = require('ui/buy/components/CinemaProgram'),
@@ -15,17 +16,18 @@ var general = require('ui/styles/general'),
 
 
 
-function layout(obj) {
-	
-	self.titleControl = general.defaultTitle(obj.name);
+function layout() {
+
+	self.titleControl = general.defaultTitle(place.name);
 
 	// Setup tabbar
-	self.add(tabbar.init());
+	self.add(tabbar);
 	self.add(shadow);
 
 	
 	// Setup scrollable view
 	wrapper.setViews([currentView.load(), programView.load(), comingView]);
+	//wrapper.setViews([currentView, programView, comingView]);
 	wrapper.setCurrentPage(0);
 	self.add(wrapper);
 	
@@ -45,10 +47,11 @@ function layout(obj) {
 	setView(0);
 }
 
-exports.load = function(obj) {
-		
-	layout(obj);
+exports.load = function() {
+	place = JSON.parse(u.getString('place'));
 
+	layout();
+	
 	return self;
 };
 

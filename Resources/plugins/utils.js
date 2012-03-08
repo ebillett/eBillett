@@ -25,11 +25,15 @@ exports.logOut = function() {
 };
 
 
-exports.loading = function() {
-	var instance = Titanium.UI.createView({backgroundColor: '#000', opacity: 0.7, zIndex: 50});
+exports.loading = function(top) {
+	if(!top) {
+		var top = 100;
+	}
+
+	var instance = Titanium.UI.createView({backgroundColor: '#000', opacity: 0.7, zIndex: 50, layout: 'vertical'});
 	var label = Titanium.UI.createLabel({
 		text: 'Laster inn... ',
-		top: 200,
+		top: 20,
 		width: 'auto',
 		height: 'auto',
 		font: {
@@ -41,21 +45,32 @@ exports.loading = function() {
 		shadowOffset: {x: 0, y: 1}
 	});
 	
-	var icon = Titanium.UI.createView({backgroundImage: 'images/common/icon_loading.png', width: 30, height: 26, top: 130});
+	// var icon = Titanium.UI.createView({backgroundImage: 'images/common/icon_loading.png', width: 30, height: 26, top: 130});
 	
-	//Animation
-	var t = Ti.UI.create2DMatrix();
-	t = t.rotate(180);
+	// //Animation
+	// var t = Ti.UI.create2DMatrix();
+	// t = t.rotate(180);
 	
-	icon.animate({
-		transform: t,
-		duration: 400,
-		repeat: 100,
-		curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
-	});
+	// icon.animate({
+	// 	transform: t,
+	// 	duration: 400,
+	// 	repeat: 100,
+	// 	curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
+	// });
 	
-	instance.add(label);
-	instance.add(icon);
+	// instance.add(icon);
+
+	var actInd = Ti.UI.createActivityIndicator({
+      	style:Ti.UI.iPhone.ActivityIndicatorStyle.BIG,
+      	height:30,
+      	width:30,
+      	top: 100
+    });
+     
+    instance.add(actInd);
+    instance.add(label);
+
+    actInd.show();
 	
 	return instance;
 }
