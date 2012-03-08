@@ -25,14 +25,18 @@ exports.logOut = function() {
 };
 
 
-exports.loading = function(top) {
+exports.loading = function(top, txt) {
 	if(!top) {
-		var top = 100;
+		var top = 200;
 	}
 
-	var instance = Titanium.UI.createView({backgroundColor: '#000', opacity: 0.7, zIndex: 50, layout: 'vertical'});
+	if(!txt) {
+		var txt = 'Laster inn...';
+	}
+
+	var instance = Titanium.UI.createView({backgroundColor: '#000', opacity: 0.7, zIndex: 1010, layout: 'vertical'});
 	var label = Titanium.UI.createLabel({
-		text: 'Laster inn... ',
+		text: txt,
 		top: 20,
 		width: 'auto',
 		height: 'auto',

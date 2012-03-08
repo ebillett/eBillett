@@ -1,6 +1,7 @@
 var general = require('ui/styles/general'),
 	styles = require('ui/styles/Login'),
 	net = require('services/network'),
+	u = require('plugins/utils'),
 	self = Titanium.UI.createWindow(styles.loginWin),
 	wrapper = Titanium.UI.createView(),
 	logo = Titanium.UI.createView(styles.logo),
@@ -60,6 +61,7 @@ modeSelect.addEventListener('click', function(e) {
 
 
 loginBtn.addEventListener('click', function() {
+
 	if(usernameField.value && passwordField.value) {
 		var user = {
 			email: usernameField.value,
@@ -68,26 +70,76 @@ loginBtn.addEventListener('click', function() {
 
 		// Burde regexe epostadresse
 		if(modeSelect.index == 1) {
+			// Show loader
+			var loader = u.loading(null, 'Registrer bruker...');
+			self.add(loader);
 
 			net.user.register(user, function(responseData) {
 				
 				if(responseData) {
+					
+					if(responseData.result.status == 'NOK') {
+						
+						alert(responseData.result.message);	
+					
+					} else {
 
-					debug('response');
-					debug(JSON.stringify(responseData));
+						debug(JSON.stringify(responseData));
+
+					}
+
+					u.fadeout(loader, function() {
+						self.remove(loader);
+					});
 
 				} else {
 
 					alert('En feil har oppstått. Prøv igjen.');
+					u.fadeout(loader, function() {
+						self.remove(loader);
+					});
 
 				}
 
-			})
+			});
 
 
 		} else if (modeSelect.index == 0) {
 
-			debug('logging in');
+			// Show loader
+			var loader = u.loading(null, 'Logger inn...');
+			self.add(loader);
+
+			net.user.login(user, function(responseData) {
+				
+				if(responseData) {
+					
+					if(responseData.result.status == 'NOK') {
+						
+						alert(responseData.result.message);	
+					
+					} else {
+
+						debug(JSON.stringify(responseData));
+
+					}
+
+
+					u.fadeout(loader, function() {
+						self.remove(loader);
+					});
+
+
+				} else {
+
+					alert('En feil har oppstått. Prøv igjen.');
+					u.fadeout(loader, function() {
+						self.remove(loader);
+					});
+
+				}
+
+			});
 
 		}
 
