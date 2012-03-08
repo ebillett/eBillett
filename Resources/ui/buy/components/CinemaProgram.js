@@ -11,14 +11,20 @@ var general = require('ui/styles/general'),
 
 function layout() {
 
+	var testRow = Titanium.UI.createTableViewRow({title: place.name});
+	self.appendRow(testRow);
+
+	var test = {
+		
+	}
+
 };
 
 exports.load = function() {
 
 	place = JSON.parse(u.getString('place'));
 
-	var testRow = Titanium.UI.createTableViewRow({title: place.name});
-	self.appendRow(testRow);
+	layout();
 
 	return self;
 

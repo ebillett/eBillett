@@ -1,10 +1,10 @@
 exports = {
 	table: {
-		top: 156,
+		top: 186,
 		backgroundColor: 'transparent'
 	},
 	tableHeader: {
-		top: 130,
+		top: 160,
 		height: 26,
 		backgroundColor: '#222'
 	},
@@ -42,15 +42,61 @@ exports = {
 		shadowOffset: {x: 0, y:1}
 	},
 	infoWrapper: {
-		backgroundColor: '#eee',
-		height: 130,
+		backgroundColor: 'transparent',
+		height: 150,
 		top: 0
 	},
+	posterWrapper: {
+		width: 97,
+		height: 140,
+		top: 10,
+		left: 10,
+		backgroundImage: 'images/buy/bg-poster.png'
+	},
 	poster: {
-		width: 95,
-		height: 120,
-		top: 6,
-		left: 6,
+		width: 91,
+		height: 132,
+		top: 3,
+		left: 3,
 		backgroundColor: '#ddd'
+	},
+	title: {
+		color: '#535353',
+		font: {
+			fontSize: 18,
+			fontWeight: 'bold'
+		},
+		top: 35,
+		left: 120,
+		width: 180,
+		height: 'auto',
+		shadowColor: '#fff',
+		shadowOffset: {x: 0, y: 1}
+	},
+	age: {
+		color: '#6d6d6d',
+		font: {
+			fontSize: 14,
+		},
+		width: 'auto',
+		height: 'auto',
+		shadowColor: '#fff',
+		shadowOffset: {x: 0, y: 1},
+		left: 153,
+		top: 94
+	},
+	ageIcon: {
+		backgroundImage: 'images/buy/icon-age.png',
+		width: 26,
+		height: 17,
+		left: 120,
+		top: 93
+	},
+	lengthIcon: {
+		backgroundImage: 'images/buy/icon-clock.png',
+		width: 20,
+		height: 20,
+		left: 120,
+		top: 120
 	}
 };

@@ -6,10 +6,6 @@ var general = require('ui/styles/general'),
 	place,
 	show,
 	self = Titanium.UI.createWindow(general.defaultWindow),
-	// Infoblock
-	infoWrapper = Titanium.UI.createView(styles.infoWrapper),
-	poster = Titanium.UI.createImageView(styles.poster),
-	// ---
 	table = Titanium.UI.createTableView(styles.table),
 	tableHeader = Titanium.UI.createView(styles.tableHeader),
 	tableHeaderTitle = Titanium.UI.createLabel(styles.tableHeaderTitle),
@@ -178,5 +174,10 @@ continueButton.addEventListener('click', function() {
 	_.each(selectedTickets, function(a) {
 		debug(a.name + '/' + a.count);
 	})
+
+	var url = 'http://dx.no/sp/?pid=113&arr=32923&ant=1:5&mai=test@test.no&mob=null&sms=0'
+
+	var win = require('ui/buy/BuyWebView').load(url);
+	require('ui/Tabgroup').tabs.buy.open(win);
 
 });

@@ -58,9 +58,10 @@ var loadSavedPlaces = function() {
 
 		// Load places from db only
 		db.getPlaces(function(places) {
-			if(!places) {
+			if(places.length == 0) {
 				// No places saved
 				debug('No places saved.');
+				addPlaceBtn.fireEvent('click');
 				//wrapper.add(addPlaceHint);
 			} else {
 				debug('Did load ' + places.length + ' locally stored places');

@@ -11,8 +11,8 @@ exports = {
 	closeBtn: {
 		title: '',
 		width: 273,
-		height: 44,
-		backgroundImage: 'images/common/greenbtn_wide.png',
+		height: 50,
+		backgroundImage: 'images/common/button-green.png',
 		bottom: 20
 	},
 	closeTitle: {

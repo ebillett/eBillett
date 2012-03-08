@@ -79,11 +79,11 @@ loginBtn.addEventListener('click', function() {
 				if(responseData) {
 					
 					if(responseData.result.status == 'NOK') {
-						
+						// Error
 						alert(responseData.result.message);	
 					
 					} else {
-
+						// Registered
 						debug(JSON.stringify(responseData));
 
 					}
@@ -115,12 +115,25 @@ loginBtn.addEventListener('click', function() {
 				if(responseData) {
 					
 					if(responseData.result.status == 'NOK') {
-						
+						// Error
 						alert(responseData.result.message);	
 					
 					} else {
-
+						// Verified
 						debug(JSON.stringify(responseData));
+
+						var user = {
+							id: '1',
+							name: 'Martin Berg',
+							email: 'martin@dx.no',
+							tel: '',
+							password: 'martin'
+						};
+
+						Ti.App.fireEvent('loginwin.close', {loggedIn: true});
+						u.setBool('purchaseMode', true);
+						app.user.login(user);
+						self.close();
 
 					}
 

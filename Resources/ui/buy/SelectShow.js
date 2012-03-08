@@ -8,8 +8,15 @@ var general = require('ui/styles/general'),
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	// Infoblock
 	infoWrapper = Titanium.UI.createView(styles.infoWrapper),
+	posterWrapper = Titanium.UI.createView(styles.posterWrapper),
 	poster = Titanium.UI.createImageView(styles.poster),
+	title = Titanium.UI.createLabel(styles.title),
+	lengthIcon = Titanium.UI.createView(styles.lengthIcon),
+	length = Titanium.UI.createLabel(styles.age),
+	ageIcon = Titanium.UI.createView(styles.ageIcon),
+	age = Titanium.UI.createLabel(styles.age),
 	// ---
+	loader,
 	table = Titanium.UI.createTableView(styles.table),
 	tableHeader = Titanium.UI.createView(styles.tableHeader),
 	tableHeaderTitle = Titanium.UI.createLabel(styles.tableHeaderTitle);
@@ -23,15 +30,33 @@ function layout() {
 
 	// Build infoblock
 	poster.image = movie.poster;
-	infoWrapper.add(poster);
+	posterWrapper.add(poster);
+	infoWrapper.add(posterWrapper);
+
+	title.text = movie.title;
+	infoWrapper.add(title);
+
+	age.text = movie.age;
+	infoWrapper.add(age);
+	infoWrapper.add(ageIcon);
+
+	length.text = movie.length;
+	length.top = 122;
+	infoWrapper.add(length);
+	infoWrapper.add(lengthIcon);
+
 	self.add(infoWrapper);
+
 
 	tableHeader.add(tableHeaderTitle);
 	self.add(tableHeader);
 
+	loader = u.loading(25, 'Laster inn...');
+	table.add(loader);
+
 	self.add(table);
 	//self.add(general.shadowTop(116));
-	self.add(general.shadowTop(156));
+	self.add(general.shadowTop(186));
 
 }
 
@@ -84,7 +109,12 @@ function getShows(movie, place) {
 					
 				});
 
+
 				table.setData(tableData);
+
+				u.fadeout(loader, function() {
+					table.remove(loader);
+				});
 
 			} else {
 				// ERROR
