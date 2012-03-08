@@ -5,6 +5,7 @@ function Show(obj) {
 	this.showtime = obj.showtime;
 	this.showend = obj.showend;
 	this.room = obj.showroom;
+	this.id = obj.showid;
 
 	this.tickets = obj.tickets;
 

@@ -5,6 +5,7 @@ var general = require('ui/styles/general'),
 	movie,
 	place,
 	show,
+	user,
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	table = Titanium.UI.createTableView(styles.table),
 	tableHeader = Titanium.UI.createView(styles.tableHeader),
@@ -22,14 +23,12 @@ function layout() {
 
 	//self.add(InfoBlock.load2(movie));
 	// Build infoblock
-	poster.image = movie.poster;
-	infoWrapper.add(poster);
-	self.add(infoWrapper);
+	//self.add(infoWrapper);
 
 	tableHeader.add(tableHeaderTitle);
 	self.add(tableHeader);
 
-	self.add(general.shadowTop(156));
+	self.add(general.shadowTop(0));
 
 	self.add(table);
 
@@ -44,6 +43,7 @@ function layout() {
 
 exports.load = function(mv, sw) {
 
+	user = place = JSON.parse(u.getString('user:info'));
 	place = JSON.parse(u.getString('place'));
 	movie = mv;
 	show = sw;
@@ -158,6 +158,10 @@ function updateTotal(op, price) {
 
 
 continueButton.addEventListener('click', function() {
+	// Start building URL
+	var url = 'http://dx.no/sp/?mai=' + user.epost + '&userid=' + user.profil_id + 'sms=0&pid=' + place.pid + '&arr=' + show.id + '&ant=';
+
+	// Loop through ticket categories and collect totals
 	var cats = table.data[0].rows,
 		selectedTickets = [];
 
@@ -167,15 +171,15 @@ continueButton.addEventListener('click', function() {
 
 		if(o.count !== 0 || !o.count) {
 			selectedTickets.push(o);
+			url = url + o.id + ':'+ o.count + ',';
 		}
 
 	});
 
-	_.each(selectedTickets, function(a) {
-		debug(a.name + '/' + a.count);
-	})
+	// Remove last comma from ticket-list
+	url = url.substring(0, url.length-1);
 
-	var url = 'http://dx.no/sp/?pid=113&arr=32923&ant=1:5&mai=test@test.no&mob=null&sms=0'
+	debug(url);
 
 	var win = require('ui/buy/BuyWebView').load(url);
 	require('ui/Tabgroup').tabs.buy.open(win);

@@ -111,3 +111,55 @@ exports.login = function(user, callback) {
 			'password': user.password
 		});
 };
+
+exports.getInfo = function(userid, callback) {
+	var url = 'https://ma01.dx.no/dx_profil.php';
+
+	debug('user.getInfo: ' + url);
+
+
+	var xhr = Titanium.Network.createHTTPClient();
+		xhr.onerror = function(e) {
+			debug("user.getInfo, ERROR " + e.error);
+				if(callback) {
+					callback(null);
+				}
+		};
+
+		xhr.onload = function()
+			{
+				if(this.status === 200) {
+					
+					var returnData = JSON.parse(this.responseText);
+						
+						if(callback) {
+							callback(returnData);
+						}
+				
+				} else if(this.status === 500) {
+					debug("user.getInfo, server error " + this.status);
+					if(callback) {
+						callback(null);
+					}
+				} else if(this.status === 404) {
+					debug("user.getInfo, not found " + this.status);
+					if(callback) {
+						callback(null);
+					}
+				} else {
+					debug("user.getInfo, unknown " + this.status);
+					debug('response: ' + this.responseText);
+
+					if(callback) {
+						callback(null);
+					}
+				}
+				
+			};
+
+		xhr.setTimeout(5000);
+		xhr.open('POST',url);
+		xhr.send({
+			'profil_id': userid,
+		});
+};
