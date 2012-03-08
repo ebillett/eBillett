@@ -33,7 +33,8 @@ exports.launch = function() {
 		
 		if(e.loggedIn) {
 							
-			tabgroup = tabgroup.load();
+			//tabgroup = tabgroup.load();
+			var tabgroup = require('ui/Tabgroup').load();
 			tabgroup.open();
 							
 		} else {
@@ -104,7 +105,7 @@ exports.user = {
 	
 	login: function(user) {
 		
-		debug('Persisting login credentials for ' + user.name + ' with id: ' + user.id);
+		debug('Persisting login credentials for ' + user.epost + ' with id: ' + user.profil_id);
 
 		exports.user.info = user;
 		
@@ -119,7 +120,7 @@ exports.user = {
 		
 		var user = JSON.parse(u.getString('user:info'));
 		
-		debug('Logging out user: ' + user.name + ' with id: ' + user.id);
+		debug('Logging out user: ' + user.epost + ' with id: ' + user.profil_id);
 
 		u.setBool('user:loggedin', false);
 		u.setString('user:info', '-');
@@ -135,7 +136,7 @@ exports.user = {
 		var user = JSON.parse(u.getString('user:info'));
 		exports.user.info = user;
 
-		debug('Stored credentials for logged in user is ' + user.name + ' with id: ' + user.id);
+		debug('Stored credentials for logged in user is ' + user.epost + ' with id: ' + user.profil_id);
 		
 		if(callback) {
 			

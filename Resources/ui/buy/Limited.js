@@ -143,11 +143,13 @@ table.addEventListener('click', function(e) {
 });
 
 self.addEventListener('focus', function() {
-	u.resetCinemaLoaded();
+	//u.resetCinemaLoaded();
 });
 
 exit.addEventListener('click', function() {
+	
 	app.openLoginDialog();
-	self.close();
+	container.close();
+	
 });
 

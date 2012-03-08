@@ -42,6 +42,7 @@ exports.load = function() {
 }
 
 
+
 self.addEventListener('focus', function() {
 	
 	loadSavedPlaces();

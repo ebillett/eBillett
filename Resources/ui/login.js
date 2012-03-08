@@ -86,6 +86,7 @@ loginBtn.addEventListener('click', function() {
 						// Registered
 						debug(JSON.stringify(responseData));
 
+
 					}
 
 					u.fadeout(loader, function() {
@@ -122,17 +123,12 @@ loginBtn.addEventListener('click', function() {
 						// Verified
 						debug(JSON.stringify(responseData));
 
-						var user = {
-							id: '1',
-							name: 'Martin Berg',
-							email: 'martin@dx.no',
-							tel: '',
-							password: 'martin'
-						};
+						var user = responseData.profil;
+						app.user.login(user);
 
 						Ti.App.fireEvent('loginwin.close', {loggedIn: true});
 						u.setBool('purchaseMode', true);
-						app.user.login(user);
+						
 						self.close();
 
 					}
