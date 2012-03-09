@@ -18,7 +18,7 @@ var tabs = {
 	tickets: Titanium.UI.createTab({
 		title: 'Mine billetter',
 		window: TicketsWin,
-		icon: 'images/common/icon_tickets.png'
+		icon: 'images/common/icon-tickets.png'
 	}),
 	profile: Titanium.UI.createTab({
 		title: 'Min profil',

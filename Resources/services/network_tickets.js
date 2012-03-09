@@ -1,5 +1,19 @@
-exports.get = function(userid, callback) {
+exports.get = function(userid, localPurchases, callback) {
 	var url = 'https://ma01.dx.no/dx_tickets.php';
+
+	var storedTickets;
+
+	if(localPurchases) {
+
+		_.each(localPurchases, function(obj) {
+			storedTickets = obj + ',';
+		});
+
+		storedTickets = storedTickets.substring(0, storedTickets.length-1);
+
+		//debug
+		storedTickets = storedTickets + ',6675494';
+	}
 
 	debug('tickets.get: ' + url);
 
@@ -45,7 +59,9 @@ exports.get = function(userid, callback) {
 
 		xhr.setTimeout(5000);
 		xhr.open('POST',url);
+
 		xhr.send({
 			'profil_id': userid,
+			'stored_tickets': storedTickets
 		});
 };

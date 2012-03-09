@@ -127,8 +127,8 @@ function getShows(movie, place) {
 
 
 table.addEventListener('click', function(e) {
-	
-	if(app.state == 'limited') {
+
+	if(!u.getBool('purchaseMode')) {
 
 		alert('Du må logge inn for å fortsette');
 

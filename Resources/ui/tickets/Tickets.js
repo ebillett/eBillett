@@ -4,6 +4,7 @@ var general = require('ui/styles/general'),
 	net = require('services/network'),
 	db = require('services/db'),
 	user,
+	checkedForNew = false;
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	wrapper = Titanium.UI.createView(general.wrapper),
 	table = Titanium.UI.createTableView(styles.table);
@@ -29,8 +30,6 @@ exports.load = function() {
 	} else {
 		user = false;
 	}
-
-	checkNewPurchases();
 
 	getPurchases();
 
@@ -59,8 +58,19 @@ function getPurchases() {
 
 
 function checkNewPurchases() {
+	debug('check new purchases');
 
-	net.tickets.get(user.profil_id, function(responseData) {
+	var localPurchases = [];
+	db.getPurchases(function(purchases) {
+
+		_.each(purchases, function(purchase) {
+			localPurchases.push(purchase.receipt_id);
+		});
+
+	});
+
+	// Check for new purchases
+	net.tickets.get(user.profil_id, localPurchases, function(responseData) {
 
 		if(responseData) {
 					
@@ -68,11 +78,19 @@ function checkNewPurchases() {
 				// Error
 				alert(responseData.result.message);	
 					
-			} else {
+			} else if(responseData.purchases.length !== 0) {
 
 				debug('got new tickets online: ')
 				debug(JSON.stringify(responseData));
 
+			} else if(responseData.purchases.length === 0) {
+
+				debug('no new tickets');
+
+			} else {
+
+				//error
+				debug('error');
 
 			}
 
@@ -88,3 +106,10 @@ function checkNewPurchases() {
 
 }
 
+
+self.addEventListener('focus', function() {
+	if(!checkedForNew) {
+		checkNewPurchases();
+		checkedForNew = true;
+	}
+});

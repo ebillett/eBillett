@@ -11,7 +11,8 @@ var general = require('ui/styles/general'),
 	easyHeaderTitle = Titanium.UI.createLabel(styles.tableHeaderTitle),
 	easyWrapper = Titanium.UI.createView(styles.easyWrapper),
 	easyLabel = Titanium.UI.createLabel(styles.easyLabel),
-	didLoadInfo = false;
+	didLoadInfo = false,
+	//fbBtn = Ti.Facebook.BUTTON_STYLE_WIDE,
 	logoutBtn = Titanium.UI.createButton(styles.logoutBtn);
 
 
@@ -35,6 +36,8 @@ var layout = function() {
 	easyWrapper.add(easyLabel);
 
 	wrapper.add(easyWrapper);
+
+	//wrapper.add(fbBtn);
 
 
 	//self.add(logoutBtn);
