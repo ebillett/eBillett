@@ -37,21 +37,21 @@ exports.load = function() {
 
 
 
-function getPurchases() {
-	table.setData([]);
+// function getPurchases() {
+// 	table.setData([]);
 
-	db.getPurchases(function(purchases) {
+// 	db.getPurchases(function(purchases) {
 
-		_.each(purchases, function(purchase) {
-			purchase.getTickets();
+// 		_.each(purchases, function(purchase) {
+// 			purchase.getTickets();
 
-			var row = Titanium.UI.createTableViewRow(styles.row);
-			row.title = purchase.title;
-			table.appendRow(row);
+// 			var row = Titanium.UI.createTableViewRow(styles.row);
+// 			row.title = purchase.title;
+// 			table.appendRow(row);
 
-		});
+// 		});
 
-	});
+// 	});
 
-};
+// };
 

@@ -2,7 +2,7 @@
 
 exports.getCurrent = function(id, callback) {
 
-	var url = 'http://dx.no/ebillett/dx_movies.php?p_id=' + id;
+	var url = 'https://ma01.dx.no/dx_movies.php?p_id=' + id;
 
 	debug('cinema.getCurrent: ' + url);
 

@@ -45,6 +45,8 @@ var layout = function() {
 exports.load = function() {
 	layout();
 
+	alert('nn');
+
 	return self;
 };
 
