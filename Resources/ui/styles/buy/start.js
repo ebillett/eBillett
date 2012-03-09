@@ -1,5 +1,15 @@
 
 exports = {
+	welcome: {
+		width: 318,
+		height: 148,
+		top: 1,
+		left: 1,
+		defaultImage: 'images/buy/welcome.png',
+		backgroundImage: 'images/buy/welcome.png',
+		image: 'http://ma01.dx.no/cover.png'
+
+	},
 	table: {
 		height: 300,
 		top: 150,

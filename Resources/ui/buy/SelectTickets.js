@@ -185,3 +185,8 @@ continueButton.addEventListener('click', function() {
 	require('ui/Tabgroup').tabs.buy.open(win);
 
 });
+
+self.addEventListener('focus', function() {
+	// Reset total amount
+	totalAmt = 0;
+});

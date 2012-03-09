@@ -4,6 +4,7 @@ var general = require('ui/styles/general'),
 	u = require('plugins/utils'),
 	db = require('services/db'),
 	self = Titanium.UI.createWindow(general.defaultWindow),
+	welcome = Titanium.UI.createImageView(styles.welcome),
 	wrapper = Titanium.UI.createView(general.wrapper),
 	addPlaceBtn = Titanium.UI.createButton(addPlaceBtn),
 	addPlaceHint = Titanium.UI.createButton(addPlaceHint),
@@ -22,6 +23,8 @@ var layout = function() {
 	
 	self.setLeftNavButton(addPlaceBtn);
 	self.setRightNavButton(editBtn);
+
+	self.add(welcome);
 
 	self.add(general.shadowTop(150));
 
