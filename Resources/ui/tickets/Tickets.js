@@ -1,8 +1,8 @@
 var general = require('ui/styles/general'),
 	styles = require('ui/styles/tickets/Tickets'),
 	u = require('plugins/utils'),
-	net = require('services/network'),
-	db = require('services/db'),
+	//net = require('services/network'),
+	//db = require('services/db'),
 	user,
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	wrapper = Titanium.UI.createView(general.wrapper),
@@ -22,15 +22,15 @@ var layout = function() {
 exports.load = function() {
 	layout();
 
-	user = u.getString('user:info');
+	// user = u.getString('user:info');
 
-	if(user) {
-		user = JSON.parse(user);
-	} else {
-		user = false;
-	}
+	// if(user) {
+	// 	user = JSON.parse(user);
+	// } else {
+	// 	user = false;
+	// }
 
-	getPurchases();
+	//getPurchases();
 
 	return self;
 };
