@@ -11,6 +11,7 @@ var general = require('ui/styles/general'),
 	easyHeaderTitle = Titanium.UI.createLabel(styles.tableHeaderTitle),
 	easyWrapper = Titanium.UI.createView(styles.easyWrapper),
 	easyLabel = Titanium.UI.createLabel(styles.easyLabel),
+	didLoadInfo = false;
 	logoutBtn = Titanium.UI.createButton(styles.logoutBtn);
 
 
@@ -45,7 +46,6 @@ var layout = function() {
 exports.load = function() {
 	layout();
 
-	alert('nn');
 
 	return self;
 };
@@ -142,5 +142,8 @@ logoutBtn.addEventListener('click', function() {
 });
 
 self.addEventListener('focus', function() {
-	getUserInfo();
+	if(!didLoadInfo) {
+		getUserInfo();
+		didLoadInfo = true;
+	}
 });

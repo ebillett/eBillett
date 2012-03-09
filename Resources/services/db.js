@@ -1,6 +1,6 @@
 
-var Place = require('models/Place');
-	//Purchase = require('models/Purchase');
+var Place = require('models/Place'),
+	Purchase = require('models/Purchase');
 
 
 // Bootstrap database
@@ -69,86 +69,86 @@ exports.deletePlace = function(place) {
 	db.close();
 };
 
-// exports.getPurchases = function(callback) {
+exports.getPurchases = function(callback) {
 	
-// 	debug('get purchases');
+	debug('get purchases');
 
-// 	var db = Ti.Database.open('eBillett');
+	var db = Ti.Database.open('eBillett');
 	
-// 	var result = db.execute('SELECT * FROM purchases');
+	var result = db.execute('SELECT * FROM purchases');
 	
-// 	var data = [];
+	var data = [];
 	
-// 	if(result.isValidRow()) {
-//         while(result.isValidRow()) {
-//             var obj = {
-// 				id: result.fieldByName('id'),
-// 				title: result.fieldByName('title'),
-// 				place: result.fieldByName('place'),
-// 				pid: result.fieldByName('pid'),
-// 				receipt_id: result.fieldByName('receipt_id'),
-// 				utref: result.fieldByName('utref'),
-// 				fdato: result.fieldByName('fdato'),
-// 				fkl: result.fieldByName('fkl'),
-// 				dato: result.fieldByName('dato'),
-// 				kl: result.fieldByName('kl'),
-// 				showroom: result.fieldByName('showroom'),
-// 			};
+	if(result.isValidRow()) {
+        while(result.isValidRow()) {
+            var obj = {
+				id: result.fieldByName('id'),
+				title: result.fieldByName('title'),
+				place: result.fieldByName('place'),
+				pid: result.fieldByName('pid'),
+				receipt_id: result.fieldByName('receipt_id'),
+				utref: result.fieldByName('utref'),
+				fdato: result.fieldByName('fdato'),
+				fkl: result.fieldByName('fkl'),
+				dato: result.fieldByName('dato'),
+				kl: result.fieldByName('kl'),
+				showroom: result.fieldByName('showroom'),
+			};
 
-// 			var purchase = new Purchase(obj);
+			var purchase = new Purchase(obj);
 			
-// 			data.push(purchase);
+			data.push(purchase);
 
-// 			result.next();
-// 		}
-// 	}
+			result.next();
+		}
+	}
 
-// 	result.close();
-// 	db.close();
+	result.close();
+	db.close();
 
-// 	if(callback) {
-// 		callback(data);
-// 	}
+	if(callback) {
+		callback(data);
+	}
 
-// 	return data;
+	return data;
 
-// }
+}
 
-// exports.getTickets = function(receipt_id) {
+exports.getTickets = function(receipt_id) {
 	
-// 	debug('get tickets');
+	debug('get tickets');
 
-// 	var db = Ti.Database.open('eBillett');
+	var db = Ti.Database.open('eBillett');
 	
-// 	var result = db.execute('SELECT * FROM tickets WHERE belongs_to = ?', receipt_id);
+	var result = db.execute('SELECT * FROM tickets WHERE belongs_to = ?', receipt_id);
 	
-// 	var data = [];
+	var data = [];
 	
-// 	if(result.isValidRow()) {
-//         while(result.isValidRow()) {
-//             var obj = {
-// 				id: result.fieldByName('id'),
-// 				category: result.fieldByName('category'),
-// 				price: result.fieldByName('price'),
-// 				seat_f: result.fieldByName('seat_f'),
-// 				seat: result.fieldByName('seat'),
-// 				row: result.fieldByName('row')
-// 			};
+	if(result.isValidRow()) {
+        while(result.isValidRow()) {
+            var obj = {
+				id: result.fieldByName('id'),
+				category: result.fieldByName('category'),
+				price: result.fieldByName('price'),
+				seat_f: result.fieldByName('seat_f'),
+				seat: result.fieldByName('seat'),
+				row: result.fieldByName('row')
+			};
 
-// 			debug(obj.category + ' / ' + obj.seat_f);
+			debug(obj.category + ' / ' + obj.seat_f);
 
-// 			//var purchase = new Purchase(obj);
+			//var purchase = new Purchase(obj);
 			
-// 			//data.push(purchase);
+			//data.push(purchase);
 
-// 			result.next();
-// 		}
-// 	}
+			result.next();
+		}
+	}
 
-// 	result.close();
-// 	db.close();
+	result.close();
+	db.close();
 
 
-// 	return data;
+	return data;
 
-// }
+}
