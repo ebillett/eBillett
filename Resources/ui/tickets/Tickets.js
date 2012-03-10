@@ -7,6 +7,13 @@ var general = require('ui/styles/general'),
 	checkedForNew = false;
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	wrapper = Titanium.UI.createView(general.wrapper),
+	refreshBtn = Titanium.UI.createButton({
+		//backgroundImage: 'images/common/icon_loading.png',
+		image: 'images/common/icon_loading.png',
+		backgroundColor: 'transparent',
+		backgroundImage: 'transparent',
+		title: 'X'
+	});
 	table = Titanium.UI.createTableView(styles.table);
 
 
@@ -14,6 +21,8 @@ var general = require('ui/styles/general'),
 
 
 var layout = function() {
+
+	self.setRightNavButton(refreshBtn);
 
 	self.add(table);
 
