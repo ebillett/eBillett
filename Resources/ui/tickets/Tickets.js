@@ -12,8 +12,14 @@ var general = require('ui/styles/general'),
 		image: 'images/common/icon_loading.png',
 		backgroundColor: 'transparent',
 		backgroundImage: 'transparent',
-		title: 'X'
-	});
+		title: '',
+		heigth: 23
+	}),
+	refreshBtnImg = Titanium.UI.createView({
+		backgroundImage: 'images/tickets/icon-refresh.png',
+		width: 19,
+		heigth: 23
+	}),
 	table = Titanium.UI.createTableView(styles.table);
 
 
@@ -22,10 +28,10 @@ var general = require('ui/styles/general'),
 
 var layout = function() {
 
-	self.setRightNavButton(refreshBtn);
+	self.setRightNavButton(refreshBtnImg);
+	self.setLeftNavButton(refreshBtn);
 
 	self.add(table);
-
 
 };
 
@@ -121,4 +127,20 @@ self.addEventListener('focus', function() {
 		checkNewPurchases();
 		checkedForNew = true;
 	}
+});
+
+refreshBtn.addEventListener('click', function() {
+
+	refreshBtn.opacity = 0.5;
+	
+	var t = Ti.UI.create2DMatrix();
+	t = t.rotate(180);
+
+	refreshBtn.animate({
+		transform: t,
+		duration: 500,
+		repeat: 100,
+		//curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
+	});
+
 });
