@@ -28,12 +28,25 @@ var general = require('ui/styles/general'),
 
 var layout = function() {
 
-	self.setRightNavButton(refreshBtnImg);
 	self.setLeftNavButton(refreshBtn);
 
 	self.add(table);
 
 };
+
+//DEBUG
+var test = Titanium.UI.createButton({title: 'test'});
+self.setRightNavButton(test);
+test.addEventListener('click', function() {
+	var eb_id = 'eb66754945';
+	u.generateQrCode(eb_id, function(result) {
+		if(result) {
+			debug('saved code');
+		} else {
+			debug('did not save, should be marked, so that it can be saved later');
+		}
+	});
+});
 
 exports.load = function() {
 	layout();

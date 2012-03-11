@@ -126,3 +126,38 @@ exports.fadeout = function(obj) {
 	
 	setTimeout(callback(), 750);
 }
+
+
+exports.generateQrCode = function(receipt, callback) {
+
+	// Should create backup-load if code cannot be saved instantly after purchase
+
+	var qrUrl = 'http://chart.apis.google.com/chart?cht=qr&chl=' + receipt +'&chs=265x265',
+		filename = 'ticket_' + receipt + '.png';
+
+	var c = Titanium.Network.createHTTPClient();
+
+	c.setTimeout(10000);
+	c.onload = function() {
+		if (c.status == 200 ) {
+			
+			var f = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,filename);
+			f.write(this.responseData);
+			
+			callback(true);
+
+		} else {
+
+			debug('error writing ticket image');
+			
+			callback(false)
+
+		}
+	};
+
+	c.open('GET',qrUrl);
+	c.send();  
+
+
+
+}

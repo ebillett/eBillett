@@ -12,6 +12,10 @@ exports = {
 		width: 301,
 		height: 354
 	},
+	qrImg: {
+		width: 265,
+		height: 265
+	},
 	tPlace: {
 		color: '#666',
 		font: {

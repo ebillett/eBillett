@@ -18,6 +18,7 @@ var general = require('ui/styles/general'),
 	codeBtn = Titanium.UI.createButton(styles.codeBtn),
 	codeBtnLabel = Titanium.UI.createLabel(styles.codeBtnLabel),
 	qrWrapper = Titanium.UI.createView(styles.qrWrapper),
+	qrImg = Titanium.UI.createImageView(styles.qrImg),
 	cover = Titanium.UI.createView(styles.cover),
 	ticketImg = Titanium.UI.createView(styles.ticketImg);
 
@@ -54,6 +55,10 @@ function layout() {
 	shareBtn.add(shareBtnLabel);
 	wrapper.add(shareBtn);
 
+	// Add qr code
+	var filename = 'ticket_' + ticket.utref + '.png';
+	qrImg.image = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory,filename);
+	qrWrapper.add(qrImg);
 
 
 	codeBtn.add(codeBtnLabel);
