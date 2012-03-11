@@ -45,6 +45,7 @@ function layout() {
 	wrapper.add(tRoom);
 
 	wrapper.add(table);
+	table.setData([{title: '1 x Voksen    Rad 11, sete 12'}]);
 
 	var purchaseDate = ticket.dato + ' ' + ticket.kl;
 
@@ -63,6 +64,17 @@ function layout() {
 
 	codeBtn.add(codeBtnLabel);
 	wrapper.add(codeBtn);
+
+
+	// Check if ticket has expired
+	if(ticket.expired) {
+		wrapper.add(cover);
+		var expiredBanner = Titanium.UI.createView(styles.expiredBanner);
+
+		self.add(expiredBanner);
+	}
+
+
 
 	container.add(wrapper);
 

@@ -132,9 +132,13 @@ exports = {
 		shadowOffset: {x: 0, y:1}
 	},
 	cover: {
-		backgroundColor: '#000',
-		opacity: 0,
-		zIndex: 200
+		backgroundColor: '#fff',
+		opacity: 0.5,
+		zIndex: 200,
+		top: 10,
+		left: 10,
+		right: 10,
+		bottom: 99
 	},
 	ticketImg: {
 		width: 280,
@@ -145,6 +149,14 @@ exports = {
 		borderWidth: 4,
 		zIndex: 205,
 		touchEnabled: false
+	},
+	expiredBanner: {
+		width: 206,
+		height: 210,
+		backgroundImage: 'images/tickets/expired-banner.png',
+		top: 5,
+		left: 108,
+		zIndex: 400
 	}
 
 };

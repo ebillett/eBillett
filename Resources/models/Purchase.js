@@ -13,6 +13,7 @@ function Purchase(o) {
 	this.dato = o.dato;
 	this.kl = o.kl;
 	this.showroom = o.showroom;
+	this.expired = true;
 
 	this.getTickets = function() {
 		require('services/db').getTickets(this.receipt_id);
