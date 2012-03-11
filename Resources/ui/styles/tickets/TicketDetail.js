@@ -61,10 +61,50 @@ exports = {
 		width: 'auto',
 		height: 'auto'
 	},
+	table: {
+		top: 105,
+		left: 10,
+		right: 10,
+		height: 100,
+		backgroundColor: '#ddd'
+	},
+	tPurch: {
+		color: '#666',
+		font: {
+			fontSize: 12,
+			fontWeight: 'normal',
+			fontStyle: 'italic'
+		},
+		top: 225,
+		left: 20,
+		width: 'auto',
+		height: 'auto'
+	},
+	shareBtn: {
+		width: 125,
+		height: 34,
+		top: 215,
+		right: 10,
+		backgroundImage: 'images/tickets/button-share.png'
+		//backgroundSelectedImage: 'images/common/button-green-pressed.png'
+	},
+	shareBtnLabel: {
+		height: 'auto',
+		width: 'auto',
+		text: 'Del på Facebook',
+		color: '#fff',
+		touchEnabled: false,
+		font: {
+			fontWeight: 'bold',
+			fontSize: 12
+		},
+		shadowColor: '#1b3268',
+		shadowOffset: {x: 0, y:-1}
+	},
 	codeBtn: {
 		width: 251,
 		height: 50,
-		bottom: 45,
+		bottom: 20,
 		backgroundImage: 'images/common/button-grey.png',
 		backgroundSelectedImage: 'images/common/button-green-pressed.png'
 	},
@@ -72,14 +112,14 @@ exports = {
 		height: 'auto',
 		width: 'auto',
 		text: 'Vis billettkode',
-		color: '#eee',
+		color: '#666',
 		touchEnabled: false,
 		font: {
 			fontWeight: 'bold',
 			fontSize: 16
 		},
-		shadowColor: '#516a12',
-		shadowOffset: {x: 0, y:-1}
+		shadowColor: '#fff',
+		shadowOffset: {x: 0, y:1}
 	},
 	cover: {
 		backgroundColor: '#000',

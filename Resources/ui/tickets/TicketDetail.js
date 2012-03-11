@@ -8,6 +8,10 @@ var general = require('ui/styles/general'),
 	tTime = Titanium.UI.createLabel(styles.tTime),
 	tDate = Titanium.UI.createLabel(styles.tDate),
 	tRoom = Titanium.UI.createLabel(styles.tRoom),
+	table = Titanium.UI.createTableView(styles.table),
+	tPurch = Titanium.UI.createLabel(styles.tPurch),
+	shareBtn = Titanium.UI.createButton(styles.shareBtn),
+	shareBtnLabel = Titanium.UI.createLabel(styles.shareBtnLabel),
 	codeBtn = Titanium.UI.createButton(styles.codeBtn),
 	codeBtnLabel = Titanium.UI.createLabel(styles.codeBtnLabel),
 	cover = Titanium.UI.createView(styles.cover),
@@ -21,7 +25,9 @@ function layout() {
 	tPlace.text = ticket.place;
 	wrapper.add(tPlace);
 
-	tDate.text = ticket.fdato;
+	var date = Date.parse(ticket.fdato);
+
+	tDate.text = date.toString('ddd dd. MMMM');
 	wrapper.add(tDate);
 
 	tTitle.text = ticket.title;
@@ -33,10 +39,21 @@ function layout() {
 	tRoom.text = ticket.showroom;
 	wrapper.add(tRoom);
 
+	wrapper.add(table);
+
+	var purchaseDate = ticket.dato + ' ' + ticket.kl;
+
+	purchaseDate = Date.parse(purchaseDate);
+	tPurch.text = 'Kjøpt ' +  purchaseDate.toString('dd/MM-yy') + ' kl.: ' + purchaseDate.toString('hh:mm');
+	wrapper.add(tPurch);
+
+	shareBtn.add(shareBtnLabel);
+	wrapper.add(shareBtn);
 
 
-	//codeBtn.add(codeBtnLabel);
-	//wrapper.add(codeBtn);
+
+	codeBtn.add(codeBtnLabel);
+	wrapper.add(codeBtn);
 
 	self.add(wrapper);
 
@@ -57,11 +74,47 @@ function showHideTicket(what) {
 	if(what) {
 		// Show ticket
 		self.add(ticketImg);
+		ticketImg.zIndex = 600;
+
 		self.add(cover);
+		ticketImg.zIndex = 500;
+
+
+		cover.animate({
+			opacity: 0.8,
+			duration: 200
+		}, function() {
+			cover.opacity = 0.8;
+		});
+
+		ticketImg.animate({
+			opacity: 1,
+			duration: 200
+		}, function() {
+			ticketImg.opacity = 1;
+		});
+
 	} else {
 		// Hide ticket
-		self.remove(ticketImg);
-		self.remove(cover);
+		//
+		//
+
+		cover.animate({
+			opacity: 0,
+			duration: 200
+		}, function() {
+			cover.opacity = 0;
+			self.remove(cover);
+		});
+
+		ticketImg.animate({
+			opacity: 0,
+			duration: 200
+		}, function() {
+			ticketImg.opacity = 0;
+			self.remove(ticketImg);
+		});
+
 
 	}
 
@@ -76,5 +129,15 @@ codeBtn.addEventListener('click', function() {
 cover.addEventListener('click', function() {
 	
 	showHideTicket(false);
+
+});
+
+self.addEventListener('close', function() {
+	
+	self.remove(ticketImg);
+	ticketImg.zIndex = 600;
+
+	self.remove(cover);
+	cover.zIndex = 500;
 
 });

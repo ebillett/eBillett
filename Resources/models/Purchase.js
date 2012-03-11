@@ -10,7 +10,7 @@ function Purchase(o) {
 	this.utref = o.utref;
 	this.fdato = o.fdato;
 	this.fkl = o.fkl.substr(0,5);
-	this.dato = o.dat;
+	this.dato = o.dato;
 	this.kl = o.kl;
 	this.showroom = o.showroom;
 
