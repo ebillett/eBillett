@@ -61,8 +61,6 @@ exports = {
 		width: 'auto',
 		height: 'auto'
 	},
-
-
 	codeBtn: {
 		width: 251,
 		height: 50,

@@ -19,4 +19,5 @@ var app = require('ui/bootstrap');
 
 app.db.bootstrap();
 
+
 app.launch();
