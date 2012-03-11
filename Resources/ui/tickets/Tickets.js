@@ -63,6 +63,7 @@ function getPurchases() {
 
 			var row = Titanium.UI.createTableViewRow(styles.row);
 			row.title = purchase.title;
+			row.obj = purchase;
 			table.appendRow(row);
 
 		});
@@ -142,5 +143,12 @@ refreshBtn.addEventListener('click', function() {
 		repeat: 100,
 		//curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
 	});
+
+});
+
+table.addEventListener('click', function(e) {
+
+	var win = require('ui/tickets/TicketDetail').load(e.rowData.obj);
+	require('ui/Tabgroup').tabs.tickets.open(win);
 
 });

@@ -6,7 +6,7 @@ var general = require('ui/styles/general'),
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	welcome = Titanium.UI.createImageView(styles.welcome),
 	wrapper = Titanium.UI.createView(general.wrapper),
-	addPlaceBtn = Titanium.UI.createButton(addPlaceBtn),
+	addPlaceBtn = Titanium.UI.createButton(styles.addPlaceBtn),
 	addPlaceHint = Titanium.UI.createButton(addPlaceHint),
 	addDialog = require('ui/buy/AddPlaceDialog').load(),
 	addDialogActive = false,
@@ -154,14 +154,37 @@ var closeAddDialog = function() {
 // ------------------------------------
 
 addPlaceBtn.addEventListener('click', function() {
+
 	if(!addDialogActive) {
 		Ti.App.fireEvent('addPlaces.open');
 		openAddDialog();
+
+		var t = Ti.UI.create2DMatrix();
+	t = t.rotate(45);
+
+	addPlaceBtn.animate({
+		transform: t,
+		duration: 200,
+		delay: 100,
+		repeat: 1,
+		//curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
+	});
 
 		addDialogActive = true;
 	} else {
 		closeAddDialog();
 		addDialogActive = false;
+
+		var t = Ti.UI.create2DMatrix();
+	t = t.rotate(-45);
+
+	addPlaceBtn.animate({
+		transform: t,
+		duration: 200,
+		delay: 100,
+		repeat: 1,
+		//curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
+	});
 	}
 });
 

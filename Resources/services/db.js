@@ -137,11 +137,11 @@ exports.getTickets = function(receipt_id) {
 				row: result.fieldByName('row')
 			};
 
-			debug(obj.category + ' / ' + obj.seat_f);
-
 			//var purchase = new Purchase(obj);
 			
 			//data.push(purchase);
+
+			data.push(obj);
 
 			result.next();
 		}

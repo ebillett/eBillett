@@ -42,7 +42,9 @@ exports = {
 		backgroundColor: '#ff0000'
 	},
 	addPlaceBtn: {
-		title: '+'
+		title: '+',
+		image: 	'images/buy/icon-add.png',
+		backgroundImage: 'transparent'
 	},
 	addPlaceHint: {
 		title: 'Ingen steder lagret. Klikk her for å legge til',
