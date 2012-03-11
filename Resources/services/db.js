@@ -9,6 +9,12 @@ exports.bootstrap = function() {
     db.execute('CREATE TABLE IF NOT EXISTS places (id INTEGER PRIMARY KEY, name VARCHAR(16) NOT NULL, pid INTEGER NOT NULL, type VARCHAR(16) NOT NULL, hasmobile INTEGER NOT NULL)');
     db.execute('CREATE TABLE IF NOT EXISTS purchases (id INTEGER PRIMARY KEY, title VARCHAR(100) NOT NULL, place VARCHAR(100) NOT NULL, pid INTEGER NOT NULL, receipt_id INTEGER NOT NULL, utref VARCHAR(100) NOT NULL, fdato VARCHAR(100) NOT NULL, fkl VARCHAR(100) NOT NULL, dato VARCHAR(100) NOT NULL, kl VARCHAR(100) NOT NULL, showroom VARCHAR(100) NOT NULL)');
     db.execute('CREATE TABLE IF NOT EXISTS tickets (id INTEGER PRIMARY KEY, belongs_to INTEGER NOT NULL, category VARCHAR(100) NOT NULL, price VARCHAR(100) NOT NULL, seat_f VARCHAR(100) NOT NULL, seat INTEGER NOT NULL, row INTEGER NOT NULL)');
+    
+    // Debug – for device testing ticket views
+    //db.execute("INSERT INTO purchases VALUES (1, 'Test film', 'Fram Kino', 113, 6675485, 'eb16237845', '2012-03-16', '17:30:00', '2012-03-07', '21:35:45', 'SAL 1')");
+    //db.execute("INSERT INTO tickets VALUES (1, '6675485', 'Voksen', '90.00', 'Rad 5, sete 4', '4', '5')");
+    //db.execute("INSERT INTO tickets VALUES (2, '6675485', 'Voksen', '90.00', 'Rad 5, sete 5', '5', '5')");
+
     db.close();
 };
 

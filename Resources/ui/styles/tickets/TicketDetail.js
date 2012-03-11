@@ -1,13 +1,10 @@
 exports = {
 
 	wrapper: {
-		backgroundColor: '#f0f0f0',
-		borderColor: '#555',
-		left: 10,
-		right: 10,
+		backgroundImage: 'images/tickets/ticket.png',
 		top: 10,
-		height: 300,
-		layout: 'vertical'
+		width: 301,
+		height: 354
 	},
 	tPlace: {
 		color: '#666',
@@ -26,7 +23,7 @@ exports = {
 			fontSize: 16,
 			fontWeight: 'normal'
 		},
-		top: 10,
+		top: 45,
 		left: 20,
 		width: 'auto',
 		height: 'auto'
@@ -37,8 +34,19 @@ exports = {
 			fontSize: 14,
 			fontWeight: 'bold'
 		},
-		top: 20,
+		top: 80,
 		left: 20,
+		width: 'auto',
+		height: 'auto'
+	},
+	tDate: {
+		color: '#333',
+		font: {
+			fontSize: 14,
+			fontWeight: 'normal'
+		},
+		top: 20,
+		right: 20,
 		width: 'auto',
 		height: 'auto'
 	},
@@ -48,20 +56,18 @@ exports = {
 			fontSize: 14,
 			fontWeight: 'normal'
 		},
-		top: 7,
-		left: 20,
+		top: 80,
+		left: 85,
 		width: 'auto',
 		height: 'auto'
 	},
 
 
 	codeBtn: {
-		//width: 251,
-		left: 20,
-		right: 20,
+		width: 251,
 		height: 50,
-		top: 10,
-		backgroundImage: 'images/common/button-green.png',
+		bottom: 45,
+		backgroundImage: 'images/common/button-grey.png',
 		backgroundSelectedImage: 'images/common/button-green-pressed.png'
 	},
 	codeBtnLabel: {

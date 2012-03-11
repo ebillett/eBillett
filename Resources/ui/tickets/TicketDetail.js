@@ -6,7 +6,7 @@ var general = require('ui/styles/general'),
 	tPlace = Titanium.UI.createLabel(styles.tPlace),
 	tTitle = Titanium.UI.createLabel(styles.tTitle),
 	tTime = Titanium.UI.createLabel(styles.tTime),
-	tDate = Titanium.UI.createLabel(styles.tTime),
+	tDate = Titanium.UI.createLabel(styles.tDate),
 	tRoom = Titanium.UI.createLabel(styles.tRoom),
 	codeBtn = Titanium.UI.createButton(styles.codeBtn),
 	codeBtnLabel = Titanium.UI.createLabel(styles.codeBtnLabel),
@@ -21,10 +21,13 @@ function layout() {
 	tPlace.text = ticket.place;
 	wrapper.add(tPlace);
 
+	tDate.text = ticket.fdato;
+	wrapper.add(tDate);
+
 	tTitle.text = ticket.title;
 	wrapper.add(tTitle);
 
-	tTime.text = ticket.fkl + '    ' + ticket.fdato;
+	tTime.text = ticket.fkl;
 	wrapper.add(tTime);
 
 	tRoom.text = ticket.showroom;
@@ -32,8 +35,8 @@ function layout() {
 
 
 
-	codeBtn.add(codeBtnLabel);
-	wrapper.add(codeBtn);
+	//codeBtn.add(codeBtnLabel);
+	//wrapper.add(codeBtn);
 
 	self.add(wrapper);
 
@@ -55,22 +58,10 @@ function showHideTicket(what) {
 		// Show ticket
 		self.add(ticketImg);
 		self.add(cover);
-
-		cover.animate({
-			opacity: 0.8,
-			duration: 200,
-		}, function() {
-			cover.opacity = 0.8;
-			ticketImg.animate({
-				opacity: 1,
-				duration: 200
-			}, function() {
-				ticketImg.opacity = 1;
-			});
-		});
 	} else {
 		// Hide ticket
-		
+		self.remove(ticketImg);
+		self.remove(cover);
 
 	}
 
