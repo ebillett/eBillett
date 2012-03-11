@@ -26,135 +26,137 @@ var general = require('ui/styles/general'),
 	self.titleControl = general.defaultTitle('Mine billetter');
 
 
-exports.load = function() {
+var layout = function() {
 
-	return self;
+	self.setRightNavButton(refreshBtnImg);
+	self.setLeftNavButton(refreshBtn);
+
+	self.add(table);
 
 };
 
-// var layout = function() {
+exports.load = function() {
+	layout();
 
-// 	self.setRightNavButton(refreshBtnImg);
-// 	self.setLeftNavButton(refreshBtn);
+	user = u.getString('user:info');
 
-// 	self.add(table);
+	if(user) {
+		user = JSON.parse(user);
+	} else {
+		user = false;
+	}
 
-// };
+	getPurchases();
 
-// exports.load = function() {
-// 	layout();
-
-// 	user = u.getString('user:info');
-
-// 	if(user) {
-// 		user = JSON.parse(user);
-// 	} else {
-// 		user = false;
-// 	}
-
-// 	getPurchases();
-
-// 	return self;
-// };
+	return self;
+};
 
 
 
-// function getPurchases() {
-// 	table.setData([]);
+function getPurchases() {
+	table.setData([]);
 
-// 	db.getPurchases(function(purchases) {
+	db.getPurchases(function(purchases) {
+		if(purchases.length !== 0) {
+			
+			_.each(purchases, function(purchase) {
+				purchase.getTickets();
 
-// 		_.each(purchases, function(purchase) {
-// 			purchase.getTickets();
+				var row = Titanium.UI.createTableViewRow(styles.row);
+				row.title = purchase.title;
+				row.obj = purchase;
+				table.appendRow(row);
 
-// 			var row = Titanium.UI.createTableViewRow(styles.row);
-// 			row.title = purchase.title;
-// 			row.obj = purchase;
-// 			table.appendRow(row);
+			});
 
-// 		});
+		} else {
+			// No stored tickets
+			var row = Titanium.UI.createTableViewRow({title: 'Ingen billetter.'});
+			table.appendRow(row);
 
-// 	});
+		}
 
-// };
+	});
+
+};
 
 
-// function checkNewPurchases() {
-// 	debug('check new purchases');
+function checkNewPurchases() {
+	debug('check new purchases');
 
-// 	var localPurchases = [];
-// 	db.getPurchases(function(purchases) {
+	var localPurchases = [];
+	db.getPurchases(function(purchases) {
 
-// 		_.each(purchases, function(purchase) {
-// 			localPurchases.push(purchase.receipt_id);
-// 		});
+		_.each(purchases, function(purchase) {
+			localPurchases.push(purchase.receipt_id);
+		});
 
-// 	});
+	});
 
-// 	// Check for new purchases
-// 	net.tickets.get(user.profil_id, localPurchases, function(responseData) {
+	// Check for new purchases
+	net.tickets.get(user.profil_id, localPurchases, function(responseData) {
 
-// 		if(responseData) {
+		if(responseData) {
 					
-// 			if(responseData.status == 'NOK') {
-// 				// Error
-// 				alert(responseData.result.message);	
+			if(responseData.status == 'NOK') {
+				// Error
+				alert(responseData.result.message);	
 					
-// 			} else if(responseData.purchases.length !== 0) {
+			} else if(responseData.purchases.length !== 0) {
 
-// 				debug('got new tickets online: ')
-// 				debug(JSON.stringify(responseData));
+				debug('got new tickets online: ')
+				debug(JSON.stringify(responseData));
 
-// 			} else if(responseData.purchases.length === 0) {
+			} else if(responseData.purchases.length === 0) {
 
-// 				debug('no new tickets');
+				debug('no new tickets');
 
-// 			} else {
+			} else {
 
-// 				//error
-// 				debug('error');
+				//error
+				debug('error');
 
-// 			}
-
-
-
-// 		} else {
-
-// 			debug('error');
-
-// 		}
-
-// 	});
-
-// }
+			}
 
 
-// self.addEventListener('focus', function() {
-// 	if(!checkedForNew) {
-// 		checkNewPurchases();
-// 		checkedForNew = true;
-// 	}
-// });
 
-// refreshBtn.addEventListener('click', function() {
+		} else {
 
-// 	refreshBtn.opacity = 0.5;
+			debug('error');
+
+		}
+
+	});
+
+}
+
+
+self.addEventListener('focus', function() {
+	if(!checkedForNew) {
+		checkNewPurchases();
+		checkedForNew = true;
+	}
+});
+
+refreshBtn.addEventListener('click', function() {
+
+	refreshBtn.opacity = 0.5;
 	
-// 	var t = Ti.UI.create2DMatrix();
-// 	t = t.rotate(180);
+	var t = Ti.UI.create2DMatrix();
+	t = t.rotate(180);
 
-// 	refreshBtn.animate({
-// 		transform: t,
-// 		duration: 500,
-// 		repeat: 100,
-// 		//curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
-// 	});
+	refreshBtn.animate({
+		transform: t,
+		duration: 500,
+		repeat: 100,
+		//curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
+	});
 
-// });
+});
 
-// table.addEventListener('click', function(e) {
+table.addEventListener('click', function(e) {
 
-// 	//var win = require('ui/tickets/TicketDetail').load(e.rowData.obj);
-// 	//require('ui/Tabgroup').tabs.tickets.open(win);
+	var win = require('ui/tickets/TicketDetail').load(e.rowData.obj);
+	require('ui/Tabgroup').tabs.tickets.open(win);
 
-// });
+});
