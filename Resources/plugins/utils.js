@@ -79,6 +79,43 @@ exports.loading = function(top, txt) {
 	return instance;
 }
 
+exports.infoPop = function(txt) {
+
+	var instance = Titanium.UI.createView({
+		backgroundColor: '#000',
+		opacity: 0,
+		borderRadius: 6,	
+		width: 200,
+		height: 100,
+		zIndex: 500
+	});
+
+	var label = Titanium.UI.createLabel({
+		text: txt,
+		width: 'auto',
+		height: 'auto',
+		font: {
+			fontSize: 16,
+			fontWeight: 'bold'
+		},
+		color: '#fff',
+		shadowColor: '#000',
+		shadowOffset: {x: 0, y: 1}
+	});
+
+	instance.add(label);
+
+	instance.animate({
+		opacity: 0.8,
+		duration: 200
+	}, function() {
+		instance.opacity = 0.8;
+	})
+
+	return instance;
+
+}
+
 exports.fadeout = function(obj) {
 	obj.animate({
 		duration: 750,

@@ -6,6 +6,12 @@ exports = {
 		width: 301,
 		height: 354
 	},
+	qrWrapper: {
+		backgroundImage: 'images/tickets/ticket-qr.png',
+		top: 10,
+		width: 301,
+		height: 354
+	},
 	tPlace: {
 		color: '#666',
 		font: {
@@ -71,7 +77,7 @@ exports = {
 	tPurch: {
 		color: '#666',
 		font: {
-			fontSize: 12,
+			fontSize: 11,
 			fontWeight: 'normal',
 			fontStyle: 'italic'
 		},

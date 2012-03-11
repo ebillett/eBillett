@@ -18,6 +18,7 @@ var _ = require('plugins/underscore-min')._;
 var app = require('ui/bootstrap');
 
 app.db.bootstrap();
+app.social.bootstrap();
 
 
 app.launch();

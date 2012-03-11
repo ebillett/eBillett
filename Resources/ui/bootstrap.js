@@ -5,6 +5,7 @@ var tabgroup = require('ui/Tabgroup'),
 exports.db = require('services/db');
 exports.net = require('services/network');
 exports.u = u;
+exports.social = require('services/social');
 
 
 exports.launch = function() {
