@@ -6,7 +6,8 @@ exports = {
 	tableHeader: {
 		top: 160,
 		height: 26,
-		backgroundColor: '#222'
+		//backgroundColor: '#222'
+		backgroundColor: '#659113'
 	},
 	tableHeaderTitle: {
 		text: 'Velg forestilling',
@@ -15,7 +16,8 @@ exports = {
 			fontSize: 12,
 			fontWeight: 'bold'
 		},
-		shadowColor: '#111',
+		//shadowColor: '#111',
+		shadowColor: '#304608',
 		shadowOffset: {x: 0, y: -1},
 		width: 'auto',
 		height: 'auto',

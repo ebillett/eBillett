@@ -13,11 +13,27 @@ function Purchase(o) {
 	this.dato = o.dato;
 	this.kl = o.kl;
 	this.showroom = o.showroom;
-	this.expired = true;
+
 
 	this.getTickets = function() {
 		require('services/db').getTickets(this.receipt_id);
 	}
+
+	this.isExpired = function(fdate) {
+		var limit = new Date;
+		limit.add(1).days().add(12).hours();
+
+		if(fdate.isAfter(limit)) {
+			// Not expired
+			return false;
+		} else {
+			// Expired
+			return true;
+		}
+	}
+
+	this.fullDate = Date.parse(this.fdato + ' ' + this.fkl);
+	this.expired = this.isExpired(this.fullDate);
 
 };
 

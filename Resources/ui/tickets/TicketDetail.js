@@ -20,7 +20,9 @@ var general = require('ui/styles/general'),
 	qrWrapper = Titanium.UI.createView(styles.qrWrapper),
 	qrImg = Titanium.UI.createImageView(styles.qrImg),
 	cover = Titanium.UI.createView(styles.cover),
-	ticketImg = Titanium.UI.createView(styles.ticketImg);
+	ticketImg = Titanium.UI.createView(styles.ticketImg),
+	expiredBanner = Titanium.UI.createView(styles.expiredBanner),
+	expiredTicket = false;
 
 
 function layout() {
@@ -69,9 +71,9 @@ function layout() {
 	// Check if ticket has expired
 	if(ticket.expired) {
 		wrapper.add(cover);
-		var expiredBanner = Titanium.UI.createView(styles.expiredBanner);
-
 		self.add(expiredBanner);
+
+		expiredTicket = true;
 	}
 
 
@@ -119,6 +121,15 @@ shareBtn.addEventListener('click', function() {
 	//social.postToWall(null);
 	Ti.App.fireEvent('fb:postSuccess');
 
+});
+
+self.addEventListener('close', function() {
+	if(expiredTicket) {
+		wrapper.remove(cover);
+		self.remove(expiredBanner);
+
+		expiredTicket = false;
+	}
 });
 
 Ti.App.addEventListener('fb:postSuccess', function() {
