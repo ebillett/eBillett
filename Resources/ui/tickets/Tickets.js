@@ -3,6 +3,7 @@ var general = require('ui/styles/general'),
 	u = require('plugins/utils'),
 	net = require('services/network'),
 	db = require('services/db'),
+	Purchase = require('models/Purchase'),
 	user,
 	checkedForNew = false;
 	self = Titanium.UI.createWindow(general.defaultWindow),
@@ -34,20 +35,6 @@ var layout = function() {
 
 };
 
-//DEBUG
-var test = Titanium.UI.createButton({title: 'test'});
-self.setRightNavButton(test);
-test.addEventListener('click', function() {
-	var eb_id = 'eb66754945';
-	u.generateQrCode(eb_id, function(result) {
-		if(result) {
-			debug('saved code');
-		} else {
-			debug('did not save, should be marked, so that it can be saved later');
-		}
-	});
-});
-
 exports.load = function() {
 	layout();
 
@@ -59,8 +46,6 @@ exports.load = function() {
 		user = false;
 	}
 
-	getPurchases();
-
 	return self;
 };
 
@@ -68,6 +53,8 @@ exports.load = function() {
 
 function getPurchases() {
 	table.setData([]);
+
+	var data = [];
 
 	db.getPurchases(function(purchases) {
 		if(purchases.length !== 0) {
@@ -78,7 +65,8 @@ function getPurchases() {
 				var row = Titanium.UI.createTableViewRow(styles.row);
 				row.title = purchase.title;
 				row.obj = purchase;
-				table.appendRow(row);
+				//table.appendRow(row);
+				data.push(row);
 
 			});
 
@@ -86,8 +74,11 @@ function getPurchases() {
 			// No stored tickets
 			var row = Titanium.UI.createTableViewRow({title: 'Ingen billetter.'});
 			table.appendRow(row);
+			//tix.push(row);
 
 		}
+
+		table.setData(data, {animated: true});
 
 	});
 
@@ -99,10 +90,11 @@ function checkNewPurchases() {
 
 	var localPurchases = [];
 	db.getPurchases(function(purchases) {
-
-		_.each(purchases, function(purchase) {
-			localPurchases.push(purchase.receipt_id);
-		});
+		if(purchases) {
+			_.each(purchases, function(purchase) {
+				localPurchases.push(purchase.receipt_id);
+			});
+		}
 
 	});
 
@@ -117,8 +109,29 @@ function checkNewPurchases() {
 					
 			} else if(responseData.purchases.length !== 0) {
 
-				debug('got new tickets online: ')
-				debug(JSON.stringify(responseData));
+				debug('got new tickets online: ' + responseData.purchases.length);
+				
+				_.each(responseData.purchases, function(purchase) {
+
+					db.savePurchase(purchase, user.profil_id, function() {
+							
+						_.each(purchase.tickets, function(ticket) {
+							db.saveTicket(ticket, purchase.receipt_id);
+						});
+
+					});
+
+					u.generateQrCode(purchase.utref, function(result) {
+						if(result) {
+							debug('saved code');
+						} else {
+							debug('did not save, should be marked, so that it can be saved later');
+						}
+					});
+
+				});
+
+				getPurchases();
 
 			} else if(responseData.purchases.length === 0) {
 
@@ -141,6 +154,8 @@ function checkNewPurchases() {
 
 	});
 
+	
+
 }
 
 
@@ -149,9 +164,15 @@ self.addEventListener('focus', function() {
 		checkNewPurchases();
 		checkedForNew = true;
 	}
+
+	
+	//getPurchases();
 });
 
 refreshBtn.addEventListener('click', function() {
+
+	checkNewPurchases();
+	//table.setData([], {animated:true})
 
 	refreshBtn.opacity = 0.5;
 	

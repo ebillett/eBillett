@@ -161,7 +161,7 @@ continueButton.addEventListener('click', function() {
 
 	if(totalAmt > 0) {
 		// Start building URL
-		var url = 'http://dx.no/sp/?mai=' + user.epost + '&userid=' + user.profil_id + '&sms=0&pid=' + place.pid + '&arr=' + show.id + '&ant=';
+		var url = 'http://dx.no/sp/?mai=' + user.epost + '&uid=' + user.profil_id + '&sms=0&pid=' + place.pid + '&arr=' + show.id + '&ant=';
 
 		// Loop through ticket categories and collect totals
 		var cats = table.data[0].rows,

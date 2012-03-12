@@ -1,18 +1,16 @@
 exports.get = function(userid, localPurchases, callback) {
 	var url = 'https://ma01.dx.no/dx_tickets.php';
 
-	var storedTickets;
+	var storedTickets = '';
 
-	if(localPurchases) {
+	if(localPurchases.length > 0) {
 
 		_.each(localPurchases, function(obj) {
-			storedTickets = obj + ',';
+			storedTickets = storedTickets + obj + ',';
 		});
 
 		storedTickets = storedTickets.substring(0, storedTickets.length-1);
 
-		//debug
-		//storedTickets = storedTickets + ',6675494';
 		debug('stored tickets: ' + storedTickets);
 	}
 
