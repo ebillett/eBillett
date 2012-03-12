@@ -33,8 +33,7 @@ function Purchase(o) {
 	}
 
 	this.fullDate = Date.parse(this.fdato + ' ' + this.fkl);
-	//this.expired = this.isExpired(this.fullDate);
-	this.expired = true;
+	this.expired = this.isExpired(this.fullDate);
 
 };
 

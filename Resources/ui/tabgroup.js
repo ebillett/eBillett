@@ -5,7 +5,8 @@ var general = require('ui/styles/general'),
 	disable = Titanium.UI.createView(styles.disable),
 	loginAlert = Titanium.UI.createAlertDialog(styles.loginAlert),
 	BuyWin = require('ui/buy/Start').load(),
-	TicketsWin = require('ui/tickets/Tickets').load(),
+	//TicketsWin = require('ui/tickets/Tickets').load(),
+	TicketsWin = Titanium.UI.createWindow(),
 	ProfileWin = require('ui/profile/Profile').load();
 	
 
