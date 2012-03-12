@@ -12,7 +12,8 @@ exports.get = function(userid, localPurchases, callback) {
 		storedTickets = storedTickets.substring(0, storedTickets.length-1);
 
 		//debug
-		storedTickets = storedTickets + ',6675494';
+		//storedTickets = storedTickets + ',6675494';
+		debug('stored tickets: ' + storedTickets);
 	}
 
 	debug('tickets.get: ' + url);

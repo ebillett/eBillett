@@ -111,7 +111,7 @@ function createTicketRows() {
 		});
 
 		subBtn.addEventListener('click', function() {
-			if(ticketCount != 0) {
+			if(ticketCount !== 0) {
 
 				// Update category count label
 				ticketCount--;
@@ -158,31 +158,37 @@ function updateTotal(op, price) {
 
 
 continueButton.addEventListener('click', function() {
-	// Start building URL
-	var url = 'http://dx.no/sp/?mai=' + user.epost + '&userid=' + user.profil_id + '&sms=0&pid=' + place.pid + '&arr=' + show.id + '&ant=';
 
-	// Loop through ticket categories and collect totals
-	var cats = table.data[0].rows,
-		selectedTickets = [];
+	if(totalAmt > 0) {
+		// Start building URL
+		var url = 'http://dx.no/sp/?mai=' + user.epost + '&userid=' + user.profil_id + '&sms=0&pid=' + place.pid + '&arr=' + show.id + '&ant=';
 
-	_.each(cats, function(cat) {
+		// Loop through ticket categories and collect totals
+		var cats = table.data[0].rows,
+			selectedTickets = [];
 
-		var o = cat.i;
+		_.each(cats, function(cat) {
 
-		if(o.count !== 0 || !o.count) {
-			selectedTickets.push(o);
-			url = url + o.id + ':'+ o.count + ',';
-		}
+			var o = cat.i;
 
-	});
+			if(o.count > 0) {
+				selectedTickets.push(o);
+				url = url + o.id + ':'+ o.count + ',';
+			}
 
-	// Remove last comma from ticket-list
-	url = url.substring(0, url.length-1);
+		});
 
-	debug(url);
+		// Remove last comma from ticket-list
+		url = url.substring(0, url.length-1);
 
-	var win = require('ui/buy/BuyWebView').load(url);
-	require('ui/Tabgroup').tabs.buy.open(win);
+		debug(url);
+
+		var win = require('ui/buy/BuyWebView').load(url);
+		require('ui/Tabgroup').tabs.buy.open(win);
+
+	} else {
+		alert('Ingen billetter valgt');
+	}
 
 });
 

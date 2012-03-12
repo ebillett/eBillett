@@ -1,28 +1,56 @@
 var general = require('ui/styles/general'),
 	//styles = require('ui/styles/buy/ShowCombo'),
 	self = Titanium.UI.createWindow(general.defaultWindow),
-	u = require('plugins/utils');
+	u = require('plugins/utils'),
+	web = Ti.UI.createWebView(),
+	interval;
 
 
 	self.titleControl = general.defaultTitle('Gjennomfør kjøp');
 	self.tabBarHidden = true;
 
 
+function layout(url) {
 
-exports.load = function(url) {
-	var web = Ti.UI.createWebView({
-            url: url
-        });
+	web.url = url;
 
 	self.add(web);
 
-	web.addEventListener('purchaseComplete', function(data) {
-		debug(JSON.stringify(data));
-	})
+};
 
-	Ti.App.addEventListener('purchaseComplete', function(data) {
-		debug('Ti.App.: ' + JSON.stringify(data));
-	})
+
+exports.load = function(url) {
+
+	layout(url);
 
 	return self;
 }
+
+
+web.addEventListener('load', function(data) {
+		
+	interval = setInterval(checkStatus, 333);
+
+});
+
+
+function checkStatus() {
+
+	var success = web.evalJS('document.purchaseCompleted && document.purchaseCompleted.pop();');
+
+	var error = web.evalJS('document.purchaseError && document.purchaseError.pop();');
+
+	if(success) {
+
+		clearInterval(interval);
+
+		alert(JSON.stringify(success));
+
+	} else if(error) {
+		clearInterval(interval);
+
+		alert(JSON.stringify(error));		
+	}
+	
+
+};
