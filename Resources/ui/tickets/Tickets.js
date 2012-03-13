@@ -45,7 +45,7 @@ exports.load = function() {
 		user = false;
 	}
 
-	getPurchases();
+	//getPurchases();
 
 
 	return self;
@@ -63,7 +63,7 @@ function getPurchases() {
 				purchase.getTickets();
 
 				var row = Titanium.UI.createTableViewRow(styles.row);
-				row.title = purchase.title;
+				//row.title = purchase.title;
 				row.obj = purchase;
 				table.appendRow(row);
 
@@ -123,6 +123,8 @@ function checkNewPurchases() {
 
 				newTickets = false;
 
+				getPurchases();
+
 				infoPop('Fant ingen nye kjøp.');
 
 			} else {
@@ -149,6 +151,8 @@ function checkNewPurchases() {
 function savePurchase(purchase) {
 
 	debug('saving purchase: ' + purchase.tittel + ' / ' + purchase.fdato);
+
+	
 
 	db.savePurchase(purchase, user.profil_id, function() {
 
@@ -195,13 +199,7 @@ self.addEventListener('focus', function() {
 
 
 	// Update userinfo in case of user switch
-	user = u.getString('user:info');
-
-	if(user) {
-		user = JSON.parse(user);
-	} else {
-		user = false;
-	}
+	//user = u.getString('user:info');
 
 });
 

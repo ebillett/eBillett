@@ -30,7 +30,7 @@ exports = {
 
 		Titanium.Facebook.dialog("feed", data, function(e) {
     		if(e.success && e.result) {
-        		//alert("Success! New Post ID: " + e.result);
+        		debug("Success! New Post ID: " + e.result);
         		Ti.App.fireEvent('fb:postSuccess');
     		} else {
         		if(e.error) {

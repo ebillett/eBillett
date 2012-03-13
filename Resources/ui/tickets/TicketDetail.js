@@ -118,8 +118,7 @@ qrWrapper.addEventListener('click', function() {
 
 shareBtn.addEventListener('click', function() {
 
-	//social.postToWall(null);
-	Ti.App.fireEvent('fb:postSuccess');
+	social.postToWall(null);
 
 });
 
