@@ -11,7 +11,7 @@ var general = require('ui/styles/general'),
 	tableHeader = Titanium.UI.createView(styles.tableHeader),
 	tableHeaderTitle = Titanium.UI.createLabel(styles.tableHeaderTitle),
 	bottomWrapper = Titanium.UI.createView(styles.bottomWrapper),
-	totalAmt = 0;
+	totalAmt,
 	totalLabel = Titanium.UI.createLabel(styles.totalLabel),
 	continueButton = Titanium.UI.createButton(styles.continueButton);
 
@@ -47,6 +47,8 @@ exports.load = function(mv, sw) {
 	place = JSON.parse(u.getString('place'));
 	movie = mv;
 	show = sw;
+
+	totalAmt = 0;
 
 
 	layout();
@@ -183,7 +185,7 @@ continueButton.addEventListener('click', function() {
 
 		debug(url);
 
-		var win = require('ui/buy/BuyWebView').load(url);
+		var win = require('ui/buy/BuyWebView').load(url, self);
 		require('ui/Tabgroup').tabs.buy.open(win);
 
 	} else {
@@ -194,5 +196,5 @@ continueButton.addEventListener('click', function() {
 
 self.addEventListener('focus', function() {
 	// Reset total amount
-	totalAmt = 0;
+	//totalAmt = 0;
 });

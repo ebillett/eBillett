@@ -19,7 +19,9 @@ function layout(url) {
 };
 
 
-exports.load = function(url) {
+exports.load = function(url, prevWin) {
+
+	//prevWin.close();
 
 	layout(url);
 
