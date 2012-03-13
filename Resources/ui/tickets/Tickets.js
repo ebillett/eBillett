@@ -119,6 +119,7 @@ function checkNewPurchases() {
 
 				debug('got new tickets online: ')
 				debug(JSON.stringify(responseData));
+				alert(JSON.stringify(responseData));
 
 			} else if(responseData.purchases.length === 0) {
 

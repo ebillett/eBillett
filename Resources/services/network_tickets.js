@@ -6,7 +6,7 @@ exports.get = function(userid, localPurchases, callback) {
 	if(localPurchases) {
 
 		_.each(localPurchases, function(obj) {
-			storedTickets = obj + ',';
+			storedTickets = storedTickets + obj + ',';
 		});
 
 		storedTickets = storedTickets.substring(0, storedTickets.length-1);
@@ -38,7 +38,7 @@ exports.get = function(userid, localPurchases, callback) {
 						}
 				
 				} else if(this.status === 500) {
-					debug("tickets.get, server error " + this.status);
+					debug("tickets.get, server er ror " + this.status);
 					if(callback) {
 						callback(null);
 					}

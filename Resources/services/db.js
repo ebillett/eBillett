@@ -7,7 +7,7 @@ var Place = require('models/Place'),
 exports.bootstrap = function() {
     var db = Ti.Database.open('eBillett');
     db.execute('CREATE TABLE IF NOT EXISTS places (id INTEGER PRIMARY KEY, name VARCHAR(16) NOT NULL, pid INTEGER NOT NULL, type VARCHAR(16) NOT NULL, hasmobile INTEGER NOT NULL)');
-    db.execute('CREATE TABLE IF NOT EXISTS purchases (id INTEGER PRIMARY KEY, title VARCHAR(100) NOT NULL, place VARCHAR(100) NOT NULL, pid INTEGER NOT NULL, receipt_id INTEGER NOT NULL, utref VARCHAR(100) NOT NULL, fdato VARCHAR(100) NOT NULL, fkl VARCHAR(100) NOT NULL, dato VARCHAR(100) NOT NULL, kl VARCHAR(100) NOT NULL, showroom VARCHAR(100) NOT NULL)');
+    db.execute('CREATE TABLE IF NOT EXISTS purchases (id INTEGER PRIMARY KEY,  user INTEGER NOT NULL, title VARCHAR(100) NOT NULL, place VARCHAR(100) NOT NULL, pid INTEGER NOT NULL, receipt_id INTEGER NOT NULL, utref VARCHAR(100) NOT NULL, fdato VARCHAR(100) NOT NULL, fkl VARCHAR(100) NOT NULL, dato VARCHAR(100) NOT NULL, kl VARCHAR(100) NOT NULL, showroom VARCHAR(100) NOT NULL)');
     db.execute('CREATE TABLE IF NOT EXISTS tickets (id INTEGER PRIMARY KEY, belongs_to INTEGER NOT NULL, category VARCHAR(100) NOT NULL, price VARCHAR(100) NOT NULL, seat_f VARCHAR(100) NOT NULL, seat INTEGER NOT NULL, row INTEGER NOT NULL)');
     
     // Debug – for device testing ticket views
