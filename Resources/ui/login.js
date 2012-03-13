@@ -78,20 +78,60 @@ loginBtn.addEventListener('click', function() {
 
 				if(responseData) {
 
-					if(responseData.result.status == 'NOK') {
+					if(responseData.status == 'NOK') {
 						// Error
 						alert(responseData.result.message);	
 
 					} else {
 						// Registered
-						debug(JSON.stringify(responseData));
+						debug('User registered with profile id: ' + responseData.profil_id);
+
+
+						net.user.login(user, function(responseData) {
+				
+							if(responseData) {
+								
+								if(responseData.result.status == 'NOK') {
+									// Error
+									alert(responseData.result.message);	
+								
+								} else {
+									// Verified
+									debug(JSON.stringify(responseData));
+
+									var user = responseData.profil;
+									app.user.login(user);
+
+									Ti.App.fireEvent('loginwin.close', {loggedIn: true});
+									u.setBool('purchaseMode', true);
+									
+									self.close();
+
+								}
+
+
+								u.fadeout(loader, function() {
+									self.remove(loader);
+					});
+
+
+				} else {
+
+					alert('En feil har oppstått. Prøv igjen.');
+					u.fadeout(loader, function() {
+						self.remove(loader);
+					});
+
+				}
+
+			});
 
 
 					}
 
-					u.fadeout(loader, function() {
-						self.remove(loader);
-					});
+					// u.fadeout(loader, function() {
+					// 	self.remove(loader);
+					// });
 
 				} else {
 

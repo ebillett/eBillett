@@ -22,10 +22,11 @@ exports.register = function(user, callback) {
 
 		xhr.onload = function()
 			{
+
 				if(this.status === 200) {
 					
 					var returnData = JSON.parse(this.responseText);
-						
+
 						if(callback) {
 							callback(returnData);
 						}
