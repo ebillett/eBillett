@@ -12,6 +12,7 @@ var general = require('ui/styles/general'),
 	easyWrapper = Titanium.UI.createView(styles.easyWrapper),
 	easyLabel = Titanium.UI.createLabel(styles.easyLabel),
 	didLoadInfo = false,
+	changedUser = false,
 	//fbBtn = Ti.Facebook.BUTTON_STYLE_WIDE,
 	logoutBtn = Titanium.UI.createButton(styles.logoutBtn);
 
@@ -149,4 +150,14 @@ self.addEventListener('focus', function() {
 		getUserInfo();
 		didLoadInfo = true;
 	}
+
+	if(changedUser) {
+		getUserInfo();
+		changedUser = false;
+	}
+});
+
+Ti.App.addEventListener('loginwin.close', function() {
+	changedUser = true;
+	debug('changed user: ' + changedUser);
 });

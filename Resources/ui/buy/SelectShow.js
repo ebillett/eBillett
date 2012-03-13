@@ -97,13 +97,28 @@ function getShows(movie, place) {
 
 					var row = Titanium.UI.createTableViewRow(styles.row);
 					row.obj = obj;
-					row.backgroundColor = '#ff0000';
+					//row.backgroundColor = '#ff0000';
 
-					var title = Titanium.UI.createLabel(styles.rowTitle);
-					title.text = obj.date;
-					//title.text = date.toString('dddd dd MMMM');
+					var date = Date.parse(obj.date);
 
-					row.add(title);
+					var sDate = Titanium.UI.createLabel(styles.rowTitle);
+					sDate.text = date.toString('ddd dd. MMMM');
+					sDate.color = '#666';
+					row.add(sDate);
+
+					var sTime = Titanium.UI.createLabel(styles.rowTitle);
+					sTime.text = obj.showtime.substr(0,5);
+					sTime.left = 130;
+					row.add(sTime);
+
+					var sRoom = Titanium.UI.createLabel(styles.rowInfo);
+					sRoom.text = obj.room;
+					row.add(sRoom);
+
+					var sDone = Titanium.UI.createLabel(styles.rowInfo2);
+					sDone.text = 'Ferdig ca. ' + obj.showend.substr(0,5);
+					row.add(sDone);
+
 
 					tableData.push(row);
 					

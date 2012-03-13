@@ -1,11 +1,11 @@
 exports = {
 
 	table: {
-		top: 156,
+		top: 126,
 		backgroundColor: 'transparent'
 	},
 	tableHeader: {
-		top: 130,
+		top: 100,
 		height: 26,
 		backgroundColor: '#222'
 	},
@@ -24,7 +24,7 @@ exports = {
 	},
 	infoWrapper: {
 		backgroundColor: 'transparent',
-		height: 130,
+		height: 100,
 		top: 0
 	},
 	poster: {
@@ -90,29 +90,72 @@ exports = {
 		right: 110
 	},
 	bottomWrapper: {
-		height: 60,
+		height: 80,
 		bottom: 0,
-		backgroundColor: '#eee'
+		backgroundColor: '#2a2a2a'
 	},
 	totalLabel: {
-		color: '#222',
+		color: '#eee',
 		font: {
 			fontSize: 32,
 			fontWeight: 'bold'
 		},
-		shadowColor: '#fff',
+		shadowColor: '#000',
 		shadowOffset: {x: 0, y: 1},
 		width: 'auto',
 		height: 'auto',
-		left: 60,
-		bottom: 30
+		left: 15,
+		top: 23
 	},
-	continueButton: {
-		title: 'Fortsett',
-		right: 10,
-		bottom: 20,
-		height: 40,
-		width: 60
+	totalInfo: {
+		text: 'Totalt: ',
+		color: '#ddd',
+		font: {
+			fontSize: 14,
+			fontWeight: 'normal'
+		},
+		shadowColor: '#000',
+		shadowOffset: {x: 0, y: 1},
+		width: 'auto',
+		height: 'auto',
+		left: 10,
+		top: 8
+	},
+	totalPolicy: {
+		text: 'Eks. formidlingsgebyr. ',
+		color: '#777',
+		font: {
+			fontSize: 11,
+			fontWeight: 'normal',
+			fontStyle: 'italic'
+		},
+		shadowColor: '#000',
+		shadowOffset: {x: 0, y: 1},
+		width: 'auto',
+		height: 'auto',
+		left: 10,
+		bottom: 6
+	},
+	continueBtn: {
+		width: 120,
+		height: 50,
+		right: 15,
+		top: 15,
+		backgroundImage: 'images/common/button-green.png',
+		backgroundSelectedImage: 'images/common/button-green-pressed.png'
+	},
+	continueBtnLabel: {
+		height: 'auto',
+		width: 'auto',
+		text: 'FORTSETT',
+		color: '#eee',
+		touchEnabled: false,
+		font: {
+			fontWeight: 'bold',
+			fontSize: 16
+		},
+		shadowColor: '#516a12',
+		shadowOffset: {x: 0, y:-1}
 	}
 
 

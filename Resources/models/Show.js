@@ -7,6 +7,7 @@ function Show(obj) {
 	this.room = obj.showroom;
 	this.id = obj.showid;
 
+
 	this.tickets = obj.tickets;
 
 	this.getDate = function() {

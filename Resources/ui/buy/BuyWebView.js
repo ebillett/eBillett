@@ -2,7 +2,10 @@ var general = require('ui/styles/general'),
 	//styles = require('ui/styles/buy/ShowCombo'),
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	u = require('plugins/utils'),
-	web = Ti.UI.createWebView(),
+	toLoad = '',
+	web = Ti.UI.createWebView({
+
+	}),
 	interval;
 
 
@@ -10,11 +13,11 @@ var general = require('ui/styles/general'),
 	self.tabBarHidden = true;
 
 
-function layout(url) {
+function layout(toLoad) {
 
-	web.url = url;
+	web.url = toLoad;
 
-	self.add(web);
+	
 
 };
 
@@ -23,7 +26,9 @@ exports.load = function(url, prevWin) {
 
 	//prevWin.close();
 
-	layout(url);
+	toLoad = url;
+
+	layout(toLoad);
 
 	return self;
 }
@@ -56,3 +61,12 @@ function checkStatus() {
 	
 
 };
+
+self.addEventListener('focus', function() {
+	self.add(web);
+});
+
+self.addEventListener('blur', function() {
+	web.url = 'index.html';
+	self.remove(web);
+});

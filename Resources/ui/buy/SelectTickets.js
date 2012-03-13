@@ -11,9 +11,12 @@ var general = require('ui/styles/general'),
 	tableHeader = Titanium.UI.createView(styles.tableHeader),
 	tableHeaderTitle = Titanium.UI.createLabel(styles.tableHeaderTitle),
 	bottomWrapper = Titanium.UI.createView(styles.bottomWrapper),
+	totalInfo = Titanium.UI.createLabel(styles.totalInfo),
 	totalAmt,
 	totalLabel = Titanium.UI.createLabel(styles.totalLabel),
-	continueButton = Titanium.UI.createButton(styles.continueButton);
+	totalPolicy = Titanium.UI.createLabel(styles.totalPolicy),
+	continueBtn = Titanium.UI.createButton(styles.continueBtn),
+	continueBtnLabel = Titanium.UI.createLabel(styles.continueBtnLabel);
 
 	self.titleControl = general.defaultTitle('Velg antall');
 	self.tabBarHidden = true;
@@ -28,13 +31,20 @@ function layout() {
 	tableHeader.add(tableHeaderTitle);
 	self.add(tableHeader);
 
-	self.add(general.shadowTop(0));
+	//self.add(general.shadowTop(0));
 
 	self.add(table);
 
-	totalLabel.text = null;
+	bottomWrapper.add(totalInfo);
+
+	totalLabel.text = '0,-';
 	bottomWrapper.add(totalLabel);
-	bottomWrapper.add(continueButton);
+
+	bottomWrapper.add(totalPolicy);
+
+	continueBtn.add(continueBtnLabel);
+	bottomWrapper.add(continueBtn);
+	
 	self.add(bottomWrapper);
 
 	createTicketRows();
@@ -148,7 +158,7 @@ function updateTotal(op, price) {
 		// Subtract
 		totalAmt = totalAmt - price*1;
 		if(totalAmt === 0) {
-			totalLabel.text = null;
+			totalLabel.text = '0,-';
 			return;	
 		}
 
@@ -159,11 +169,11 @@ function updateTotal(op, price) {
 }
 
 
-continueButton.addEventListener('click', function() {
+continueBtn.addEventListener('click', function() {
 
 	if(totalAmt > 0) {
 		// Start building URL
-		var url = 'http://dx.no/sp/?mai=' + user.epost + '&userid=' + user.profil_id + '&sms=0&pid=' + place.pid + '&arr=' + show.id + '&ant=';
+		var url = 'http://dx.no/sp/?mai=' + user.epost + '&uid=' + user.profil_id + '&sms=0&pid=' + place.pid + '&arr=' + show.id + '&ant=';
 
 		// Loop through ticket categories and collect totals
 		var cats = table.data[0].rows,

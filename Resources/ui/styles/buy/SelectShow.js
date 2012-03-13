@@ -37,8 +37,35 @@ exports = {
 		touchEnabled: false,
 		color: '#444',
 		font: {
-			fontSize: 14,
+			fontSize: 15,
 			fontWeight: 'bold'
+		},
+		shadowColor: '#fff',
+		shadowOffset: {x: 0, y:1}
+	},
+	rowInfo: {
+		height: 'auto',
+		left: 20,
+		top: 35,
+		touchEnabled: false,
+		color: '#888',
+		font: {
+			fontSize: 12,
+			fontWeight: 'normal'
+		},
+		shadowColor: '#fff',
+		shadowOffset: {x: 0, y:1}
+	},
+	rowInfo2: {
+		height: 'auto',
+		left: 130,
+		top: 35,
+		touchEnabled: false,
+		color: '#888',
+		font: {
+			fontSize: 12,
+			fontWeight: 'normal',
+			fontStyle: 'italic'
 		},
 		shadowColor: '#fff',
 		shadowOffset: {x: 0, y:1}

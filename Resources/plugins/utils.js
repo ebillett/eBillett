@@ -27,7 +27,7 @@ exports.logOut = function() {
 
 exports.loading = function(top, txt) {
 	if(!top) {
-		var top = 200;
+		var top = 100;
 	}
 
 	if(!txt) {
@@ -68,7 +68,7 @@ exports.loading = function(top, txt) {
       	style:Ti.UI.iPhone.ActivityIndicatorStyle.BIG,
       	height:30,
       	width:30,
-      	top: 100
+      	top: top
     });
      
     instance.add(actInd);
