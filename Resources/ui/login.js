@@ -75,55 +75,16 @@ loginBtn.addEventListener('click', function() {
 			self.add(loader);
 
 			net.user.register(user, function(responseData) {
-				
+
 				if(responseData) {
-					
+
 					if(responseData.result.status == 'NOK') {
 						// Error
 						alert(responseData.result.message);	
-					
+
 					} else {
 						// Registered
-						//debug(JSON.stringify(responseData));
-
-						//Log in
-						net.user.login(user, function(responseData) {
-
-							if(responseData) {
-
-								if(responseData.result.status == 'NOK') {
-									// Error
-									alert(responseData.result.message);	
-
-								} else {
-									// Verified
-									debug(JSON.stringify(responseData));
-
-									var user = responseData.profil;
-									app.user.login(user);
-
-									Ti.App.fireEvent('loginwin.close', {loggedIn: true});
-									u.setBool('purchaseMode', true);
-
-									self.close();
-
-								}
-
-
-								u.fadeout(loader, function() {
-									self.remove(loader);
-								});
-
-
-				} else {
-
-					alert('En feil har oppstått. Prøv igjen.');
-					u.fadeout(loader, function() {
-						self.remove(loader);
-					});
-
-				}
-
+						debug(JSON.stringify(responseData));
 
 
 					}

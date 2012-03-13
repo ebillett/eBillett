@@ -59,7 +59,6 @@ exports.load = function() {
 		user = false;
 	}
 
-	getPurchases();
 
 	return self;
 };
