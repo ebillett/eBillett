@@ -222,7 +222,14 @@ self.addEventListener('focus', function() {
 
 	if(!checkedForNew || changedUser) {
 		checkNewPurchases();
-		checkedForNew = true;
+
+		if(!checkedForNew) {
+			checkedForNew = true;
+		}
+
+		if(changedUser) {
+			changedUser = false;
+		}
 	}
 
 	// Update userinfo in case of user switch
@@ -262,4 +269,4 @@ Ti.App.addEventListener('tickets:new', function() {
 Ti.App.addEventListener('loginwin.close', function() {
 	changedUser = true;
 	debug('changed user: ' + changedUser);
-})
+});

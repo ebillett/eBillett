@@ -146,4 +146,8 @@ Ti.App.addEventListener('fb:postSuccess', function() {
 		})
 	}, 2000);
 
-})
+});
+
+Ti.App.addEventListener('loginwin.close', function() {
+	self.close();
+});
