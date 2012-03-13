@@ -162,3 +162,23 @@ exports.getTickets = function(receipt_id) {
 	return data;
 
 }
+
+exports.savePurchase = function(obj, userid, callback) {
+
+	var db = Ti.Database.open('eBillett');
+	db.execute('INSERT INTO purchases (user, title, place, pid, receipt_id, utref, fdato, fkl, dato, kl, showroom) VALUES (?,?,?,?,?,?,?,?,?,?,?)', userid, obj.tittel, obj.sted, obj.partner_id, obj.receipt_id, obj.utref, obj.fdato, obj.fkl, obj.dato, obj.kl, obj.sted);
+
+	db.close();
+
+	callback();
+
+}
+
+exports.saveTicket = function(obj, belongs_to) {
+
+	var db = Ti.Database.open('eBillett');
+	db.execute('INSERT INTO tickets (belongs_to, category, price, seat_f, seat, row) VALUES(?,?,?,?,?,?)', belongs_to, obj.kategori, obj.pris, obj.plassering, obj.sete, obj.rad);
+
+	db.close();
+
+}

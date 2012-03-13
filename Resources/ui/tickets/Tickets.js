@@ -85,6 +85,7 @@ function checkNewPurchases() {
 	debug('check new purchases');
 
 	var localPurchases = [];
+	var newTickets = false;
 	db.getPurchases(user.profil_id, function(purchases) {
 
 		_.each(purchases, function(purchase) {
@@ -112,13 +113,17 @@ function checkNewPurchases() {
 					savePurchase(purchase);
 				});
 
-				Ti.App.fireEvent('tickets:new');
+				newTickets = true;
 
 				infoPop('Fant ' + responseData.purchases.length + ' nye kjøp.');
 
 			} else if(responseData.purchases.length === 0) {
 
 				debug('no new tickets');
+
+				newTickets = false;
+
+				infoPop('Fant ingen nye kjøp.');
 
 			} else {
 
@@ -127,7 +132,9 @@ function checkNewPurchases() {
 
 			}
 
-
+			if(newTickets) {
+				Ti.App.fireEvent('tickets:new');
+			}
 
 		} else {
 
@@ -141,7 +148,26 @@ function checkNewPurchases() {
 
 function savePurchase(purchase) {
 
-	debug('fake-saving ' + purchase.tittel);
+	debug('saving purchase: ' + purchase.tittel + ' / ' + purchase.fdato);
+
+	db.savePurchase(purchase, user.profil_id, function() {
+
+		_.each(purchase.tickets, function(ticket) {
+
+			debug('saving ticket');
+
+			db.saveTicket(ticket, purchase.receipt_id);
+		});
+
+		u.generateQrCode(purchase.utref, function(result) {
+			if(result) {
+				debug('saved code');
+			} else {
+				debug('did not save, should be marked, so that it can be saved later');
+			}
+		});
+
+	});
 
 }
 
