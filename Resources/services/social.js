@@ -1,3 +1,5 @@
+var FACEBOOK_LANDING = 'http://erlend.ebillett.test.dx.no/index.php?page=facebook&utref=';
+
 exports = {
 
 	bootstrap: function() {

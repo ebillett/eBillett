@@ -4,7 +4,7 @@ var general = require('ui/styles/general'),
 	net = require('services/network'),
 	db = require('services/db'),
 	user,
-	checkedForNew = false;
+	checkedForNew = false,
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	wrapper = Titanium.UI.createView(general.wrapper),
 	refreshBtn = Titanium.UI.createButton({
@@ -44,6 +44,8 @@ exports.load = function() {
 	} else {
 		user = false;
 	}
+
+	getPurchases();
 
 
 	return self;
@@ -104,14 +106,19 @@ function checkNewPurchases() {
 
 				debug('got new tickets online: ')
 				debug(JSON.stringify(responseData));
-				alert(JSON.stringify(responseData.purchases.length));
+
+				// Save purchases and tickets
+				_.each(responseData.purchases, function(purchase) {
+					savePurchase(purchase);
+				});
+
+				Ti.App.fireEvent('tickets:new');
+
+				infoPop('Fant ' + responseData.purchases.length + ' nye kjøp.');
 
 			} else if(responseData.purchases.length === 0) {
 
 				debug('no new tickets');
-				alert('no new tickets');
-
-				getPurchases();
 
 			} else {
 
@@ -132,15 +139,49 @@ function checkNewPurchases() {
 
 }
 
+function savePurchase(purchase) {
+
+	debug('fake-saving ' + purchase.tittel);
+
+}
+
+function infoPop(txt) {
+	var popup = u.infoPop(txt);
+
+	self.add(popup);
+
+	setTimeout(function() {
+		popup.animate({
+			duration: 500,
+			opacity: 0
+		}, function() {
+			self.remove(popup);
+		})
+	}, 2000);
+};
+
 
 self.addEventListener('focus', function() {
 	if(!checkedForNew) {
 		checkNewPurchases();
 		checkedForNew = true;
 	}
+
+
+	// Update userinfo in case of user switch
+	user = u.getString('user:info');
+
+	if(user) {
+		user = JSON.parse(user);
+	} else {
+		user = false;
+	}
+
 });
 
 refreshBtn.addEventListener('click', function() {
+
+	checkNewPurchases();
 
 	refreshBtn.opacity = 0.5;
 	
@@ -150,7 +191,7 @@ refreshBtn.addEventListener('click', function() {
 	refreshBtn.animate({
 		transform: t,
 		duration: 500,
-		repeat: 100,
+		repeat: 2,
 		//curve: Ti.UI.iOS.ANIMATION_CURVE_EASE_IN_OUT
 	});
 
@@ -162,3 +203,7 @@ table.addEventListener('click', function(e) {
 	require('ui/Tabgroup').tabs.tickets.open(win);
 
 });
+
+Ti.App.addEventListener('tickets:new', function() {
+	getPurchases();
+})

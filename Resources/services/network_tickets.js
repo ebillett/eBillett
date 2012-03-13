@@ -3,7 +3,7 @@ exports.get = function(userid, localPurchases, callback) {
 
 	var storedTickets = null;
 
-	if(localPurchases) {
+	if(localPurchases.length > 0) {
 
 		_.each(localPurchases, function(obj) {
 			storedTickets = storedTickets + obj + ',';
