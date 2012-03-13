@@ -1,7 +1,7 @@
 exports.get = function(userid, localPurchases, callback) {
 	var url = 'https://ma01.dx.no/dx_tickets.php';
 
-	var storedTickets;
+	var storedTickets = null;
 
 	if(localPurchases) {
 

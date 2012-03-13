@@ -77,13 +77,13 @@ exports.deletePlace = function(place) {
 	db.close();
 };
 
-exports.getPurchases = function(callback) {
+exports.getPurchases = function(userid, callback) {
 	
-	debug('get purchases');
+	debug('get purchases for: ' + userid);
 
 	var db = Ti.Database.open('eBillett');
 	
-	var result = db.execute('SELECT * FROM purchases');
+	var result = db.execute('SELECT * FROM purchases WHERE user = ?', userid);
 	
 	var data = [];
 	
@@ -113,6 +113,8 @@ exports.getPurchases = function(callback) {
 
 	result.close();
 	db.close();
+
+	debug('found locally stored purchases: ' + data.length);
 
 	if(callback) {
 		callback(data);

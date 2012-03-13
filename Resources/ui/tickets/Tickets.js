@@ -34,20 +34,6 @@ var layout = function() {
 
 };
 
-//DEBUG
-var test = Titanium.UI.createButton({title: 'test'});
-self.setRightNavButton(test);
-test.addEventListener('click', function() {
-	var eb_id = 'eb66754945';
-	u.generateQrCode(eb_id, function(result) {
-		if(result) {
-			debug('saved code');
-		} else {
-			debug('did not save, should be marked, so that it can be saved later');
-		}
-	});
-});
-
 exports.load = function() {
 	layout();
 
@@ -68,7 +54,7 @@ exports.load = function() {
 function getPurchases() {
 	table.setData([]);
 
-	db.getPurchases(function(purchases) {
+	db.getPurchases(user.profil_id, function(purchases) {
 		if(purchases.length !== 0) {
 			
 			_.each(purchases, function(purchase) {
@@ -97,7 +83,7 @@ function checkNewPurchases() {
 	debug('check new purchases');
 
 	var localPurchases = [];
-	db.getPurchases(function(purchases) {
+	db.getPurchases(user.profil_id, function(purchases) {
 
 		_.each(purchases, function(purchase) {
 			localPurchases.push(purchase.receipt_id);
@@ -118,11 +104,14 @@ function checkNewPurchases() {
 
 				debug('got new tickets online: ')
 				debug(JSON.stringify(responseData));
-				alert(JSON.stringify(responseData));
+				alert(JSON.stringify(responseData.purchases.length));
 
 			} else if(responseData.purchases.length === 0) {
 
 				debug('no new tickets');
+				alert('no new tickets');
+
+				getPurchases();
 
 			} else {
 
