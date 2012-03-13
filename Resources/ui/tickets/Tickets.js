@@ -5,6 +5,7 @@ var general = require('ui/styles/general'),
 	db = require('services/db'),
 	user,
 	checkedForNew = false,
+	changedUser = false,
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	wrapper = Titanium.UI.createView(general.wrapper),
 	refreshBtn = Titanium.UI.createButton({
@@ -37,13 +38,7 @@ var layout = function() {
 exports.load = function() {
 	layout();
 
-	user = u.getString('user:info');
-
-	if(user) {
-		user = JSON.parse(user);
-	} else {
-		user = false;
-	}
+	debug('changed user: ' + changedUser);
 
 	//getPurchases();
 
@@ -58,9 +53,13 @@ function getPurchases() {
 
 	db.getPurchases(user.profil_id, function(purchases) {
 		if(purchases.length !== 0) {
+
+			var data = [];
 			
 			_.each(purchases, function(purchase) {
-				purchase.getTickets();
+
+				var tickLen = purchase.getTickets();
+				tickLen = tickLen.length;
 
 				var row = Titanium.UI.createTableViewRow(styles.row);
 				//row.title = purchase.title;
@@ -79,10 +78,21 @@ function getPurchases() {
 				tTime.text = purchase.fkl + '   ' + date.toString('ddd dd. MMMM');
 				row.add(tTime);
 
+				if(tickLen == 2) {
+					row.backgroundImage = 'images/tickets/table_ticket2.png';
+				} else if (tickLen > 2) {
+					row.backgroundImage = 'images/tickets/table_ticket3.png';
+				}
+
+
 				row.obj = purchase;
-				table.appendRow(row);
+				//table.appendRow(row);
+
+				data.push(row);
 
 			});
+
+			table.setData(data, {animated: true});
 
 		} else {
 			// No stored tickets
@@ -207,11 +217,13 @@ function infoPop(txt) {
 
 
 self.addEventListener('focus', function() {
-	if(!checkedForNew) {
+	user = u.getString('user:info');
+	user = JSON.parse(user);
+
+	if(!checkedForNew || changedUser) {
 		checkNewPurchases();
 		checkedForNew = true;
 	}
-
 
 	// Update userinfo in case of user switch
 	//user = u.getString('user:info');
@@ -245,4 +257,9 @@ table.addEventListener('click', function(e) {
 
 Ti.App.addEventListener('tickets:new', function() {
 	getPurchases();
+})
+
+Ti.App.addEventListener('loginwin.close', function() {
+	changedUser = true;
+	debug('changed user: ' + changedUser);
 })

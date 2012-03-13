@@ -26,7 +26,7 @@ var layout = function() {
 	loginWrapper.add(passwordField);
 
 	loginBtn.add(loginBtnLabel);
-	loginWrapper.add(loginBtn);
+	//loginWrapper.add(loginBtn);
 
 	wrapper.add(loginWrapper);
 	
@@ -58,6 +58,10 @@ modeSelect.addEventListener('click', function(e) {
 		debug('register-mode');
 	}
 });
+
+passwordField.addEventListener('return', function() {
+	loginBtn.fireEvent('click');
+})
 
 
 loginBtn.addEventListener('click', function() {
@@ -197,6 +201,8 @@ loginBtn.addEventListener('click', function() {
 	}
 });
 
+
+
 // Throw warning about no purchase-mode
 continueWrapper.addEventListener('click', function() {
 	noLoginAlert.show();
@@ -216,7 +222,7 @@ self.addEventListener('close', function() {
 	loginWrapper.remove(modeSelect);
 	loginWrapper.remove(usernameField);
 	loginWrapper.remove(passwordField);
-	loginWrapper.remove(loginBtn);
+	//loginWrapper.remove(loginBtn);
 
 	wrapper.add(loginWrapper);
 

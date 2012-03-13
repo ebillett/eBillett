@@ -8,7 +8,7 @@ exports = {
 	logo: {
 		width: 101,
 		height: 28,
-		top: 40,
+		top: 20,
 		backgroundImage: 'images/common/logo.png'
 	},
 	loginWrapper: {
@@ -20,11 +20,12 @@ exports = {
 	},
 	modeSelect: {
 		labels:['LOGG INN', 'REGISTRER'],
-    	backgroundColor:'#ddd',
+    	backgroundColor:'#85b629',
     	backgroundSelectedColor: '#98c532',
-    	backgroundImage: 'images/common/button-grey.png',
-    	top:30,
+    	//backgroundImage: 'images/common/button-grey.png',
+    	top:10,
     	style:Titanium.UI.iPhone.SystemButtonStyle.BAR,
+    	//style: 'none',
     	height:50,
     	width:251,
     	index: 0
@@ -60,6 +61,7 @@ exports = {
 		borderColor: '#b5b5b5',
 		clearButtonMode: Ti.UI.INPUT_BUTTONMODE_ONFOCUS,
 		autocapitalization: Ti.UI.TEXT_AUTOCAPITALIZATION_NONE,
+		returnKeyType: Titanium.UI.RETURNKEY_GO,
 		passwordMask: true,
 		autocorrect: false,
 		paddingLeft: 8

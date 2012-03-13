@@ -4,7 +4,7 @@ exports = {
 
 	bootstrap: function() {
 	
-		Ti.Facebook.appid = '412856565398124';
+		Ti.Facebook.appid = '412856565398124@';
 		Ti.Facebook.permissions = ['publish_stream'];
 
 	},

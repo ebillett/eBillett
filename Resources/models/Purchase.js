@@ -16,7 +16,9 @@ function Purchase(o) {
 
 
 	this.getTickets = function() {
-		require('services/db').getTickets(this.receipt_id);
+		var tickets = require('services/db').getTickets(this.receipt_id);
+
+		return tickets;
 	}
 
 	this.isExpired = function(fdate) {

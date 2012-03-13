@@ -6,7 +6,9 @@ exports = {
 	},
 	row: {
 		backgroundImage: 'images/tickets/table_ticket.png',
-		height: 112
+		height: 123,
+		className: 'ticketList',
+		selectionStyle: 'none'
 	},
 	tPlace: {
 		color: '#8d8d8d',
@@ -17,7 +19,7 @@ exports = {
 		shadowOffset: {x: 0, y: 1},
 		width: 'auto',
 		height: 'auto',
-		top: 21,
+		top: 32,
 		left: 55
 	},
 	tTitle: {
@@ -30,7 +32,7 @@ exports = {
 		shadowOffset: {x: 0, y: 1},
 		width: 'auto',
 		height: 'auto',
-		top: 44,
+		top: 55,
 		left: 55
 	},
 	tTime: {
@@ -43,7 +45,7 @@ exports = {
 		shadowOffset: {x: 0, y: 1},
 		width: 'auto',
 		height: 'auto',
-		top: 70,
+		top: 81,
 		left: 55
 	}
 	
