@@ -64,6 +64,21 @@ function getPurchases() {
 
 				var row = Titanium.UI.createTableViewRow(styles.row);
 				//row.title = purchase.title;
+				
+				var tPlace = Titanium.UI.createLabel(styles.tPlace);
+				tPlace.text = purchase.place;
+				row.add(tPlace);
+
+				var tTitle = Titanium.UI.createLabel(styles.tTitle);
+				tTitle.text = purchase.title;
+				row.add(tTitle);
+
+				var date = Date.parse(purchase.fdato);
+
+				var tTime = Titanium.UI.createLabel(styles.tTime);
+				tTime.text = purchase.fkl + '   ' + date.toString('ddd dd. MMMM');
+				row.add(tTime);
+
 				row.obj = purchase;
 				table.appendRow(row);
 
