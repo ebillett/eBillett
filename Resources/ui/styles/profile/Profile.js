@@ -30,18 +30,31 @@ exports = {
 		bottom: 0
 	},
 	row: {
-		height: 42,
+		height: 36,
 		backgroundImage: 'images/buy/table_places.png',
 		layout: 'horizontal'
 	},
 	label: {
 		font: {
-			fontSize: 14,
+			fontSize: 12,
 			fontWeight: 'normal'
 		},
 		color: '#7b7b7e',
 		width: 125,
-		top: 12,
+		top: 9,
+		left: 15,
+		height: 'auto',
+		shadowColor: '#fff',
+		shadowOffset: {x: 0, y: 1}
+	},
+	labelSmall: {
+		font: {
+			fontSize: 12,
+			fontWeight: 'normal'
+		},
+		color: '#7b7b7e',
+		width: 125,
+		top: 9,
 		left: 15,
 		height: 'auto',
 		shadowColor: '#fff',
@@ -49,13 +62,13 @@ exports = {
 	},
 	txt: {
 		font: {
-			fontSize: 14,
+			fontSize: 12,
 			fontWeight: 'normal'
 		},
 		color: '#464646',
 		height: 'auto',
 		width: 'auto',
-		top: 12,
+		top: 9,
 		shadowColor: '#fff',
 		shadowOffset: {x: 0, y: 1}
 	},

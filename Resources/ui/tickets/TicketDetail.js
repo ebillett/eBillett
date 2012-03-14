@@ -116,9 +116,81 @@ qrWrapper.addEventListener('click', function() {
 });
 
 
+var fb = {
+	ui: {
+		cover: Titanium.UI.createView({backgroundColor: '#000', opacity: 0.8}),
+		wrapper: Titanium.UI.createView({backgroundColor: '#f0f0f0', width: 250, height: 150}),
+		fbBtn: Ti.Facebook.createLoginButton({bottom: 50, style : Ti.Facebook.BUTTON_STYLE_WIDE})
+	},
+	loginView: function() {
+		var that = this;
+
+		this.ui.wrapper.add(this.ui.fbBtn);
+
+		self.add(this.ui.cover);
+		self.add(this.ui.wrapper);
+
+		this.ui.cover.addEventListener('click', function() {
+			self.remove(that.ui.cover);
+			self.remove(that.ui.wrapper);
+		});
+
+		Titanium.Facebook.addEventListener('login', function(e) {
+		    if (e.success) {
+		        that.loginSuccess();
+		    } else if (e.error) {
+		        debug(e.error);
+		    } else if (e.cancelled) {
+		        debug("Cancelled");
+		    }
+		});
+	},
+	loginSuccess: function() {
+		var that = this;
+
+		this.ui.wrapper.animate({
+			opacity: 0,
+			duration: 200
+		}, function() {
+			self.remove(that.ui.wrapper);
+		});
+
+		this.ui.cover.animate({
+			opacity: 0,
+			duration: 200
+		}, function() {
+			self.remove(that.ui.cover);
+		});
+
+		social.postToWall(ticket);
+	},
+	cancelLogin: function() {
+		var that = this;
+
+		this.ui.wrapper.animate({
+			opacity: 0,
+			duration: 200
+		}, function() {
+			self.remove(that.ui.wrapper);
+		});
+
+		this.ui.cover.animate({
+			opacity: 0,
+			duration: 200
+		}, function() {
+			self.remove(that.ui.cover);
+		});
+	}
+}
+
+
 shareBtn.addEventListener('click', function() {
 
-	social.postToWall(null);
+	if(social.checkAuth()) {
+		social.postToWall(ticket);
+	} else {
+		fb.loginView();
+	}
 
 });
 

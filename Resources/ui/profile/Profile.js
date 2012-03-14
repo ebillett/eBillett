@@ -28,17 +28,17 @@ var layout = function() {
 	userHeader.top = 1;
 	wrapper.add(userHeader);
 
+	table.height = 300;
 	wrapper.add(table);
 
-	easyHeaderTitle.text = 'Enkel betaling';
-	easyHeader.add(easyHeaderTitle);
-	wrapper.add(easyHeader);
+	// easyHeaderTitle.text = 'Enkel betaling';
+	// easyHeader.add(easyHeaderTitle);
+	// wrapper.add(easyHeader);
 
-	easyWrapper.add(easyLabel);
+	// easyWrapper.add(easyLabel);
 
-	wrapper.add(easyWrapper);
+	// wrapper.add(easyWrapper);
 
-	//wrapper.add(fbBtn);
 
 
 	//self.add(logoutBtn);
@@ -127,6 +127,16 @@ function createUserTable(user) {
 	};
 
 
+	//Facebook row
+	var fbRow = Titanium.UI.createTableViewRow(styles.row),
+		fbLbl = Titanium.UI.createLabel(styles.labelSmall),
+		fbBtn = Ti.Facebook.createLoginButton({style : Ti.Facebook.BUTTON_STYLE_WIDE, top: 2});
+
+	fbLbl.text = 'Facebook';
+
+	fbRow.add(fbLbl);
+	fbRow.add(fbBtn);
+
 	// Add rows
 	var usern = user.fornavn + ' ' + user.etternavn;
 	table.appendRow(createRow('Navn', usern));
@@ -136,6 +146,7 @@ function createUserTable(user) {
 	table.appendRow(createRow('', user.adresse2));
 	table.appendRow(createRow('Postnr', user.postnr));
 	table.appendRow(createRow('Poststed', user.poststed));
+	table.appendRow(fbRow);
 
 }
 
