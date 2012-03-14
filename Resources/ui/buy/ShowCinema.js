@@ -51,6 +51,9 @@ exports.load = function() {
 	place = JSON.parse(u.getString('place'));
 
 	layout();
+
+
+	app.oldWin.push(self);
 	
 	return self;
 };

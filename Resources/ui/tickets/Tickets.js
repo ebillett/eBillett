@@ -109,6 +109,8 @@ function getPurchases() {
 function checkNewPurchases() {
 	debug('check new purchases');
 
+	infoPop.build();
+
 	var localPurchases = [];
 	var newTickets = false;
 	db.getPurchases(user.profil_id, function(purchases) {
@@ -140,7 +142,7 @@ function checkNewPurchases() {
 
 				newTickets = true;
 
-				infoPop('Fant ' + responseData.purchases.length + ' nye kjøp.');
+				infoPop.change('Fant ' + responseData.purchases.length + ' nye kjøp.');
 
 			} else if(responseData.purchases.length === 0) {
 
@@ -150,12 +152,13 @@ function checkNewPurchases() {
 
 				getPurchases();
 
-				infoPop('Fant ingen nye kjøp.');
+				infoPop.change(null);
 
 			} else {
 
 				//error
 				debug('error');
+				infoPop.change('Ikke kontakt med server. Prøv igjen.');
 
 			}
 
@@ -200,20 +203,61 @@ function savePurchase(purchase) {
 
 }
 
-function infoPop(txt) {
-	var popup = u.infoPop(txt);
+var infoPop = {
+	instance: Titanium.UI.createView({
+		backgroundColor: '#000',
+		opacity: 0,
+		borderRadius: 6,	
+		width: 200,
+		height: 100,
+		zIndex: 500
+	}),
+	label: Titanium.UI.createLabel({
+		text: 'Sjekker billetter...',
+		width: 'auto',
+		height: 'auto',
+		font: {
+			fontSize: 16,
+			fontWeight: 'bold'
+		},
+		color: '#fff',
+		shadowColor: '#000',
+		shadowOffset: {x: 0, y: 1}
+	}),
+	build: function() {
+		var that = this;
 
-	self.add(popup);
+		this.instance.add(this.label);
 
-	setTimeout(function() {
-		popup.animate({
-			duration: 500,
-			opacity: 0
+		self.add(this.instance)
+		this.instance.animate({
+			opacity: 0.8,
+			duration: 200
 		}, function() {
-			self.remove(popup);
-		})
-	}, 2000);
-};
+			that.instance.opacity = 0.8;
+		});
+		
+	},
+	change: function(txt) {
+		if(txt) {
+			this.label.text = txt;
+		}
+
+		this.fade();
+	},
+	fade: function() {
+		var that = this;
+		setTimeout(function() {
+			that.instance.animate({
+				opacity: 0,
+				duration: 600
+			}, function() {
+				self.remove(that.instance);
+				that.label.text = 'Sjekker billetter...';
+			});
+		}, 1200);
+	}
+}
 
 
 self.addEventListener('focus', function() {
@@ -264,6 +308,10 @@ table.addEventListener('click', function(e) {
 
 Ti.App.addEventListener('tickets:new', function() {
 	getPurchases();
+});
+
+Ti.App.addEventListener('tickets:check', function() {
+	checkNewPurchases();
 })
 
 Ti.App.addEventListener('loginwin.close', function() {

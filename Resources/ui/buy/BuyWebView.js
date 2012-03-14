@@ -1,12 +1,14 @@
 var general = require('ui/styles/general'),
-	//styles = require('ui/styles/buy/ShowCombo'),
+	styles = require('ui/styles/buy/BuyWebView'),
 	self = Titanium.UI.createWindow(general.defaultWindow),
 	u = require('plugins/utils'),
 	toLoad = '',
+	continueBtn = Titanium.UI.createButton(styles.continueBtn),
+	continueBtnLbl = Titanium.UI.createLabel(styles.continueBtnLbl)
 	web = Ti.UI.createWebView({
 
 	}),
-	interval;
+	interval = '';
 
 
 	self.titleControl = general.defaultTitle('Gjennomfør kjøp');
@@ -42,6 +44,9 @@ exports.load = function(url, prevWin) {
 
 	//layout(toLoad);
 
+
+	//app.oldWin.push(self);
+
 	return self;
 }
 
@@ -61,7 +66,25 @@ function checkStatus() {
 
 		clearInterval(interval);
 
-		alert(JSON.stringify(success));
+		continueBtn.add(continueBtnLbl);
+		self.add(continueBtn);
+
+		continueBtn.addEventListener('click', function() {
+			var tabgroup = require('ui/Tabgroup');
+
+			for(var i = 0; i<app.oldWin.length;i++){
+				tabgroup.tabs.buy.close(app.oldWin[i],{animated:false});
+			}
+			
+			tabgroup.tabs.buy.close(self,{animated:true});
+			tabgroup.set(1);
+
+			self.remove(continueBtn);
+
+			Ti.App.fireEvent('tickets:check');
+		});
+
+		
 
 	} else if(error) {
 		clearInterval(interval);

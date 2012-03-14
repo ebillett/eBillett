@@ -28,6 +28,7 @@ function layout() {
 	// Build infoblock
 	//self.add(infoWrapper);
 
+
 	tableHeader.add(tableHeaderTitle);
 	self.add(tableHeader);
 
@@ -62,6 +63,9 @@ exports.load = function(mv, sw) {
 
 
 	layout();
+
+
+	app.oldWin.push(self);
 
 	return self;
 

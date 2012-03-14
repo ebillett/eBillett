@@ -7,6 +7,8 @@ exports.net = require('services/network');
 exports.u = u;
 exports.social = require('services/social');
 
+exports.oldWin = [];
+
 
 exports.launch = function() {
 	

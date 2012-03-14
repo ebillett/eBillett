@@ -68,6 +68,9 @@ exports.load = function(obj) {
 	layout();
 	
 	getShows(movie, place);
+
+
+	app.oldWin.push(self);
 	
 	return self;
 

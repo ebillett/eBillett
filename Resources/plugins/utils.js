@@ -79,7 +79,11 @@ exports.loading = function(top, txt) {
 	return instance;
 }
 
-exports.infoPop = function(txt) {
+exports.infoPop = function(txt, delay) {
+
+	if(!delay) {
+		var delay = 0;
+	}
 
 	var instance = Titanium.UI.createView({
 		backgroundColor: '#000',
@@ -107,7 +111,8 @@ exports.infoPop = function(txt) {
 
 	instance.animate({
 		opacity: 0.8,
-		duration: 200
+		duration: 200,
+		delay: delay
 	}, function() {
 		instance.opacity = 0.8;
 	})
